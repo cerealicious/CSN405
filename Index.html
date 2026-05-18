@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Practice Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-8 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <header class="max-w-6xl mx-auto mb-12 mt-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">CWNA Practice Dashboard</h1>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <p class="text-slate-400 leading-relaxed">
+                    These practice questions are sourced from the <span class="text-indigo-300 font-medium">CWNA Certified Wireless Network Administrator Study Guide, CWNA-108 6th Edition</span> by David D. Coleman and David A. Westcott.
+                </p>
+                
+                <div class="inline-block bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mt-2">
+                    <p class="text-amber-200 text-sm italic font-medium">
+                        Disclaimer: This website is intended as a personal learning guide only.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto mb-20">
+        <div id="chapter-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Chapter Cards will be injected here via JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('chapter-grid');
+            
+            // Define chapter data. Easy to update as you build more chapters!
+            const chapters = [];
+            
+            for (let i = 1; i <= 20; i++) {
+                let chapterData = {
+                    id: i,
+                    title: `Chapter ${i}`,
+                    subtitle: 'Practice Quiz',
+                    url: '#',
+                    active: false
+                };
+
+                if (i === 1) {
+                    chapterData.subtitle = 'Overview of Wireless Standards';
+                    chapterData.url = 'https://cerealicious.github.io/CSN405/Chapter1.html';
+                    chapterData.active = true;
+                } else if (i === 2) {
+                    chapterData.subtitle = 'IEEE 802.11 Standard & Amendments';
+                } else if (i === 3) {
+                    chapterData.subtitle = 'Radio Frequency Fundamentals';
+                    chapterData.url = 'https://cerealicious.github.io/CSN405/Chapter3.html';
+                    chapterData.active = true;
+                } else if (i === 4) {
+                    chapterData.subtitle = 'RF Components & Measurements';
+                }
+
+                chapters.push(chapterData);
+            }
+
+            let gridHtml = '';
+            
+            chapters.forEach(chap => {
+                if (chap.active) {
+                    // Active Card Layout
+                    gridHtml += `
+                        <a href="${chap.url}" class="group relative bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-indigo-500 hover:bg-slate-800/80 transition-all duration-300 shadow-md hover:shadow-indigo-500/10 hover:-translate-y-1 flex flex-col justify-between min-h-[160px] overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white mb-1">${chap.title}</h2>
+                                <p class="text-indigo-400 text-sm font-medium line-clamp-2">${chap.subtitle}</p>
+                            </div>
+                            <div class="mt-4 flex items-center text-sm text-slate-300 group-hover:text-white transition-colors">
+                                <span>Start Practice</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </a>
+                    `;
+                } else {
+                    // Inactive (Coming Soon) Card Layout
+                    gridHtml += `
+                        <div class="relative bg-slate-800/40 rounded-xl p-6 border border-slate-800 opacity-60 cursor-not-allowed flex flex-col justify-between min-h-[160px]">
+                            <div class="absolute top-4 right-4 bg-slate-900 border border-slate-700 text-slate-400 text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full">
+                                Coming Soon
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-500 mb-1">${chap.title}</h2>
+                                <p class="text-slate-500 text-sm font-medium line-clamp-2">${chap.subtitle}</p>
+                            </div>
+                            <div class="mt-4 flex items-center text-sm text-slate-600">
+                                <span>Pending...</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            gridContainer.innerHTML = gridHtml;
+        });
+    </script>
+</body>
+</html>
