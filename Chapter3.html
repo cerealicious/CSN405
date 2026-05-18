@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Practice Quiz - Chapter 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #4f46e5; /* Indigo-600 */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <header class="max-w-3xl mx-auto mb-10 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">CWNA Practice Quiz</h1>
+        <p class="text-indigo-400 font-medium mb-2">Chapter 3: Radio Frequency Fundamentals</p>
+        <p class="text-slate-400 text-sm mt-1">Questions and options are randomized on every refresh.</p>
+    </header>
+
+    <main id="quiz-container" class="max-w-3xl mx-auto space-y-8 flex flex-col items-center">
+        <!-- Questions will be dynamically injected here -->
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'multiple',
+                question: 'What are some results of multipath interference? (Choose all that apply.)',
+                options: ['Scattering delay', 'Upfade', 'Excessive retransmissions', 'Absorption'],
+                correctAnswers: ['Upfade', 'Excessive retransmissions'],
+                explanation: 'Multipath may result in attenuation, amplification, signal loss, or data corruption. If two signals arrive together in phase, the result is an increase in signal strength called upfade. The delay spread may also be too significant and cause data bits to be corrupted, resulting in excessive layer 2 retransmissions.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'What term best defines the linear distance traveled in one positive-to-negative-to-positive oscillation of an electromagnetic signal?',
+                options: ['Crest', 'Frequency', 'Trough', 'Wavelength'],
+                correctAnswers: ['Wavelength'],
+                explanation: 'The wavelength is the linear distance between the repeating crests (peaks) or repeating troughs (valleys) of a single cycle of a wave pattern.'
+            },
+            {
+                id: 3,
+                type: 'multiple',
+                question: 'Which of the following statements are true about amplification? (Choose all that apply.)',
+                options: [
+                    'Antennas are active gain amplifiers that focus the energy of a signal.',
+                    'Transceivers are active gain amplifiers where the signal is sourced.',
+                    'Antennas are passive gain amplifiers that focus the energy of a signal.',
+                    'RF amplifiers passively increase signal strength by focusing the AC current of the signal.'
+                ],
+                correctAnswers: [
+                    'Transceivers are active gain amplifiers where the signal is sourced.',
+                    'Antennas are passive gain amplifiers that focus the energy of a signal.'
+                ],
+                explanation: 'RF amplifiers introduce active gain with the help of an outside power source. Passive gain is typically created by antennas that focus the energy of a signal without the use of an outside power source.'
+            },
+            {
+                id: 4,
+                type: 'single',
+                question: 'A standard measurement of frequency is called what?',
+                options: ['Hertz', 'Milliwatt', 'Nanosecond', 'Decibel', 'K-factor'],
+                correctAnswers: ['Hertz'],
+                explanation: 'The standard measurement of the number of times a signal cycles per second is hertz (Hz). One Hz is equal to one cycle in 1 second.'
+            },
+            {
+                id: 5,
+                type: 'single',
+                question: 'When an RF signal bends around an object, this propagation behavior is known as what?',
+                options: ['Stratification', 'Refraction', 'Scattering', 'Diffraction', 'Attenuation'],
+                correctAnswers: ['Diffraction'],
+                explanation: 'Often confused with refraction, diffraction is the bending of the wave front around an obstacle. Diffraction is caused by some sort of partial blockage of the RF signal, such as a small hill or a building that sits between a transmitting radio and a receiver.'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'When multiple RF signals arrive at a receiver at the same time and are generated from the same transmitter, which of the following can be the result of the combined phase of the signals?',
+                options: [
+                    '140 degrees out of phase, amplification',
+                    '140 degrees out of phase, cancellation',
+                    '0 degrees out of phase, amplification',
+                    '180 degrees out of phase, attenuation',
+                    '180 degrees out of phase, amplification',
+                    '180 degrees out of phase, cancellation'
+                ],
+                correctAnswers: ['0 degrees out of phase, amplification'],
+                explanation: 'If multiple copies of an RF signal from a transmitter arrive at a receiver at the same time, there will be no phase separation. Signals that have 0 (zero) degree phase separation actually combine their amplitude, which results in a received signal of much greater signal strength, potentially as much as twice the amplitude.'
+            },
+            {
+                id: 7,
+                type: 'multiple',
+                question: 'Which of the following statements are true? (Choose all that apply.)',
+                options: [
+                    'When upfade occurs, the final received signal will be stronger than the original transmitted signal.',
+                    'When downfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When upfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When downfade occurs, the final received signal will be stronger than the original transmitted signal.'
+                ],
+                correctAnswers: [
+                    'When downfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When upfade occurs, the final received signal will never be stronger than the original transmitted signal.'
+                ],
+                explanation: 'When the multiple RF signals arrive at the receiver at the same time and are in phase or partially out of phase with the primary wave, the result is an increase in signal strength (amplitude). However, the final received signal, whether affected by upfade or downfade, will never be stronger than the original transmitted signal because of free space path loss.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'What is the frequency of an RF signal that cycles 2.4 million times per second?',
+                options: ['2.4 hertz', '2.4 MHz', '2.4 GHz', '2.4 kilohertz', '2.4 KHz'],
+                correctAnswers: ['2.4 MHz'],
+                explanation: '802.11 wireless LANs operate in the 60 GHz, 6 GHz, 5 GHz, and 2.4 GHz frequency range. However, 2.4 GHz is equal to 2.4 billion cycles per second. The frequency of 2.4 million cycles per second is 2.4 MHz. Trick question!'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'What is the best example of a time-domain tool that could be used by an RF engineer?',
+                options: ['Oscilloscope', 'Spectroscope', 'Spectrum analyzer', 'Refractivity gastroscope'],
+                correctAnswers: ['Oscilloscope'],
+                explanation: 'An oscilloscope is a time-domain tool that can be used to measure how a signal’s amplitude changes over time. A frequency-domain tool called a spectrum analyzer is a more commonplace tool most often used during site surveys.'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'What are some objects or materials that are common causes of reflection? (Choose all that apply.)',
+                options: ['Metal', 'Trees', 'Asphalt road', 'Lake', 'Carpeted floors'],
+                correctAnswers: ['Metal', 'Asphalt road', 'Lake'],
+                explanation: 'This is a tough question to answer because many of the same mediums can cause several different propagation behaviors. Metal will always bring about reflection. Water is a major source of absorption; however, large bodies of water can also cause reflection. Flat surfaces such as asphalt roads, ceilings, and walls will also result in reflection behavior.'
+            },
+            {
+                id: 11,
+                type: 'multiple',
+                question: 'Which of these propagation behaviors can result in multipath? (Choose all that apply.)',
+                options: ['Refraction', 'Diffraction', 'Amplification', 'Scattering', 'Attenuation', 'Reflection'],
+                correctAnswers: ['Refraction', 'Diffraction', 'Scattering', 'Reflection'],
+                explanation: 'Multipath is a propagation phenomenon that results in two or more paths of a signal arriving at a receiving antenna at the same time or within nanoseconds of each other. Because of the natural broadening of the waves, the propagation behaviors of reflection, scattering, diffraction, and refraction can all result in multiple paths of the same signal. The propagation behavior of reflection is usually considered to be the main cause of high-multipath environments.'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'Which behavior can be described as an RF signal encountering a chain link fence, causing the signal to bounce into multiple directions?',
+                options: ['Diffraction', 'Scattering', 'Reflection', 'Refraction', 'Multiplexing'],
+                correctAnswers: ['Scattering'],
+                explanation: 'Scattering, or scatter, is defined as an RF signal reflecting in multiple directions when encountering an uneven surface.'
+            },
+            {
+                id: 13,
+                type: 'multiple',
+                question: 'Which 802.11 radio technologies are most impacted by the destructive effects of multipath? (Choose all that apply.)',
+                options: ['802.11a', '802.11b', '802.11g', '802.11n', '802.11ac', '802.11ax'],
+                correctAnswers: ['802.11a', '802.11b', '802.11g'],
+                explanation: 'High-multipath environments can have a destructive impact on legacy 802.11a/b/g radio transmissions. Multipath has a constructive effect with 802.11n/ac/ax transmissions that utilize MIMO antenna diversity and maximum ratio combining (MRC) signal processing techniques.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'Which of the following can cause refraction of an RF signal traveling through it? (Choose all that apply.)',
+                options: ['Shift in air temperature', 'Change in air pressure', 'Humidity', 'Lightning', 'Wind', 'Smog'],
+                correctAnswers: ['Shift in air temperature', 'Change in air pressure', 'Humidity', 'Smog'],
+                explanation: 'Air stratification is a leading cause of refraction of an RF signal. Changes in air temperature, changes in air pressure, and water vapor are all causes of refraction. Smog can cause a density change in the air pressure as well as increased moisture.'
+            },
+            {
+                id: 15,
+                type: 'multiple',
+                question: 'Which of the following statements about free space path loss are true? (Choose all that apply.)',
+                options: [
+                    'RF signals will attenuate as they travel, despite the lack of attenuation caused by obstructions.',
+                    'Path loss occurs at a constant linear rate.',
+                    'Attenuation is only caused by obstructions.',
+                    'Path loss occurs at a logarithmic rate.'
+                ],
+                correctAnswers: [
+                    'RF signals will attenuate as they travel, despite the lack of attenuation caused by obstructions.',
+                    'Path loss occurs at a logarithmic rate.'
+                ],
+                explanation: 'Because of the natural broadening of the wave front, electromagnetic signals lose amplitude as they travel away from the transmitter. The rate of free space path loss is logarithmic and not linear. Attenuation of RF signals as they pass through different mediums does occur but is not a function of FSPL.'
+            },
+            {
+                id: 16,
+                type: 'single',
+                question: 'What term is used to describe the time differential between a primary signal and a reflected signal arriving at a receiver?',
+                options: ['Path delay', 'Spread spectrum', 'Multipath', 'Delay spread'],
+                correctAnswers: ['Delay spread'],
+                explanation: 'The time difference due to a reflected signal taking a longer path is known as the delay spread. The delay spread can cause intersymbol interference, which results in data corruption and layer 2 retransmissions.'
+            },
+            {
+                id: 17,
+                type: 'single',
+                question: 'What is an example of a frequency-domain tool that could be used by an RF engineer?',
+                options: ['Oscilloscope', 'Spectroscope', 'Spectrum analyzer', 'Refractivity gastroscope'],
+                correctAnswers: ['Spectrum analyzer'],
+                explanation: 'A spectrum analyzer is a frequency-domain tool that can be used to measure amplitude in a finite frequency spectrum. An oscilloscope is a time-domain tool.'
+            },
+            {
+                id: 18,
+                type: 'multiple',
+                question: 'Using knowledge of RF characteristics and behaviors, which two options should a WLAN engineer be most concerned about when doing an indoor site survey? (Choose the best two answers.)',
+                options: ['Concrete walls', 'Indoor temperature', 'Wood-lath plaster walls', 'Drywall'],
+                correctAnswers: ['Concrete walls', 'Wood-lath plaster walls'],
+                explanation: 'Concrete walls are very dense and will significantly attenuate a 2.4 GHz and 5 GHz signal. Older structures that are constructed with wood-lath plaster walls often have wire mesh in the walls, which was used to help hold the plaster to the walls. Wire mesh is notorious for disrupting and preventing RF signals from passing through walls. Wire mesh is also used on stucco exteriors. Drywall will attenuate a signal but not to the extent of water, cinder blocks, or other dense mediums. Air temperature has no significance during an indoor site survey.'
+            },
+            {
+                id: 19,
+                type: 'single',
+                question: 'Which three properties are interrelated?',
+                options: [
+                    'Frequency, wavelength, and the speed of light',
+                    'Frequency, amplitude, and the speed of light',
+                    'Frequency, phase, and amplitude',
+                    'Amplitude, phase, and the speed of sound'
+                ],
+                correctAnswers: ['Frequency, wavelength, and the speed of light'],
+                explanation: 'There is an inverse relationship between frequency and wavelength. A simplified explanation is that the higher the frequency of an RF signal, the shorter the wavelength will be of that signal. The longer the wavelength of an RF signal, the lower the frequency of that signal. Both formulas include the speed of light as a value.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'Which RF behavior best describes a signal striking a medium and bending in a different direction?',
+                options: ['Refraction', 'Scattering', 'Diffusion', 'Diffraction', 'Microwave reflection'],
+                correctAnswers: ['Refraction'],
+                explanation: 'Refraction is the bending of an RF signal when it encounters a medium.'
+            }
+        ];
+
+        // Utility: Fisher-Yates Shuffle Algorithm
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Core Initialization
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            const shuffledQuestions = shuffleArray([...quizData]);
+
+            shuffledQuestions.forEach((q, index) => {
+                const shuffledOptions = shuffleArray([...q.options]);
+                
+                const qCard = document.createElement('div');
+                qCard.className = 'w-full bg-slate-800 rounded-xl shadow-lg p-6 md:p-8 border border-slate-700';
+                
+                let optionsHtml = '';
+                shuffledOptions.forEach(opt => {
+                    const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                    const inputName = `question-${q.id}`;
+                    const inputId = `opt-${q.id}-${opt.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                    
+                    optionsHtml += `
+                        <label id="label-${inputId}" class="flex items-start gap-3 p-4 rounded-lg border border-slate-700 bg-slate-700/30 cursor-pointer hover:bg-slate-700/60 transition-colors w-full">
+                            <input type="${inputType}" name="${inputName}" value="${opt}" id="${inputId}" class="mt-1 w-4 h-4 cursor-pointer text-indigo-600 bg-slate-900 border-slate-600 focus:ring-indigo-500 focus:ring-offset-slate-800">
+                            <span class="text-slate-200 leading-relaxed break-words w-full">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <div class="mb-6">
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-indigo-300 bg-indigo-900/30 rounded-full">
+                            ${q.type === 'single' ? 'SINGLE CHOICE' : 'MULTIPLE CHOICE'}
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-medium text-white leading-snug">
+                            <span class="text-indigo-400 font-bold mr-2">${index + 1}.</span>${q.question}
+                        </h2>
+                    </div>
+                    <div class="flex flex-col gap-3" id="options-container-${q.id}">
+                        ${optionsHtml}
+                    </div>
+                    ${q.type === 'multiple' ? `
+                        <div class="mt-6 flex justify-end">
+                            <button id="btn-${q.id}" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg transition-colors w-full sm:w-auto shadow-md">
+                                Check Answer
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div id="explanation-${q.id}" class="hidden mt-6 p-5 rounded-lg bg-slate-900 border border-slate-700 shadow-inner">
+                        <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-2">Explanation</h4>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">${q.explanation}</p>
+                    </div>
+                `;
+                
+                container.appendChild(qCard);
+
+                const inputs = qCard.querySelectorAll(`input[name="question-${q.id}"]`);
+                
+                if (q.type === 'single') {
+                    inputs.forEach(input => {
+                        input.addEventListener('change', () => evaluateAnswer(q, inputs, qCard));
+                    });
+                } else {
+                    const btn = qCard.querySelector(`#btn-${q.id}`);
+                    btn.addEventListener('click', () => {
+                        evaluateAnswer(q, inputs, qCard);
+                        btn.style.display = 'none'; 
+                    });
+                }
+            });
+        }
+
+        // Evaluation & UI Feedback Logic
+        function evaluateAnswer(questionData, inputs, cardElement) {
+            const explanationBox = cardElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = cardElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-700/60', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500', 'bg-emerald-900/30', 'text-emerald-100');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-rose-500', 'bg-rose-900/30', 'text-rose-100');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500/50', 'bg-emerald-900/10');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        // Run application on load
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

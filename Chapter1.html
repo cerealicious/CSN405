@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Practice Quiz - Chapter 1</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to handle radio/checkbox accent colors nicely */
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #4f46e5; /* Indigo-600 */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <header class="max-w-3xl mx-auto mb-10 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">CWNA Practice Quiz</h1>
+        <p class="text-slate-400">Chapter 1: Overview of Wireless Standards, Organizations, and Fundamentals.</p>
+        <p class="text-slate-500 text-sm mt-1">Questions and options are randomized on every refresh.</p>
+    </header>
+
+    <main id="quiz-container" class="max-w-3xl mx-auto space-y-8 flex flex-col items-center">
+        <!-- Questions will be dynamically injected here -->
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'single',
+                question: '802.11 technology is typically deployed at which fundamental layer of network architecture?',
+                options: ['Core', 'Distribution', 'Access', 'Network'],
+                correctAnswers: ['Access'],
+                explanation: '802.11 wireless networking is typically used to connect client stations to the network via an access point. Access points are deployed at the access layer, not the core or distribution layer. The Physical layer is a layer of the OSI model, not a network architecture layer.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'Which organization is responsible for enforcing maximum transmit power rules in an unlicensed frequency band?',
+                options: ['IEEE', 'Wi-Fi Alliance', 'ISO', 'IETF', 'None of the above'],
+                correctAnswers: ['None of the above'],
+                explanation: 'RF communications are regulated differently in many regions and countries. The local regulatory domain authorities of individual countries or regions define the spectrum policies and transmit power rules.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: '802.11 wireless bridge links are typically associated with which network architecture layer?',
+                options: ['Core', 'Distribution', 'Access', 'Network'],
+                correctAnswers: ['Distribution'],
+                explanation: '802.11 wireless bridge links are typically used to perform distribution layer services. Core layer devices are usually much faster than 802.11 wireless devices, and bridges are not used to provide access layer services. The Network layer is a layer of the OSI model, not a network architecture layer.'
+            },
+            {
+                id: 4,
+                type: 'single',
+                question: 'The 802.11-2020 standard was created by which organization?',
+                options: ['IEEE', 'OSI', 'ISO', 'Wi-Fi Alliance', 'FCC'],
+                correctAnswers: ['IEEE'],
+                explanation: 'The Institute of Electrical and Electronics Engineers (IEEE) is responsible for the creation of all of the 802 standards.'
+            },
+            {
+                id: 5,
+                type: 'single',
+                question: 'What organization ensures interoperability of WLAN products?',
+                options: ['IEEE', 'ITU-R', 'ISO', 'Wi-Fi Alliance', 'FCC'],
+                correctAnswers: ['Wi-Fi Alliance'],
+                explanation: 'The Wi-Fi Alliance provides certification testing, and when a product passes the test, it receives a Wi-Fi Interoperability Certificate.'
+            },
+            
+            {
+                id: 6,
+                type: 'single',
+                question: 'What type of signal is required to carry data?',
+                options: ['Communications signal', 'Data signal', 'Carrier signal', 'Binary signal', 'Digital signal'],
+                correctAnswers: ['Carrier signal'],
+                explanation: 'A carrier signal is a modulated signal that is used to transmit binary data.'
+            },
+            {
+                id: 7,
+                type: 'single',
+                question: 'Which keying method is most susceptible to interference from noise?',
+                options: ['FSK', 'ASK', 'PSK', 'DSK'],
+                correctAnswers: ['ASK'],
+                explanation: 'Because of the effects of noise on the amplitude of a signal, amplitude-shift keying (ASK) has to be used cautiously.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'Which sublayer of the OSI model’s Data-Link layer is used for communication between 802.11 radios?',
+                options: ['LLC', 'PLCP', 'MAC', 'PMD'],
+                correctAnswers: ['MAC'],
+                explanation: 'The IEEE 802.11-2020 standard defines communication mechanisms at only the Physical layer and MAC sublayer of the Data-Link layer of the OSI model. The Logical Link Control (LLC) sublayer of the Data-Link layer is not defined for 802.11 operations. PLCP and PMD are sublayers of the Physical layer.'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'While performing some research, Janie comes across a reference to a document titled RFC 3935. Which of the following organization’s website would be best to further research this document?',
+                options: ['IEEE', 'Wi-Fi Alliance', 'WECA', 'FCC', 'IETF'],
+                correctAnswers: ['IETF'],
+                explanation: 'The IETF is responsible for creation of RFC documents. The IEEE is responsible for the 802 standards. The Wi-Fi Alliance is responsible for certification tests. The Wi-Fi Alliance was originally known as WECA but changed its name to Wi-Fi Alliance in 2002. The FCC is responsible for RF regulatory rules in the United States.'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'What are the three logical planes of operation for network telecommunications? (Choose three)',
+                options: ['Management', 'Core', 'Control', 'Access', 'Data'],
+                correctAnswers: ['Management', 'Control', 'Data'],
+                explanation: 'The management place exists for the monitoring and administration of a telecommunications network. The control plane is characterized as the intelligence of a network. The data place carries the network user traffic.'
+            },
+
+            {
+                id: 11,
+                type: 'multiple',
+                question: 'Which wave properties can be modulated to encode data? (Choose all that apply.)',
+                options: ['Amplitude', 'Frequency', 'Phase', 'Wavelength'],
+                correctAnswers: ['Amplitude', 'Frequency', 'Phase'],
+                explanation: 'The three keying methods that can be used to encode data are amplitude-shift keying (ASK), frequency-shift keying (FSK), and phase-shift keying (PSK).'
+            },
+            {
+                id: 12,
+                type: 'multiple',
+                question: 'The IEEE 802.11-2020 standard defines communication mechanisms at which layers of the OSI model? (Choose all that apply.)',
+                options: ['Network', 'Physical', 'Transport', 'Application', 'Data-Link', 'Session'],
+                correctAnswers: ['Physical', 'Data-Link'],
+                explanation: 'The IEEE 802.11-2020 standard defines communication mechanisms at only the Physical layer and MAC sublayer of the Data-Link layer of the OSI model.'
+            },
+            {
+                id: 13,
+                type: 'single',
+                question: 'The height or power of a wave is known as what?',
+                options: ['Phase', 'Frequency', 'Amplitude', 'Wavelength'],
+                correctAnswers: ['Amplitude'],
+                explanation: 'Height and power are two terms that describe the amplitude of a wave. Frequency is how often a wave repeats itself. Wavelength is the actual length of the wave, typically measured from peak to peak. Phase refers to the starting point of a wave in relation to another wave.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'Wi-Fi CERTIFIED 6 certifies the operation and capabilities of which 802.11 wireless standard? (Choose all that apply.)',
+                options: ['802.11ac', '802.11ax', '802.1X', '802.11ay'],
+                correctAnswers: ['802.11ax'],
+                explanation: 'Wi-Fi CERTIFIED 6 certifies the operational capabilities for 802.11ax radios for both 2.4 GHz and 5 GHz frequency bands. Wi-Fi 6E is an extension of the Wi-Fi 6 to certify 802.11ax radios in the 6 GHz frequency band.'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'Which of the following is the responsibility of the Internet Engineering Task Force (IETF)?',
+                options: ['Request for Comments (RFCs)', '802 standards', 'Wi-Fi CERTIFIED standards', 'Regulatory domain authority rules'],
+                correctAnswers: ['Request for Comments (RFCs)'],
+                explanation: 'The IETF creates RFCs, the IEEE creates the 802 standards, the Wi-Fi Alliance provides the Wi-Fi CERTIFIED standards, and the ITU-R defines the radio regulatory regions. The regulatory bodies with the regions manage the regulatory domain rules.'
+            },
+
+            {
+                id: 16,
+                type: 'multiple',
+                question: 'Which of the following wireless communications parameters and usage are typically governed by a local regulatory authority? (Choose all that apply.)',
+                options: ['Frequency', 'Bandwidth', 'Maximum transmit power', 'Maximum EIRP', 'Indoor/outdoor usage'],
+                correctAnswers: ['Frequency', 'Bandwidth', 'Maximum transmit power', 'Maximum EIRP', 'Indoor/outdoor usage'],
+                explanation: 'All of these are typically regulated by the local or regional RF regulatory authority.'
+            },
+            {
+                id: 17,
+                type: 'single',
+                question: 'What type of communications do 802.11 radios use to transmit and receive?',
+                options: ['Simplex', 'Half-duplex', 'Full-duplex', 'Echo-duplex'],
+                correctAnswers: ['Half-duplex'],
+                explanation: 'In half-duplex communications, both devices are capable of transmitting and receiving; however, only one device can transmit at a time. Walkie-talkies, or two-way radios, are examples of half-duplex devices. All RF communications by nature are half-duplex. IEEE 802.11 WLAN radios use half-duplex communications.'
+            },
+            {
+                id: 18,
+                type: 'single',
+                question: 'A wave is divided into degrees. How many degrees make up a complete wave?',
+                options: ['100', '180', '212', '360'],
+                correctAnswers: ['360'],
+                explanation: 'A wave is divided into 360 degrees.'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'What are the advantages of using unlicensed frequency bands for RF transmissions? (Choose all that apply.)',
+                options: ['There are no governmental regulations.', 'There is no additional financial cost.', 'Anyone can use the frequency band.', 'There are no rules.'],
+                correctAnswers: ['There is no additional financial cost.', 'Anyone can use the frequency band.'],
+                explanation: 'The main advantages of an unlicensed frequency are that permission to transmit on the frequency is free and that anyone can use the unlicensed frequency. Although there are no additional financial costs, you still must abide by transmission regulations and other restrictions. The fact that anyone can use the frequency band is also a disadvantage because of overcrowding.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'The OSI model consists of how many layers?',
+                options: ['Four', 'Six', 'Seven', 'Nine'],
+                correctAnswers: ['Seven'],
+                explanation: 'The OSI model is sometimes referred to as the seven-layer model.'
+            }
+        ];
+
+        // Utility: Fisher-Yates Shuffle Algorithm for randomizing arrays
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                // Swap elements
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Core Initialization Logic
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            // 1. Shuffle all questions globally
+            const shuffledQuestions = shuffleArray([...quizData]);
+
+            shuffledQuestions.forEach((q, index) => {
+                // 2. Shuffle the specific options for each question
+                const shuffledOptions = shuffleArray([...q.options]);
+                
+                // Create Card element
+                const qCard = document.createElement('div');
+                qCard.className = 'w-full bg-slate-800 rounded-xl shadow-lg p-6 md:p-8 border border-slate-700';
+                
+                let optionsHtml = '';
+                shuffledOptions.forEach(opt => {
+                    const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                    const inputName = `question-${q.id}`;
+                    // Create a safe, unique ID by removing special chars
+                    const inputId = `opt-${q.id}-${opt.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                    
+                    optionsHtml += `
+                        <label id="label-${inputId}" class="flex items-start gap-3 p-4 rounded-lg border border-slate-700 bg-slate-700/30 cursor-pointer hover:bg-slate-700/60 transition-colors w-full">
+                            <input type="${inputType}" name="${inputName}" value="${opt}" id="${inputId}" class="mt-1 w-4 h-4 cursor-pointer text-indigo-600 bg-slate-900 border-slate-600 focus:ring-indigo-500 focus:ring-offset-slate-800">
+                            <span class="text-slate-200 leading-relaxed break-words w-full">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                // Inject Card HTML
+                qCard.innerHTML = `
+                    <div class="mb-6">
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-indigo-300 bg-indigo-900/30 rounded-full">
+                            ${q.type === 'single' ? 'SINGLE CHOICE' : 'MULTIPLE CHOICE'}
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-medium text-white leading-snug">
+                            <span class="text-indigo-400 font-bold mr-2">${index + 1}.</span>${q.question}
+                        </h2>
+                    </div>
+                    <div class="flex flex-col gap-3" id="options-container-${q.id}">
+                        ${optionsHtml}
+                    </div>
+                    ${q.type === 'multiple' ? `
+                        <div class="mt-6 flex justify-end">
+                            <button id="btn-${q.id}" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg transition-colors w-full sm:w-auto shadow-md">
+                                Check Answer
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div id="explanation-${q.id}" class="hidden mt-6 p-5 rounded-lg bg-slate-900 border border-slate-700 shadow-inner">
+                        <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-2">Explanation</h4>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">${q.explanation}</p>
+                    </div>
+                `;
+                
+                container.appendChild(qCard);
+
+                const inputs = qCard.querySelectorAll(`input[name="question-${q.id}"]`);
+                
+                if (q.type === 'single') {
+                    // Single choice: evaluate instantly upon checking the radio button
+                    inputs.forEach(input => {
+                        input.addEventListener('change', () => evaluateAnswer(q, inputs, qCard));
+                    });
+                } else {
+                    // Multiple choice: evaluate only when the "Check Answer" button is clicked
+                    const btn = qCard.querySelector(`#btn-${q.id}`);
+                    btn.addEventListener('click', () => {
+                        evaluateAnswer(q, inputs, qCard);
+                        btn.style.display = 'none'; // Hide the button after submitting
+                    });
+                }
+            });
+        }
+
+        // Evaluation & UI Feedback Logic
+        function evaluateAnswer(questionData, inputs, cardElement) {
+            const explanationBox = cardElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = cardElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                // Disable the input to lock the answer in
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-700/60', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                // Apply contextual green/red visual styling
+                if (isSelected && isCorrectAnswer) {
+                    // User selected a correct answer
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500', 'bg-emerald-900/30', 'text-emerald-100');
+                } else if (isSelected && !isCorrectAnswer) {
+                    // User selected an incorrect answer
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-rose-500', 'bg-rose-900/30', 'text-rose-100');
+                } else if (!isSelected && isCorrectAnswer) {
+                    // User missed this correct answer (shows them what they should have picked)
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500/50', 'bg-emerald-900/10');
+                } else {
+                    // Unselected and incorrect (fade out slightly to emphasize the correct answers)
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            // Reveal the explanation block
+            explanationBox.classList.remove('hidden');
+            // Small subtle animation for the explanation box
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        // Initialize everything once the document is ready
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
