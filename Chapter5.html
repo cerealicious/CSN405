@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 5 Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="max-w-3xl mx-auto mb-10 relative">
+        <a href="index.html" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors mb-4 text-sm font-medium">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Dashboard
+        </a>
+        <div class="text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">Chapter 5: Radio Frequency Signal and Antenna Concepts</h1>
+            <p class="text-slate-400">Complete the questions below. The order of questions and answers are randomized.</p>
+        </div>
+    </header>
+
+    <!-- Quiz Container -->
+    <main id="quiz-container" class="max-w-3xl mx-auto space-y-8 flex flex-col items-center">
+        <!-- Questions will be injected here via JavaScript -->
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'multiple',
+                question: 'Which of the following refers to the polar chart of an antenna as viewed from above the antenna? (Choose all that apply.)',
+                options: ['Horizontal view', 'Vertical view', 'H-plane', 'E-plane', 'Elevation chart', 'Azimuth chart'],
+                correctAnswers: ['Horizontal view', 'H-plane', 'Azimuth chart'],
+                explanation: 'The azimuth chart is the top-down view of an antenna\'s radiation pattern, also known as the H-plane, or horizontal. The side view is known as the elevation chart, vertical view, or E-plane.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'The azimuth chart represents a view of an antenna\'s radiation pattern from which direction?',
+                options: ['Top', 'Side', 'Front', 'Both top and side'],
+                correctAnswers: ['Top'],
+                explanation: 'The azimuth is the top-down view of an antenna\'s radiation pattern, also known as the H-plane.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: 'What is the definition of the horizontal beamwidth of an antenna?',
+                options: [
+                    'The measurement of the angle of the main lobe as represented on the azimuth chart',
+                    'The distance between the two points on the horizontal axis where the signal decreases by a third. This distance is measured in degrees.',
+                    'The distance between the two -3 dB power points on the horizontal axis, measured in degrees',
+                    'The distance between the peak power and the point where the signal decreases by half. This distance is measured in degrees.'
+                ],
+                correctAnswers: ['The distance between the two -3 dB power points on the horizontal axis, measured in degrees'],
+                explanation: 'The beamwidth is the distance in degrees between the -3 dB (half-power) point on one side of the main signal and the -3 dB point on the other side of the main signal, measured along the horizontal axis. These are also known as half-power points.'
+            },
+            {
+                id: 4,
+                type: 'multiple',
+                question: 'Which antennas are highly directional? (Choose all that apply.)',
+                options: ['Patch', 'Panel', 'Parabolic dish', 'Grid', 'Sector'],
+                correctAnswers: ['Parabolic dish', 'Grid'],
+                explanation: 'A parabolic dish and a grid are highly directional. The rest of the antennas are semidirectional, and the sector antenna is a special type of semidirectional antenna.'
+            },
+            {
+                id: 5,
+                type: 'multiple',
+                question: 'Semidirectional antennas are often used for which of the following purposes? (Choose all that apply.)',
+                options: [
+                    'To provide short-distance point-to-point outdoor communications',
+                    'To provide long-distance point-to-point outdoor communications',
+                    'To provide unidirectional coverage from an access point to clients in an indoor environment',
+                    'To provide focused or sector coverage in a high-density environment.'
+                ],
+                correctAnswers: [
+                    'To provide short-distance point-to-point outdoor communications',
+                    'To provide unidirectional coverage from an access point to clients in an indoor environment',
+                    'To provide focused or sector coverage in a high-density environment.'
+                ],
+                explanation: 'Semidirectional antennas provide too wide a beamwidth to support long-distance communications but will work for short distances. They are also useful for providing unidirectional coverage from the access point to clients in an indoor environment. They are also used to provide focused coverage in a high-density environment.'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'The Fresnel zone should not be blocked by more than what percentage to maintain a reliable communications link?',
+                options: ['20 percent', '40 percent', '50 percent', '60 percent'],
+                correctAnswers: ['40 percent'],
+                explanation: 'Any more than 40 percent encroachment into the Fresnel zone is likely to make a link unreliable. The clearer the Fresnel zone, the better. Ideally the Fresnel zone should not be blocked at all.'
+            },
+            {
+                id: 7,
+                type: 'multiple',
+                question: 'The size of the Fresnel zone is controlled by which factors? (Choose all that apply.)',
+                options: ['Antenna beamwidth', 'RF line of sight', 'Distance', 'Frequency'],
+                correctAnswers: ['Distance', 'Frequency'],
+                explanation: 'The distance and frequency determine the size of the Fresnel zone; these are the only variables in the Fresnel zone formula.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'When a long-distance point-to-point link is installed, earth bulge should be considered beyond what distance?',
+                options: ['5 miles', '7 miles', '10 miles', '30 miles'],
+                correctAnswers: ['7 miles'],
+                explanation: 'The distance when the curvature of the earth should be considered when installing a point-to-point link is 7 miles.'
+            },
+            {
+                id: 9,
+                type: 'multiple',
+                question: 'A network administrator replaced some coaxial cabling used in an outdoor bridge deployment after water damaged the cabling. After replacing the cabling, the network administrator noticed that the EIRP increased drastically and is possibly violating the maximum EIRP power regulation mandate. What are the possible causes of the increased amplitude? (Choose all that apply.)',
+                options: [
+                    'The administrator installed a shorter cable.',
+                    'The administrator installed a lower-grade cable.',
+                    'The administrator installed a higher-grade cable.',
+                    'The administrator installed a longer cable.',
+                    'The administrator used a different-color cable.'
+                ],
+                correctAnswers: ['The administrator installed a shorter cable.', 'The administrator installed a higher-grade cable.'],
+                explanation: 'Installing a shorter cable of the same grade will result in less loss and thus more amplitude being transmitted out the antenna. A higher-grade cable rated for less dB loss will have the same result.'
+            },
+            {
+                id: 10,
+                type: 'single',
+                question: 'Which of the following is true for MIMO transmissions?',
+                options: [
+                    'The transceiver can only receive from one antenna at a time.',
+                    'Transceivers can transmit from multiple antennas at the same time.',
+                    'The transceiver samples multiple antennas and chooses the best received signal from one antenna.',
+                    'Transceivers can transmit from only one antenna at a time.'
+                ],
+                correctAnswers: ['Transceivers can transmit from multiple antennas at the same time.'],
+                explanation: 'A MIMO transceiver can transmit from multiple antennas at the same time, if it is operating using multiple radio chains.'
+            },
+            {
+                id: 11,
+                type: 'multiple',
+                question: 'To establish a four-mile point-to-point bridge link in the 5 GHz U-NII-3 band, what factors should be taken under consideration? (Choose all that apply.)',
+                options: [
+                    'Fresnel zone clearance',
+                    'Earth bulge calculations',
+                    'Outdoor power regulations',
+                    'Proper choice of semidirectional antennas',
+                    'Proper choice of highly directional antennas'
+                ],
+                correctAnswers: ['Fresnel zone clearance', 'Outdoor power regulations', 'Proper choice of semidirectional antennas'],
+                explanation: 'Point-to-point bridge links require a minimum Fresnel zone clearance of 60 percent, although 100 percent clearance is ideal. Semidirectional antennas such as patch antennas or Yagi antennas are used for short-to-medium-distance bridge links. Highly directional antennas are used for long-distance bridge links. Compensating for earth bulge is generally not a factor until 7 miles. Every nation has specific outdoor power regulations that must also be respected.'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'The ratio between the maximum peak voltage and minimum voltage on a line is known as what?',
+                options: ['Signal flux', 'Return loss', 'VSWR', 'Signal incidents'],
+                correctAnswers: ['VSWR'],
+                explanation: 'Voltage standing wave ratio (VSWR) is the difference between these voltages and is represented as a ratio, such as 1.5:1.'
+            },
+            {
+                id: 13,
+                type: 'multiple',
+                question: 'What are some of the possible negative effects of an impendence mismatch? (Choose all that apply.)',
+                options: ['Voltage reflection', 'Blockage of the Fresnel zone', 'Erratic signal strength', 'Decreased signal amplitude', 'Amplifier/transmitter failure'],
+                correctAnswers: ['Voltage reflection', 'Erratic signal strength', 'Decreased signal amplitude', 'Amplifier/transmitter failure'],
+                explanation: 'The reflected voltage caused by an impedance mismatch can result in a decrease in power or amplitude (loss) of the signal that is supposed to be transmitted. If the transmitter is not protected from excessive reflected power or large voltage peaks, it can overheat and fail. Understand that VSWR may cause decreased signal strength, erratic signal strength, or even transmitter failure.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'When you are determining the mounting height of a long-distance point-to-point antenna, which of the following should you consider? (Choose all that apply.)',
+                options: ['Frequency', 'Distance', 'Visual line of sight', 'Earth bulge', 'Antenna beamwidth', 'RF line of sight'],
+                correctAnswers: ['Frequency', 'Distance', 'Earth bulge', 'RF line of sight'],
+                explanation: 'Frequency and distance are needed to determine the Fresnel zone. Visual line of sight is not needed as long as you have RF line of sight. You may not be able to see the antenna because of fog, but the fog will not prevent RF line of sight. Earth bulge will need to be considered. The beamwidth is not needed to determine the height, although it is useful when aiming the antenna.'
+            },
+            {
+                id: 15,
+                type: 'multiple',
+                question: 'Which of the following are true about cables? (Choose all that apply.)',
+                options: ['They cause impedance on the signal.', 'They work regardless of the frequency.', 'Attenuation decreases as frequency increases.', 'They add loss to the signal.'],
+                correctAnswers: ['They cause impedance on the signal.', 'They add loss to the signal.'],
+                explanation: 'Cables must be selected that support the frequency you are using. Attenuation actually increases with frequency.'
+            },
+            {
+                id: 16,
+                type: 'multiple',
+                question: 'Amplifiers can be purchased with which of the following features? (Choose all that apply.)',
+                options: ['Bidirectional amplification', 'Unidirectional amplification', 'Fixed gain', 'Fixed output'],
+                correctAnswers: ['Bidirectional amplification', 'Unidirectional amplification', 'Fixed gain', 'Fixed output'],
+                explanation: 'These are all possible capabilities of RF amplifiers.'
+            },
+            {
+                id: 17,
+                type: 'multiple',
+                question: 'The signal between the transceiver and the antenna will be reduced by which of the following methods? (Choose all that apply.)',
+                options: ['Adding an attenuator', 'Increasing the length of the cable', 'Shortening the length of the cable', 'Using cheaper-quality cable'],
+                correctAnswers: ['Adding an attenuator', 'Increasing the length of the cable', 'Using cheaper-quality cable'],
+                explanation: 'Adding an attenuator is an intentional act to add loss to the signal. Since cable adds loss, increasing the length will add more loss, whereas shortening the length will reduce the loss. Better-quality cables produce less signal loss.'
+            },
+            {
+                id: 18,
+                type: 'single',
+                question: 'Lightning arrestors will defend against which of the following?',
+                options: ['Direct lightning strikes', 'Power surges', 'Transient currents', 'Improper common grounding'],
+                correctAnswers: ['Transient currents'],
+                explanation: 'Lightning arrestors will not stand up to a direct lightning strike, only transient currents caused by nearby lightning strikes.'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'The radius of the first Fresnel zone is (Choose all that apply.)',
+                options: [
+                    'The outermost point of the area where the signal is out of phase with the point source',
+                    'The outermost point of the area where the signal is in phase with the point source',
+                    'Dependent on the gain of the directional antenna',
+                    'Smaller than the second Fresnel zone'
+                ],
+                correctAnswers: ['The outermost point of the area where the signal is in phase with the point source', 'Smaller than the second Fresnel zone'],
+                explanation: 'The area within the radius of the first Fresnel zone is in phase with the point source. The radius of the first Fresnel zone is the point where the second Fresnel zone begins and is where the signal transitions from being in phase with the point source to being out of phase. Because the second Fresnel zone begins where the first Fresnel zone ends, the radius of the second Fresnel zone is larger than the radius of the first Fresnel zone. The size of the Fresnel is dependent on the frequency and distance of the link. The gain of the antenna has no bearing on the size of the Fresnel zone.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'While aligning a directional antenna, you notice that the signal drops as you turn the antenna away from the other antenna, but then it increases a little. This increase in signal is most likely caused by what?',
+                options: ['Signal reflection', 'Frequency harmonic', 'Side band', 'Side lobe'],
+                correctAnswers: ['Side lobe'],
+                explanation: 'Side lobes are areas of antenna coverage (other than the coverage provided by the main signal) that have a stronger signal than would be expected when compared with the areas around them. Side lobes are best seen on an azimuth chart. Side bands and frequency harmonics have nothing to do with antenna coverage.'
+            }
+        ];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            const shuffledQuestions = shuffleArray([...quizData]);
+
+            shuffledQuestions.forEach((q, index) => {
+                const shuffledOptions = shuffleArray([...q.options]);
+                const qCard = document.createElement('div');
+                qCard.className = 'w-full bg-slate-800 rounded-xl shadow-lg p-6 md:p-8 border border-slate-700';
+                
+                let optionsHtml = '';
+                shuffledOptions.forEach(opt => {
+                    const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                    const inputName = `question-${q.id}`;
+                    const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    optionsHtml += `
+                        <label id="label-${inputId}" class="flex items-start gap-3 p-4 rounded-lg border border-slate-700 bg-slate-700/30 cursor-pointer hover:bg-slate-700/60 transition-colors w-full">
+                            <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-1 w-4 h-4 cursor-pointer text-indigo-600 bg-slate-900 border-slate-600 focus:ring-indigo-500 focus:ring-offset-slate-800">
+                            <span class="text-slate-200 leading-relaxed break-words w-full">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <div class="mb-6">
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-indigo-300 bg-indigo-900/30 rounded-full">
+                            ${q.type === 'single' ? 'SINGLE CHOICE' : 'MULTIPLE CHOICE'}
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-medium text-white leading-snug">
+                            <span class="text-indigo-400 font-bold mr-2">${index + 1}.</span>${q.question}
+                        </h2>
+                    </div>
+                    <div class="flex flex-col gap-3" id="options-container-${q.id}">
+                        ${optionsHtml}
+                    </div>
+                    ${q.type === 'multiple' ? `
+                        <div class="mt-6 flex justify-end">
+                            <button id="btn-${q.id}" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg transition-colors w-full sm:w-auto shadow-md">
+                                Check Answer
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div id="explanation-${q.id}" class="hidden mt-6 p-5 rounded-lg bg-slate-900 border border-slate-700 shadow-inner">
+                        <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-2">Explanation</h4>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">${q.explanation}</p>
+                    </div>
+                `;
+                
+                container.appendChild(qCard);
+
+                const inputs = qCard.querySelectorAll(`input[name="question-${q.id}"]`);
+                
+                if (q.type === 'single') {
+                    inputs.forEach(input => {
+                        input.addEventListener('change', () => evaluateAnswer(q, inputs, qCard));
+                    });
+                } else {
+                    const btn = qCard.querySelector(`#btn-${q.id}`);
+                    btn.addEventListener('click', () => {
+                        evaluateAnswer(q, inputs, qCard);
+                        btn.style.display = 'none';
+                    });
+                }
+            });
+        }
+
+        function evaluateAnswer(questionData, inputs, cardElement) {
+            const explanationBox = cardElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = cardElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-700/60', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500', 'bg-emerald-900/30', 'text-emerald-100');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-rose-500', 'bg-rose-900/30', 'text-rose-100');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.remove('border-slate-700', 'bg-slate-700/30');
+                    label.classList.add('border-emerald-500/50', 'bg-emerald-900/10');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+
+<!-- Footer -->
+        <div class="text-center mt-8 text-sm text-gray-500">
+         <p>© <a href="https://github.com/cerealicious/" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="text-blue-600 hover:underline">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes</p>
+
+</body>
+</html>
