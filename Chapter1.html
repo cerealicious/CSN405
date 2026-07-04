@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CWNA Practice Quiz - Chapter 1</title>
-    <!-- Tailwind CSS via CDN -->
+    <title>CWNA Chapter 1 Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles to handle radio/checkbox accent colors nicely */
         input[type="radio"], input[type="checkbox"] {
-            accent-color: #4f46e5; /* Indigo-600 */
+            accent-color: #4f46e5;
         }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
-    <header class="max-w-3xl mx-auto mb-10 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">CWNA Practice Quiz</h1>
-        <p class="text-indigo-400 font-medium mb-2">Chapter 1: Overview of Wireless Standards, Organizations, and Fundamentals</p>
-        <p class="text-slate-400 text-sm mt-1">Questions and options are randomized on every refresh.</p>
+    <!-- Header -->
+    <header class="max-w-3xl mx-auto mb-10 relative">
+        <a href="index.html" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors mb-4 text-sm font-medium">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Dashboard
+        </a>
+        <div class="text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">Chapter 1: Overview of Wireless Standards, Organizations, and Fundamentals</h1>
+            <p class="text-slate-400">Complete the questions below. The order of questions and answers are randomized.</p>
+        </div>
     </header>
 
     <main id="quiz-container" class="max-w-3xl mx-auto space-y-8 flex flex-col items-center">
