@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 5 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> End Exam
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 5</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 4</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'multiple',
+                question: 'Which of the following refers to the polar chart of an antenna as viewed from above the antenna? (Choose all that apply.)',
+                options: ['Horizontal view', 'Vertical view', 'H-plane', 'E-plane', 'Elevation chart', 'Azimuth chart'],
+                correctAnswers: ['Horizontal view', 'H-plane', 'Azimuth chart'],
+                explanation: 'The azimuth chart is the top-down view of an antenna\'s radiation pattern, also known as the H-plane, or horizontal. The side view is known as the elevation chart, vertical view, or E-plane.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'The azimuth chart represents a view of an antenna\'s radiation pattern from which direction?',
+                options: ['Top', 'Side', 'Front', 'Both top and side'],
+                correctAnswers: ['Top'],
+                explanation: 'The azimuth is the top-down view of an antenna\'s radiation pattern, also known as the H-plane.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: 'What is the definition of the horizontal beamwidth of an antenna?',
+                options: [
+                    'The measurement of the angle of the main lobe as represented on the azimuth chart',
+                    'The distance between the two points on the horizontal axis where the signal decreases by a third. This distance is measured in degrees.',
+                    'The distance between the two -3 dB power points on the horizontal axis, measured in degrees',
+                    'The distance between the peak power and the point where the signal decreases by half. This distance is measured in degrees.'
+                ],
+                correctAnswers: ['The distance between the two -3 dB power points on the horizontal axis, measured in degrees'],
+                explanation: 'The beamwidth is the distance in degrees between the -3 dB (half-power) point on one side of the main signal and the -3 dB point on the other side of the main signal, measured along the horizontal axis. These are also known as half-power points.'
+            },
+            {
+                id: 4,
+                type: 'multiple',
+                question: 'Which antennas are highly directional? (Choose all that apply.)',
+                options: ['Patch', 'Panel', 'Parabolic dish', 'Grid', 'Sector'],
+                correctAnswers: ['Parabolic dish', 'Grid'],
+                explanation: 'A parabolic dish and a grid are highly directional. The rest of the antennas are semidirectional, and the sector antenna is a special type of semidirectional antenna.'
+            },
+            {
+                id: 5,
+                type: 'multiple',
+                question: 'Semidirectional antennas are often used for which of the following purposes? (Choose all that apply.)',
+                options: [
+                    'To provide short-distance point-to-point outdoor communications',
+                    'To provide long-distance point-to-point outdoor communications',
+                    'To provide unidirectional coverage from an access point to clients in an indoor environment',
+                    'To provide focused or sector coverage in a high-density environment.'
+                ],
+                correctAnswers: [
+                    'To provide short-distance point-to-point outdoor communications',
+                    'To provide unidirectional coverage from an access point to clients in an indoor environment',
+                    'To provide focused or sector coverage in a high-density environment.'
+                ],
+                explanation: 'Semidirectional antennas provide too wide a beamwidth to support long-distance communications but will work for short distances. They are also useful for providing unidirectional coverage from the access point to clients in an indoor environment. They are also used to provide focused coverage in a high-density environment.'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'The Fresnel zone should not be blocked by more than what percentage to maintain a reliable communications link?',
+                options: ['20 percent', '40 percent', '50 percent', '60 percent'],
+                correctAnswers: ['40 percent'],
+                explanation: 'Any more than 40 percent encroachment into the Fresnel zone is likely to make a link unreliable. The clearer the Fresnel zone, the better. Ideally the Fresnel zone should not be blocked at all.'
+            },
+            {
+                id: 7,
+                type: 'multiple',
+                question: 'The size of the Fresnel zone is controlled by which factors? (Choose all that apply.)',
+                options: ['Antenna beamwidth', 'RF line of sight', 'Distance', 'Frequency'],
+                correctAnswers: ['Distance', 'Frequency'],
+                explanation: 'The distance and frequency determine the size of the Fresnel zone; these are the only variables in the Fresnel zone formula.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'When a long-distance point-to-point link is installed, earth bulge should be considered beyond what distance?',
+                options: ['5 miles', '7 miles', '10 miles', '30 miles'],
+                correctAnswers: ['7 miles'],
+                explanation: 'The distance when the curvature of the earth should be considered when installing a point-to-point link is 7 miles.'
+            },
+            {
+                id: 9,
+                type: 'multiple',
+                question: 'A network administrator replaced some coaxial cabling used in an outdoor bridge deployment after water damaged the cabling. After replacing the cabling, the network administrator noticed that the EIRP increased drastically and is possibly violating the maximum EIRP power regulation mandate. What are the possible causes of the increased amplitude? (Choose all that apply.)',
+                options: [
+                    'The administrator installed a shorter cable.',
+                    'The administrator installed a lower-grade cable.',
+                    'The administrator installed a higher-grade cable.',
+                    'The administrator installed a longer cable.',
+                    'The administrator used a different-color cable.'
+                ],
+                correctAnswers: ['The administrator installed a shorter cable.', 'The administrator installed a higher-grade cable.'],
+                explanation: 'Installing a shorter cable of the same grade will result in less loss and thus more amplitude being transmitted out the antenna. A higher-grade cable rated for less dB loss will have the same result.'
+            },
+            {
+                id: 10,
+                type: 'single',
+                question: 'Which of the following is true for MIMO transmissions?',
+                options: [
+                    'The transceiver can only receive from one antenna at a time.',
+                    'Transceivers can transmit from multiple antennas at the same time.',
+                    'The transceiver samples multiple antennas and chooses the best received signal from one antenna.',
+                    'Transceivers can transmit from only one antenna at a time.'
+                ],
+                correctAnswers: ['Transceivers can transmit from multiple antennas at the same time.'],
+                explanation: 'A MIMO transceiver can transmit from multiple antennas at the same time, if it is operating using multiple radio chains.'
+            },
+            {
+                id: 11,
+                type: 'multiple',
+                question: 'To establish a four-mile point-to-point bridge link in the 5 GHz U-NII-3 band, what factors should be taken under consideration? (Choose all that apply.)',
+                options: [
+                    'Fresnel zone clearance',
+                    'Earth bulge calculations',
+                    'Outdoor power regulations',
+                    'Proper choice of semidirectional antennas',
+                    'Proper choice of highly directional antennas'
+                ],
+                correctAnswers: ['Fresnel zone clearance', 'Outdoor power regulations', 'Proper choice of semidirectional antennas'],
+                explanation: 'Point-to-point bridge links require a minimum Fresnel zone clearance of 60 percent, although 100 percent clearance is ideal. Semidirectional antennas such as patch antennas or Yagi antennas are used for short-to-medium-distance bridge links. Highly directional antennas are used for long-distance bridge links. Compensating for earth bulge is generally not a factor until 7 miles. Every nation has specific outdoor power regulations that must also be respected.'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'The ratio between the maximum peak voltage and minimum voltage on a line is known as what?',
+                options: ['Signal flux', 'Return loss', 'VSWR', 'Signal incidents'],
+                correctAnswers: ['VSWR'],
+                explanation: 'Voltage standing wave ratio (VSWR) is the difference between these voltages and is represented as a ratio, such as 1.5:1.'
+            },
+            {
+                id: 13,
+                type: 'multiple',
+                question: 'What are some of the possible negative effects of an impendence mismatch? (Choose all that apply.)',
+                options: ['Voltage reflection', 'Blockage of the Fresnel zone', 'Erratic signal strength', 'Decreased signal amplitude', 'Amplifier/transmitter failure'],
+                correctAnswers: ['Voltage reflection', 'Erratic signal strength', 'Decreased signal amplitude', 'Amplifier/transmitter failure'],
+                explanation: 'The reflected voltage caused by an impedance mismatch can result in a decrease in power or amplitude (loss) of the signal that is supposed to be transmitted. If the transmitter is not protected from excessive reflected power or large voltage peaks, it can overheat and fail. Understand that VSWR may cause decreased signal strength, erratic signal strength, or even transmitter failure.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'When you are determining the mounting height of a long-distance point-to-point antenna, which of the following should you consider? (Choose all that apply.)',
+                options: ['Frequency', 'Distance', 'Visual line of sight', 'Earth bulge', 'Antenna beamwidth', 'RF line of sight'],
+                correctAnswers: ['Frequency', 'Distance', 'Earth bulge', 'RF line of sight'],
+                explanation: 'Frequency and distance are needed to determine the Fresnel zone. Visual line of sight is not needed as long as you have RF line of sight. You may not be able to see the antenna because of fog, but the fog will not prevent RF line of sight. Earth bulge will need to be considered. The beamwidth is not needed to determine the height, although it is useful when aiming the antenna.'
+            },
+            {
+                id: 15,
+                type: 'multiple',
+                question: 'Which of the following are true about cables? (Choose all that apply.)',
+                options: ['They cause impedance on the signal.', 'They work regardless of the frequency.', 'Attenuation decreases as frequency increases.', 'They add loss to the signal.'],
+                correctAnswers: ['They cause impedance on the signal.', 'They add loss to the signal.'],
+                explanation: 'Cables must be selected that support the frequency you are using. Attenuation actually increases with frequency.'
+            },
+            {
+                id: 16,
+                type: 'multiple',
+                question: 'Amplifiers can be purchased with which of the following features? (Choose all that apply.)',
+                options: ['Bidirectional amplification', 'Unidirectional amplification', 'Fixed gain', 'Fixed output'],
+                correctAnswers: ['Bidirectional amplification', 'Unidirectional amplification', 'Fixed gain', 'Fixed output'],
+                explanation: 'These are all possible capabilities of RF amplifiers.'
+            },
+            {
+                id: 17,
+                type: 'multiple',
+                question: 'The signal between the transceiver and the antenna will be reduced by which of the following methods? (Choose all that apply.)',
+                options: ['Adding an attenuator', 'Increasing the length of the cable', 'Shortening the length of the cable', 'Using cheaper-quality cable'],
+                correctAnswers: ['Adding an attenuator', 'Increasing the length of the cable', 'Using cheaper-quality cable'],
+                explanation: 'Adding an attenuator is an intentional act to add loss to the signal. Since cable adds loss, increasing the length will add more loss, whereas shortening the length will reduce the loss. Better-quality cables produce less signal loss.'
+            },
+            {
+                id: 18,
+                type: 'single',
+                question: 'Lightning arrestors will defend against which of the following?',
+                options: ['Direct lightning strikes', 'Power surges', 'Transient currents', 'Improper common grounding'],
+                correctAnswers: ['Transient currents'],
+                explanation: 'Lightning arrestors will not stand up to a direct lightning strike, only transient currents caused by nearby lightning strikes.'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'The radius of the first Fresnel zone is (Choose all that apply.)',
+                options: [
+                    'The outermost point of the area where the signal is out of phase with the point source',
+                    'The outermost point of the area where the signal is in phase with the point source',
+                    'Dependent on the gain of the directional antenna',
+                    'Smaller than the second Fresnel zone'
+                ],
+                correctAnswers: ['The outermost point of the area where the signal is in phase with the point source', 'Smaller than the second Fresnel zone'],
+                explanation: 'The area within the radius of the first Fresnel zone is in phase with the point source. The radius of the first Fresnel zone is the point where the second Fresnel zone begins and is where the signal transitions from being in phase with the point source to being out of phase. Because the second Fresnel zone begins where the first Fresnel zone ends, the radius of the second Fresnel zone is larger than the radius of the first Fresnel zone. The size of the Fresnel is dependent on the frequency and distance of the link. The gain of the antenna has no bearing on the size of the Fresnel zone.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'While aligning a directional antenna, you notice that the signal drops as you turn the antenna away from the other antenna, but then it increases a little. This increase in signal is most likely caused by what?',
+                options: ['Signal reflection', 'Frequency harmonic', 'Side band', 'Side lobe'],
+                correctAnswers: ['Side lobe'],
+                explanation: 'Side lobes are areas of antenna coverage (other than the coverage provided by the main signal) that have a stronger signal than would be expected when compared with the areas around them. Side lobes are best seen on an azimuth chart. Side bands and frequency harmonics have nothing to do with antenna coverage.'
+            }
+        ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 5;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

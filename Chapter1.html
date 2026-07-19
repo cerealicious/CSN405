@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 1 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> End Exam
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 1</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 4</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'single',
+                question: '802.11 technology is typically deployed at which fundamental layer of network architecture?',
+                options: ['Core', 'Distribution', 'Access', 'Network'],
+                correctAnswers: ['Access'],
+                explanation: '802.11 wireless networking is typically used to connect client stations to the network via an access point. Access points are deployed at the access layer, not the core or distribution layer. The Physical layer is a layer of the OSI model, not a network architecture layer.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'Which organization is responsible for enforcing maximum transmit power rules in an unlicensed frequency band?',
+                options: ['IEEE', 'Wi-Fi Alliance', 'ISO', 'IETF', 'None of the above'],
+                correctAnswers: ['None of the above'],
+                explanation: 'RF communications are regulated differently in many regions and countries. The local regulatory domain authorities of individual countries or regions define the spectrum policies and transmit power rules.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: '802.11 wireless bridge links are typically associated with which network architecture layer?',
+                options: ['Core', 'Distribution', 'Access', 'Network'],
+                correctAnswers: ['Distribution'],
+                explanation: '802.11 wireless bridge links are typically used to perform distribution layer services. Core layer devices are usually much faster than 802.11 wireless devices, and bridges are not used to provide access layer services. The Network layer is a layer of the OSI model, not a network architecture layer.'
+            },
+            {
+                id: 4,
+                type: 'single',
+                question: 'The 802.11-2020 standard was created by which organization?',
+                options: ['IEEE', 'OSI', 'ISO', 'Wi-Fi Alliance', 'FCC'],
+                correctAnswers: ['IEEE'],
+                explanation: 'The Institute of Electrical and Electronics Engineers (IEEE) is responsible for the creation of all of the 802 standards.'
+            },
+            {
+                id: 5,
+                type: 'single',
+                question: 'What organization ensures interoperability of WLAN products?',
+                options: ['IEEE', 'ITU-R', 'ISO', 'Wi-Fi Alliance', 'FCC'],
+                correctAnswers: ['Wi-Fi Alliance'],
+                explanation: 'The Wi-Fi Alliance provides certification testing, and when a product passes the test, it receives a Wi-Fi Interoperability Certificate.'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'What type of signal is required to carry data?',
+                options: ['Communications signal', 'Data signal', 'Carrier signal', 'Binary signal', 'Digital signal'],
+                correctAnswers: ['Carrier signal'],
+                explanation: 'A carrier signal is a modulated signal that is used to transmit binary data.'
+            },
+            {
+                id: 7,
+                type: 'single',
+                question: 'Which keying method is most susceptible to interference from noise?',
+                options: ['FSK', 'ASK', 'PSK', 'DSK'],
+                correctAnswers: ['ASK'],
+                explanation: 'Because of the effects of noise on the amplitude of a signal, amplitude-shift keying (ASK) has to be used cautiously.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'Which sublayer of the OSI model’s Data-Link layer is used for communication between 802.11 radios?',
+                options: ['LLC', 'PLCP', 'MAC', 'PMD'],
+                correctAnswers: ['MAC'],
+                explanation: 'The IEEE 802.11-2020 standard defines communication mechanisms at only the Physical layer and MAC sublayer of the Data-Link layer of the OSI model. The Logical Link Control (LLC) sublayer of the Data-Link layer is not defined for 802.11 operations. PLCP and PMD are sublayers of the Physical layer.'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'While performing some research, Janie comes across a reference to a document titled RFC 3935. Which of the following organization’s website would be best to further research this document?',
+                options: ['IEEE', 'Wi-Fi Alliance', 'WECA', 'FCC', 'IETF'],
+                correctAnswers: ['IETF'],
+                explanation: 'The IETF is responsible for creation of RFC documents. The IEEE is responsible for the 802 standards. The Wi-Fi Alliance is responsible for certification tests. The Wi-Fi Alliance was originally known as WECA but changed its name to Wi-Fi Alliance in 2002. The FCC is responsible for RF regulatory rules in the United States.'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'What are the three logical planes of operation for network telecommunications? (Choose three)',
+                options: ['Management', 'Core', 'Control', 'Access', 'Data'],
+                correctAnswers: ['Management', 'Control', 'Data'],
+                explanation: 'The management place exists for the monitoring and administration of a telecommunications network. The control plane is characterized as the intelligence of a network. The data place carries the network user traffic.'
+            },
+            {
+                id: 11,
+                type: 'multiple',
+                question: 'Which wave properties can be modulated to encode data? (Choose all that apply.)',
+                options: ['Amplitude', 'Frequency', 'Phase', 'Wavelength'],
+                correctAnswers: ['Amplitude', 'Frequency', 'Phase'],
+                explanation: 'The three keying methods that can be used to encode data are amplitude-shift keying (ASK), frequency-shift keying (FSK), and phase-shift keying (PSK).'
+            },
+            {
+                id: 12,
+                type: 'multiple',
+                question: 'The IEEE 802.11-2020 standard defines communication mechanisms at which layers of the OSI model? (Choose all that apply.)',
+                options: ['Network', 'Physical', 'Transport', 'Application', 'Data-Link', 'Session'],
+                correctAnswers: ['Physical', 'Data-Link'],
+                explanation: 'The IEEE 802.11-2020 standard defines communication mechanisms at only the Physical layer and MAC sublayer of the Data-Link layer of the OSI model.'
+            },
+            {
+                id: 13,
+                type: 'single',
+                question: 'The height or power of a wave is known as what?',
+                options: ['Phase', 'Frequency', 'Amplitude', 'Wavelength'],
+                correctAnswers: ['Amplitude'],
+                explanation: 'Height and power are two terms that describe the amplitude of a wave. Frequency is how often a wave repeats itself. Wavelength is the actual length of the wave, typically measured from peak to peak. Phase refers to the starting point of a wave in relation to another wave.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'Wi-Fi CERTIFIED 6 certifies the operation and capabilities of which 802.11 wireless standard? (Choose all that apply.)',
+                options: ['802.11ac', '802.11ax', '802.1X', '802.11ay'],
+                correctAnswers: ['802.11ax'],
+                explanation: 'Wi-Fi CERTIFIED 6 certifies the operational capabilities for 802.11ax radios for both 2.4 GHz and 5 GHz frequency bands. Wi-Fi 6E is an extension of the Wi-Fi 6 to certify 802.11ax radios in the 6 GHz frequency band.'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'Which of the following is the responsibility of the Internet Engineering Task Force (IETF)?',
+                options: ['Request for Comments (RFCs)', '802 standards', 'Wi-Fi CERTIFIED standards', 'Regulatory domain authority rules'],
+                correctAnswers: ['Request for Comments (RFCs)'],
+                explanation: 'The IETF creates RFCs, the IEEE creates the 802 standards, the Wi-Fi Alliance provides the Wi-Fi CERTIFIED standards, and the ITU-R defines the radio regulatory regions. The regulatory bodies with the regions manage the regulatory domain rules.'
+            },
+            {
+                id: 16,
+                type: 'multiple',
+                question: 'Which of the following wireless communications parameters and usage are typically governed by a local regulatory authority? (Choose all that apply.)',
+                options: ['Frequency', 'Bandwidth', 'Maximum transmit power', 'Maximum EIRP', 'Indoor/outdoor usage'],
+                correctAnswers: ['Frequency', 'Bandwidth', 'Maximum transmit power', 'Maximum EIRP', 'Indoor/outdoor usage'],
+                explanation: 'All of these are typically regulated by the local or regional RF regulatory authority.'
+            },
+            {
+                id: 17,
+                type: 'single',
+                question: 'What type of communications do 802.11 radios use to transmit and receive?',
+                options: ['Simplex', 'Half-duplex', 'Full-duplex', 'Echo-duplex'],
+                correctAnswers: ['Half-duplex'],
+                explanation: 'In half-duplex communications, both devices are capable of transmitting and receiving; however, only one device can transmit at a time. Walkie-talkies, or two-way radios, are examples of half-duplex devices. All RF communications by nature are half-duplex. IEEE 802.11 WLAN radios use half-duplex communications.'
+            },
+            {
+                id: 18,
+                type: 'single',
+                question: 'A wave is divided into degrees. How many degrees make up a complete wave?',
+                options: ['100', '180', '212', '360'],
+                correctAnswers: ['360'],
+                explanation: 'A wave is divided into 360 degrees.'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'What are the advantages of using unlicensed frequency bands for RF transmissions? (Choose all that apply.)',
+                options: ['There are no governmental regulations.', 'There is no additional financial cost.', 'Anyone can use the frequency band.', 'There are no rules.'],
+                correctAnswers: ['There is no additional financial cost.', 'Anyone can use the frequency band.'],
+                explanation: 'The main advantages of an unlicensed frequency are that permission to transmit on the frequency is free and that anyone can use the unlicensed frequency. Although there are no additional financial costs, you still must abide by transmission regulations and other restrictions. The fact that anyone can use the frequency band is also a disadvantage because of overcrowding.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'The OSI model consists of how many layers?',
+                options: ['Four', 'Six', 'Seven', 'Nine'],
+                correctAnswers: ['Seven'],
+                explanation: 'The OSI model is sometimes referred to as the seven-layer model.'
+            }
+        ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 5;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

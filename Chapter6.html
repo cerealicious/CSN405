@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 6 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> End Exam
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 6</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 4</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'single',
+                question: 'Which technology has a greater tolerance of delay spread?',
+                options: ['DSSS', 'FHSS', 'OFDM', 'HR-DSSS'],
+                correctAnswers: ['OFDM'],
+                explanation: 'OFDM has a greater tolerance of delay spread over previous methods, such as FHSS, DSSS, and HR-DSSS.'
+            },
+            {
+                id: 2,
+                type: 'multiple',
+                question: 'Which is often used to describe the "shape" of a frequency channel? (Choose all that apply.)',
+                options: ['Maximum spectral density', 'Transmit spectral mask', 'Radio spectrum', 'Spectrum mask'],
+                correctAnswers: ['Transmit spectral mask', 'Spectrum mask'],
+                explanation: 'The transmit spectrum mask, also referred to as spectral mask, is used to define the spectral density limitations of 802.11 WLAN transmissions. Sometimes the spectral mask is referenced as the shape of a channel. Instead, try to think of the spectral mask as the frequency width at which signal power must decrease by a certain amount.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: 'Which term best describes modulation accuracy?',
+                options: ['EVM', 'ERP', 'VHT', 'QAM'],
+                correctAnswers: ['EVM'],
+                explanation: 'Error vector magnitude (EVM) is a measure used to quantify the performance of a radio receiver or transmitter in regard to modulation accuracy. With QAM modulation, EVM is a measure of how far a received signal is from an ideal constellation point location. Another way to describe EVM is a measure of how much the signal constellation points deviate from the ideal locations.'
+            },
+            {
+                id: 4,
+                type: 'multiple',
+                question: '802.11n (HT radios) can transmit in which frequency bands? (Choose all that apply.)',
+                options: ['2.4 GHz-2.4835 GHz', '5.47 GHz-5.725 GHz', '902 GHz-928 GHz', '5.15 GHz-5.25 GHz'],
+                correctAnswers: ['2.4 GHz-2.4835 GHz', '5.47 GHz-5.725 GHz', '5.15 GHz-5.25 GHz'],
+                explanation: 'The IEEE 802.11-2020 standard specifies that 802.11n HT radios can transmit in the 2.4 GHz ISM band and all four of the current 5 GHz U-NII bands.'
+            },
+            {
+                id: 5,
+                type: 'single',
+                question: 'A 20 MHz OFDM channel uses how many 312.5 KHz subcarriers to modulate data when transmitted by an 802.11a/g radio?',
+                options: ['64', '52', '48', '36'],
+                correctAnswers: ['48'],
+                explanation: 'A 20 MHz OFDM channel has 64 subcarriers (tones), but only 48 of them are used to transport modulated data between 802.11a/g radios. Twelve of the 64 subcarriers in a 20 MHz OFDM channel are unused and serve as guard bands, and four of the subcarriers function as pilot carriers. 802.11n/ac radios also transmit on a 20 MHz channel that consists of 64 total subcarriers; however, only 8 subcarriers are guard bands. Fifty-two of the subcarriers are used to transmit modulated data, and four of the subcarriers function as pilot carriers.'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'Which of these client radios will be able to transmit in the U-NII-5 band?',
+                options: ['Wi-Fi 4 client radios', 'Wi-Fi 5 client radios', 'Wi-Fi 6 client radios', 'Wi-Fi 6E client radios', 'Wi-Fi 7 client radios'],
+                correctAnswers: ['Wi-Fi 6E client radios'],
+                explanation: 'In early 2020, the FCC voted unanimously to make 1,200 megahertz of spectrum in the 6 GHz band available for unlicensed use in the United States. There will be as many as 59 new 20 MHz channels available across 4 U-NII bands (including U-NII-5). WLAN vendors will build Wi-Fi 6E access points in many different form factors, but in most cases they will have radios for all three bands (2.4, 5, and 6 GHz). However, only new Wi-Fi 6E client devices with 6 GHz radios will be able to communicate with the 6 GHz radio in a Wi-Fi 6E access point. An older dual-frequency (2.4 and 5 GHz) smartphone will only be able to communicate with the 2.4 or 5 GHz radios in a tri-band Wi-Fi 6E AP.'
+            },
+            {
+                id: 7,
+                type: 'single',
+                question: 'What is the frequency width of a standard OFDM channel?',
+                options: ['20 MHz', '22 MHz', '25 MHz', '40 MHz', '80 MHz', '160 MHz'],
+                correctAnswers: ['20 MHz'],
+                explanation: 'The frequency width used by a standard OFDM channel is approximately 20 MHz (as defined by the spectral mask). However, 802.11n/ac/ax radios have the ability to bond 20 MHz channels together. 40 MHz channels are essentially two 20 MHz OFDM channels that are bonded together. The 40 MHz spectral mask looks identical to the 20 MHz spectral mask except that it is twice as wide. The spectral mask of an 80 MHz channel looks similar to the 20 MHz spectral mask except that it is four times as wide.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'What best describes hop time?',
+                options: [
+                    'The period of time that the transmitter waits before hopping to the next frequency',
+                    'The period of time that the standard requires when hopping between frequencies',
+                    'The period of time that the transmitter takes to hop to the next frequency',
+                    'The period of time that the transmitter takes to hop through all the FHSS frequencies'
+                ],
+                correctAnswers: ['The period of time that the transmitter takes to hop to the next frequency'],
+                explanation: 'The time that the transmitter waits before hopping to the next frequency is known as the dwell time. The hop time is not a required time but rather a measurement of how long the hop takes.'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'As defined by the IEEE 802.11-2020 standard, how much separation is needed between center frequencies of channels in the U-NII-2C band?',
+                options: ['10 MHz', '20 MHz', '22 MHz', '25 MHz', '30 MHz'],
+                correctAnswers: ['20 MHz'],
+                explanation: 'The 802.11a amendment, which originally defined the use of OFDM, required 20 MHz of separation between the center frequencies for channels to be considered nonoverlapping. All 25 channels in the 5 GHz U-NII bands use OFDM and have 20 MHz of separation. Therefore, all 5 GHz OFDM channels are considered nonoverlapping by the IEEE. However, it should be noted that adjacent 5 GHz channels do have some sideband carrier frequency overlap.'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'Which of these 802.11 technologies can operate in the 5 GHz frequency band? (Choose all that apply.)',
+                options: ['802.11a (OFDM radios)', '802.11b (HR-DSSS radios)', '802.11g (ERP radios)', '802.11n (HT radios)', '802.11ac (VHT radios)', '802.11ax (HE radios)'],
+                correctAnswers: ['802.11a (OFDM radios)', '802.11n (HT radios)', '802.11ac (VHT radios)', '802.11ax (HE radios)'],
+                explanation: 'Wi-Fi radios that currently transmit in the 5 GHz U-NII bands include radios that use the following technologies: 802.11a, 802.11n, 802.11ac, and 802.11ax.'
+            },
+            {
+                id: 11,
+                type: 'single',
+                question: 'Which U-NII band is currently designated for possible wireless communications of an automotive intelligent transportation system (ITS)?',
+                options: ['U-NII-1', 'U-NII-2A', 'U-NII-2B', 'U-NII-2C', 'U-NII-3', 'U-NII-4'],
+                correctAnswers: ['U-NII-4'],
+                explanation: 'Although the FCC is denying expansion of Wi-Fi into the U-NII-2B band, there is still the possibility for additional frequency expansion at the top end of the 5 GHz band. The U-NII-4 frequency band, 5.85 GHz-5.925 GHz, is still under consideration for possible use for Wi-Fi communication. The FCC is considering repurposing the lower 45 MHz of the UNII-4 band to be used for Wi-Fi and unlicensed use. The upper 30 MHz of the UNII-4 band would be reaffirmed for automotive ITS using a new LTE cellular technology called C-V2x. Cellular vehicle-to-everything (C-V2X) is an ITS technology meant to enable vehicles to communicate with each other and everything around (example: traffic lights). The FCC is also reconsidering whether an older automotive ITS technology called Dedicated Short Range Communication (DSRC) should still be permitted in the UNII-4 band.'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'When data is corrupted by previous data from a reflected signal, this is known as what?',
+                options: ['Delay spread', 'Intersymbol interference', 'Co-channel interference', 'Adjacent cell interference'],
+                correctAnswers: ['Intersymbol interference'],
+                explanation: 'If the delay spread is too great, data from a reflected signal may interfere with the same data stream from the main signal; this is referred to as intersymbol interference (ISI). The cause of the problem is delay spread resulting in intersymbol interference (ISI), which causes data corruption.'
+            },
+            {
+                id: 13,
+                type: 'single',
+                question: 'Assuming all channels are supported by a 5 GHz access point, how many possible 20 MHz channels can be configured on the access point?',
+                options: ['4', '11', '12', '25'],
+                correctAnswers: ['25'],
+                explanation: 'The 802.11-2020 standard states that "the OFDM PHY shall operate in the 5 GHz band, as allocated by a regulatory body in its operational region." A total of twenty-five 20 MHz wide channels are available in the 5 GHz U-NII bands.'
+            },
+            {
+                id: 14,
+                type: 'single',
+                question: 'Which of these technologies is the most resilient against the negative effects of multipath?',
+                options: ['FHSS', 'DSSS', 'HR-DSSS', 'OFDM'],
+                correctAnswers: ['OFDM'],
+                explanation: 'Because of the lower subcarrier data rates, delay spread is a smaller percentage of the symbol period, which means that ISI is less likely to occur. In other words, OFDM technology is more resistant to the negative effects of multipath than DSSS and FHSS spread spectrum technologies.'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'What is the average amount of aggregate throughput at any data rate when legacy 802.11a/b/g/n/ac radios are transmitting?',
+                options: ['80 percent', '75 percent', '50 percent', '100 percent'],
+                correctAnswers: ['50 percent'],
+                explanation: 'A medium access method known as Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA) helps to ensure that only one radio can be transmitting on the medium at any given time. Depending on WLAN network conditions, the aggregate WLAN throughput is usually 50 percent of the advertised 802.11 data rate, due to medium contention overhead. 802.11 data rates are not TCP throughput. The medium contention protocol of CSMA/CA consumes much of the available bandwidth. In laboratory conditions, the TCP throughput in an 802.11n/ac environment is 60-70 percent of the data rate between one AP and one client. The aggregate throughput numbers are considerably less in real-world environments with active participation of multiple Wi-Fi clients communicating through an AP.'
+            },
+            {
+                id: 16,
+                type: 'multiple',
+                question: 'Which of these 802.11 technologies can operate in the 2.4 GHz frequency band? (Choose all that apply.)',
+                options: ['802.11a (OFDM radios)', '802.11b (HR-DSSS radios)', '802.11g (ERP radios)', '802.11n (HT radios)', '802.11ac (VHT radios)', '802.11ax (HE radios)'],
+                correctAnswers: ['802.11b (HR-DSSS radios)', '802.11g (ERP radios)', '802.11n (HT radios)', '802.11ax (HE radios)'],
+                explanation: 'Wi-Fi radios that currently transmit in the 2.4 GHz ISM band include radios that use the following technologies: 802.11b, 802.11g, 802.11n, and 802.11ax.'
+            },
+            {
+                id: 17,
+                type: 'single',
+                question: 'In the United States, 802.11 radios were not allowed to transmit on which range of frequencies in order to avoid interference with Terminal Doppler Weather Radar (TDWR) systems?',
+                options: ['5.15 GHz-5.25 GHz', '5.25 GHz-5.25 GHz', '5.60 GHz-5.65 GHz', '5.85 GHz-5.925 GHz'],
+                correctAnswers: ['5.60 GHz-5.65 GHz'],
+                explanation: 'In 2009, the Federal Aviation Authority (FAA) reported interference to Terminal Doppler Weather Radar (TDWR) systems. As a result, the FCC suspended certification of 802.11 devices in the U-NII-2A and U-NII-2C bands that require DFS. Certification was eventually re-established; however, the rules changed and 802.11 radios are currently allowed to transmit in the 5.60-5.65 GHz frequency space where TDWR operates. Channels 120-128 were not available for a number of years. As of April 2014, the TDWR frequency space is once again available for 802.11 transmissions in the United States.'
+            },
+            {
+                id: 18,
+                type: 'multiple',
+                question: 'Which modulation types are used by OFDM technology? (Choose all that apply.)',
+                options: ['QAM', 'Phase', 'Frequency', 'Hopping'],
+                correctAnswers: ['QAM', 'Phase'],
+                explanation: 'OFDM uses BPSK and QPSK modulation for the lower ODFM data rates. The higher OFDM data rates use 16-QAM, 64-QAM, and 256-QAM modulation. QAM modulation is a hybrid of phase and amplitude modulation.'
+            },
+            {
+                id: 19,
+                type: 'single',
+                question: 'The Barker code converts a bit of data into a series of bits that are referred to as what?',
+                options: ['Chipset', 'Chips', 'Convolutional code', 'Complementary code'],
+                correctAnswers: ['Chips'],
+                explanation: 'When a data bit is converted to a series of bits, these bits that represent the data are known as chips.'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'Which technology will be needed in the U-NII-5 and U-NII-6 bands to prevent APs from interfering with incumbents in 6 GHz?',
+                options: ['DFS', 'AFC', 'TPC', 'QAM'],
+                correctAnswers: ['AFC'],
+                explanation: 'For outdoor Wi-Fi communications in the U-NII-5 and U-NII-7 bands, the FCC will mandate the use of automated frequency coordination (AFC) to protect the incumbents. An AFC system will use geolocation databases to manage real-time frequency assignments to protect incumbent operations from RF interference.'
+            }
+        ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 5;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
