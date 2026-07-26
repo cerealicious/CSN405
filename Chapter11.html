@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 11 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> Return to Dashboard
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 11</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 4</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'multiple',
+                question: 'Which terms best describe components of a centralized WLAN architecture where the management, control, and data planes all reside in a centralized device? (Choose all that apply.)',
+                options: ['WLAN controller', 'Wireless network management system', 'Network management system', 'Distributed AP', 'Controller-based AP'],
+                correctAnswers: ['WLAN controller', 'Controller-based AP'],
+                explanation: 'In the centralized WLAN architecture, autonomous access points (APs) have been replaced with controller-based APs. All three logical planes of operation reside inside a centralized networking device known as a WLAN controller. Effectively, all planes were moved out of access points and into a WLAN controller. It should be noted that a network management system (NMS) could be used to manage controllers and controller-based APs.[cite: 4]'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'Which logical plane of network operation is typically defined by protocols and intelligence?',
+                options: ['User plane', 'Data plane', 'Network plane', 'Control plane', 'Management plane'],
+                correctAnswers: ['Control plane'],
+                explanation: 'Telecommunication networks are often defined as three logical planes of operation. The control plane consists of control or signaling information and is often defined as network intelligence or protocols.[cite: 4]'
+            },
+            {
+                id: 3,
+                type: 'multiple',
+                question: 'Which WLAN architectural models typically require support for 802.1Q tagging at the edge on the network when multiple user VLANs are required? (Choose all that apply.)',
+                options: ['Autonomous WLAN architecture', 'Centralized WLAN architecture', 'Distributed WLAN architecture', 'None of the above'],
+                correctAnswers: ['Autonomous WLAN architecture', 'Distributed WLAN architecture'],
+                explanation: 'All three WLAN infrastructure designs support the use of virtual LANs (VLANs) and 802.1Q tagging. However, the centralized WLAN architecture usually encapsulates user VLANs between the controller-based access point (AP) and the WLAN controllers; therefore, only a single VLAN is normally required at the edge. An 802.1Q trunk is, however, usually required between the WLAN controller and a core switch. Neither the autonomous nor the distributed WLAN architectures use a controller. Noncontroller architectures require support for 802.1Q tagging if multiple VLANs are to be supported at the edge of the network. The access point is connected to an 802.1Q trunk port on an edge switch that supports VLAN tagging.[cite: 4]'
+            },
+            {
+                id: 4,
+                type: 'single',
+                question: 'Which type of access points normally use centralized data forwarding?',
+                options: ['Autonomous APs', 'Controller-based APs', 'Cooperative APs within a distributed WLAN architecture', 'None of the above'],
+                correctAnswers: ['Controller-based APs'],
+                explanation: 'Controller-based APs (access points) normally forward user traffic to a centralized WLAN controller via an encapsulated IP tunnel. Autonomous and cooperative access points normally use local data forwarding. Controller-based APs are also capable of local data forwarding. Although the whole point of a cooperative and distributed WLAN model is to avoid centrally forwarding user traffic to the core, the access points may also have IP-tunneling capabilities.[cite: 4]'
+            },
+            {
+                id: 5,
+                type: 'multiple',
+                question: 'Which protocols can be used to tunnel 802.11 user traffic from access points to WLAN controllers or other centralized network servers? (Choose all that apply.)',
+                options: ['IPsec', 'GRE', 'CAPWAP', 'DTLS', 'VRRP'],
+                correctAnswers: ['IPsec', 'GRE', 'CAPWAP'],
+                explanation: 'Many WLAN vendors use Generic Routing Encapsulation (GRE), which is a commonly used network tunneling protocol. Although GRE is often used to encapsulate IP packets, GRE can also be used to encapsulate an 802.11 frame inside an IP tunnel. The GRE tunnel creates a virtual point-to-point link between a controller-based access point (AP) and a WLAN controller. WLAN vendors that do not use GRE use other proprietary protocols for the IP tunneling. The Control and Provisioning of Wireless Access Points (CAPWAP) management protocol can also be used to tunnel user traffic. IPsec can also be used to securely tunnel user traffic from APs across a WAN link.[cite: 4]'
+            },
+            {
+                id: 6,
+                type: 'single',
+                question: 'Which of these WLAN architectures may require the use of an NMS server to manage and monitor the WLAN?',
+                options: ['Autonomous WLAN architecture', 'Centralized WLAN architecture', 'Distributed WLAN architecture', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'One major disadvantage of using the traditional autonomous access point (AP) is that there is no central point of management. Any autonomous WLAN architecture with 25 or more access points is going to require some sort of network management system (NMS). Although a WLAN controller can be used to manage the WLAN in a centralized WLAN architecture, if multiple controllers are deployed, an NMS may be needed to manage multiple controllers. Although the control plane and management plane have moved back to the APs in a distributed WLAN architecture, the management plane remains centralized. Configuration and monitoring of all access points in the distributed model is still handled by an NMS. Most NMS solutions are now cloud-based management solutions.[cite: 4]'
+            },
+            {
+                id: 7,
+                type: 'single',
+                question: 'What term best describes a WLAN centralized architecture where the integration service (IS) and distribution system services (DSSs) are handled by a WLAN controller while the generation of certain 802.11 management and control frames is handled by a controller-based AP?',
+                options: ['Cooperative control', 'Distributed data forwarding', 'Distributed hybrid architecture', 'Distributed WLAN architecture', 'Split MAC'],
+                correctAnswers: ['Split MAC'],
+                explanation: 'The majority of WLAN controller vendors implement what is known as a split MAC architecture. With this type of WLAN architecture, some of the MAC services are handled by the WLAN controller and some are handled by the controller-based access point.[cite: 4]'
+            },
+            {
+                id: 8,
+                type: 'multiple',
+                question: 'What are some of the necessary components of a VoWiFi network architecture? (Choose all that apply.)',
+                options: ['VoWiFi phone', 'SIP', 'WMM support', 'Proxy server', 'PBX'],
+                correctAnswers: ['VoWiFi phone', 'WMM support', 'PBX'],
+                explanation: 'VoWiFi phones are 802.11 client stations that communicate through most WLAN architecture. The private branch exchange (PBX) is needed to make connections among the internal telephones of a private company and also connect them to the public switched telephone network (PSTN) via trunk lines. Wi-Fi Multimedia (WMM) quality-of-service capabilities must be supported by both the VoWiFi phone and WLAN infrastructure. Currently most Voice over Wi-Fi (VoWiFi) solutions use the Session Initiation Protocol (SIP) as the signaling protocol for voice communications over an IP network, but other protocols can be used instead.[cite: 4]'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'What is the traditional data-forwarding model for 802.11 user traffic when WLAN controllers are deployed?',
+                options: ['Distributed data forwarding', 'Autonomous forwarding', 'Proxy data forwarding', 'Centralized data forwarding', 'All of the above'],
+                correctAnswers: ['Centralized data forwarding'],
+                explanation: 'Centralized data forwarding is the traditional data-forwarding method used with WLAN controllers. All 802.11 user traffic is forwarded from the access point (AP) to the WLAN controller for processing, especially when the WLAN controller manages encryption and decryption or applies security and quality-of-service (QoS) policies. Most WLAN controller solutions also now support a distributed data plane. The controller-based AP performs data forwarding locally; it may be used in situations where it is advantageous to perform forwarding at the edge and to avoid a central location in the network for all data.[cite: 4]'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'What are some of the security capabilities found in an enterprise WLAN router that is typically deployed in remote branch locations? (Choose all that apply.)',
+                options: ['Integrated WIPS server', 'Integrated VPN server', 'Integrated NAC server', 'Integrated firewall', 'Integrated VPN client'],
+                correctAnswers: ['Integrated firewall', 'Integrated VPN client'],
+                explanation: 'A distributed solution using enterprise-grade WLAN routers is often deployed at company branch offices. Branch WLAN routers have the ability to connect back to corporate headquarters with virtual private network (VPN) tunnels using an integrated VPN client. Enterprise WLAN routers also have integrated firewalls with support for port forwarding, network address translation (NAT), and port address translation (PAT). Enterprise WLAN routers also offer full support for 802.11 security.[cite: 4]'
+            },
+            {
+                id: 11,
+                type: 'single',
+                question: 'Which radio form factors can be used by 802.11 technology?',
+                options: ['USB 3.0', 'Secure Digital', 'PCMCIA', 'Mini PCI', 'ExpressCard', 'Proprietary', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'The 802.11 standard does not mandate what type of form factor must be used by an 802.11 radio. Although PCMCIA and Mini PCI client adapters are the most common, 802.11 radios exist in many other formats, such as CompactFlash cards, Secure Digital cards, USB dongles, ExpressCards, and other proprietary formats.[cite: 4]'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'Which of these protocols can be used to configure WLAN infrastructure devices?',
+                options: ['HTTP', 'SSH', 'SNMP', 'Telnet', 'HTTPS', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'All of these protocols might be used to configure WLAN devices such as access points and WLAN controllers. However, written corporate policies should mandate the use of secure protocols such as SNMPv3, SSH2, and HTTPS.[cite: 4]'
+            },
+            {
+                id: 13,
+                type: 'single',
+                question: 'What are some of the common capabilities of a WLAN controller architecture?',
+                options: ['Adaptive RF', 'AP management', 'Layer 3 roaming support', 'Bandwidth throttling', 'Firewall', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'WLAN controllers support layer 3 roaming capabilities, bandwidth policies, and stateful packet inspection. Adaptive RF, device monitoring, and AP management are also supported on a controller.[cite: 4]'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'Which management protocols are often used between a network management system (NMS) server and remote access points for the purpose of monitoring a WLAN? (Choose all that apply.)',
+                options: ['IPsec', 'GRE', 'CAPWAP', 'DTLS', 'SNMP'],
+                correctAnswers: ['CAPWAP', 'SNMP'],
+                explanation: 'Communications between a network management system (NMS) server and an AP (access point) require management and monitoring protocols. Most NMS solutions use the Simple Network Management Protocol (SNMP) to manage and monitor the WLAN. Other NMS solutions also use the Control and Provisioning of Wireless Access Points (CAPWAP) as strictly a monitoring and management protocol. CAPWAP incorporates Datagram Transport Layer Security (DTLS) to provide encryption and data privacy of the monitored management traffic. Other secure protocols such as HTTPS can be used to transport management traffic from a networking device to a NMS server or cloud platform.[cite: 4]'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'What are of some of the common security capabilities often integrated within access points deployed in a distributed WLAN architecture?',
+                options: ['Captive web portal', 'Firewall', 'Integrated RADIUS', 'WIPS', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'Most of the security features found in WLAN controllers can also be found in a distributed WLAN architecture even though there is no WLAN controller. For example, a captive web portal that normally resides in a WLAN controller instead resides inside the individual APs (access points). The stateful firewall and role-based access control (RBAC) capabilities found in a centralized WLAN controller now exist cooperatively in the APs. An individual AP might also function as a RADIUS server with full Lightweight Directory Access Protocol (LDAP) integration capabilities. All control plane mechanisms reside in the access points at the edge of the network in a distributed WLAN architecture.[cite: 4]'
+            },
+            {
+                id: 16,
+                type: 'single',
+                question: 'What RF technology do IoT client devices use for communication?',
+                options: ['Wi-Fi', 'Bluetooth', 'Zigbee', 'All of the above'],
+                correctAnswers: ['All of the above'],
+                explanation: 'The bulk of IoT devices with an 802.11 radio currently transmit in the 2.4 GHz frequency band only. Please understand that not all IoT devices use Wi-Fi radios. IoT devices may use other RF technology such as Bluetooth or Zigbee. IoT devices may also have an Ethernet networking interface in addition to the RF interfaces.[cite: 4]'
+            },
+            {
+                id: 17,
+                type: 'single',
+                question: 'What type of 802.11 radio form factor is normally used in mobile devices such as smartphones and tablets?',
+                options: ['Integrated single chip', 'PCMCIA', 'Express Mini PCI', 'Mini PCI', 'Secure Digital'],
+                correctAnswers: ['Integrated single chip'],
+                explanation: 'Over the past decade, there has been a client population explosion of handheld mobile devices such as smartphones and tablets. Most users now expect Wi-Fi connectivity with numerous handheld mobile devices as well as their laptops. Almost all mobile devices use a single chip form factor that is embedded on the device\'s motherboard.[cite: 4]'
+            },
+            {
+                id: 18,
+                type: 'single',
+                question: 'Where is redundancy needed if user traffic is being tunneled in a centralized WLAN architecture?',
+                options: ['Redundant radios', 'Redundant controllers', 'Redundant access switches', 'Redundant access points', 'None of the above'],
+                correctAnswers: ['Redundant controllers'],
+                explanation: 'In a centralized WLAN architecture, traffic is tunneled from controller-based APs (access points) deployed at the access layer to a WLAN controller that is typically deployed at the core of the network. Standard network design suggests redundancy at the core, and redundant WLAN controllers should be deployed so that there is no single point of network failure. If all user traffic is being tunneled to a WLAN controller and it fails without a redundant solution, effectively the WLAN is down.[cite: 4]'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'What are the available form factors for network management system (NMS) solutions? (Choose all that apply.)',
+                options: ['Hardware appliance', 'Virtual appliance', 'Cloud subscription service', 'Integrated access point'],
+                correctAnswers: ['Hardware appliance', 'Virtual appliance', 'Cloud subscription service'],
+                explanation: 'Network management system (NMS) solutions can be deployed at a company data center in the form of a hardware appliance or as a virtual appliance that runs on VMware or some other virtualization platform. A network management system server that resides in a company\'s own data center is often referred to as an on-premises NMS. NMS solutions are more commonly available in the cloud as a software subscription service.[cite: 4]'
+            },
+            {
+                id: 20,
+                type: 'multiple',
+                question: 'What planes of operation reside in the access points of a distributed WLAN architecture? (Choose all that apply.)',
+                options: ['Radio plane', 'Data plane', 'Network plane', 'Control plane', 'Management plane'],
+                correctAnswers: ['Data plane', 'Control plane'],
+                explanation: 'The control plane mechanisms are enabled in the system with inter-AP communication via cooperative protocols in a distributed WLAN architecture. In a distributed architecture, each individual access point is responsible for local forwarding of user traffic; therefore, the data plane resides in the APs. The management plane resides in a network management system (NMS) that is used to manage and monitor the distributed WLAN.[cite: 4]'
+            }
+        ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 5;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
