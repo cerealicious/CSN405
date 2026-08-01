@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 14 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> Return to Dashboard
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 14</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 2</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+            const quizData = [
+                {
+                    id: 1,
+                    type: 'multiple',
+                    question: 'Which of the following statements best describe security considerations during a wireless site survey? (Choose all that apply.)',
+                    options: [
+                        "Questions will be asked to define the customer's security expectations.",
+                        "Wireless security recommendations will be made after the survey.",
+                        "Recommendations about wireless security policies may also be made.",
+                        "During the survey, both mutual authentication and encryption should be implemented."
+                    ],
+                    correctAnswers: [
+                        "Questions will be asked to define the customer's security expectations.",
+                        "Wireless security recommendations will be made after the survey.",
+                        "Recommendations about wireless security policies may also be made."
+                    ],
+                    explanation: 'Although security in itself is not part of the WLAN site survey, network management should be interviewed about security expectations. The surveying company will make comprehensive wireless security recommendations. An addendum to the security recommendations might be corporate wireless policy recommendations. Authentication and encryption solutions are not usually implemented during the physical survey.'
+                },
+                {
+                    id: 2,
+                    type: 'multiple',
+                    question: 'ACME Hospital uses a connection-oriented telemetry monitoring system in the cardiac care unit. Management wants the application available over a WLAN. Uptime is very important because of the critical nature of the monitoring system. What should the site survey and design engineer be looking for that might cause a loss of communication over the WLAN? (Choose all that apply.)',
+                    options: [
+                        'Medical equipment interference',
+                        'Safety glass containing metal mesh wire',
+                        'Patients',
+                        'Bedpans',
+                        'Elevator shafts'
+                    ],
+                    correctAnswers: [
+                        'Medical equipment interference',
+                        'Safety glass containing metal mesh wire',
+                        'Elevator shafts'
+                    ],
+                    explanation: 'Any type of RF interference could cause a denial of service to the WLAN. A spectrum analysis survey should be performed to determine if any of the hospital\'s medical equipment would cause interference. The metal mesh safety glass will cause scattering of RF waves and potentially create lost coverage on the opposite side of the glass. Elevator shafts are made of metal and often are dead zones if not properly covered.'
+                },
+                {
+                    id: 3,
+                    type: 'multiple',
+                    question: 'Which of the following tools might be used in an outdoor site survey of an area designed to provide outdoor coverage? (Choose all that apply.)',
+                    options: [
+                        'Spectrum analyzer',
+                        'Outdoor blueprints or topography map',
+                        'Mesh routers',
+                        'GPS',
+                        'Oscilloscope'
+                    ],
+                    correctAnswers: [
+                        'Spectrum analyzer',
+                        'Outdoor blueprints or topography map',
+                        'Mesh routers',
+                        'GPS'
+                    ],
+                    explanation: 'Outdoor site surveys are conducted using either outdoor access points or mesh routers. These outdoor Wi-Fi surveys will use most of the same tools as an indoor site survey but may also use a global positioning system (GPS) device to record latitude and longitude location coordinates.'
+                },
+                {
+                    id: 4,
+                    type: 'single',
+                    question: 'Name a unique consideration when deploying a wireless network in a hotel or other hospitality business.',
+                    options: [
+                        'Equipment theft',
+                        'Aesthetics',
+                        'Segmentation',
+                        'Roaming',
+                        'User management'
+                    ],
+                    correctAnswers: [
+                        'Aesthetics'
+                    ],
+                    explanation: 'Although all the options are issues that may need to be addressed when deploying a WLAN in a hospitality environment, aesthetics is usually a top priority. The majority of customer service businesses prefer that all wireless hardware remain completely out of sight.'
+                },
+                {
+                    id: 5,
+                    type: 'multiple',
+                    question: 'Which documents might be needed prior to performing an indoor site survey for a new wireless LAN? (Choose all that apply.)',
+                    options: [
+                        'Blueprints',
+                        'Network topography map',
+                        'Network topology map',
+                        'Coverage map',
+                        'Frequency map'
+                    ],
+                    correctAnswers: [
+                        'Blueprints',
+                        'Network topography map'
+                    ],
+                    explanation: 'Blueprints will be needed for the site survey interview to discuss coverage and capacity needs. A network topology map will be useful to assist in the design of integrating the wireless network into the current wired infrastructure.'
+                },
+                {
+                    id: 6,
+                    type: 'single',
+                    question: 'After conducting a simple site survey in the office building where your company is located on the fifth floor, you have discovered that other businesses are also operating access points on nearby floors on channels 2 and 8. What is the best recommendation you will make to management about deploying a new WLAN for your company?',
+                    options: [
+                        'Install a 2.4 GHz access point on channel 6 and use the highest available transmit power setting to overpower the WLANs of the other businesses.',
+                        'Speak with the other businesses. Suggest that they use channels 1 and 6 at lower power settings. Install a 2.4 GHz access point using channel 9.',
+                        'Speak with the other businesses. Suggest that they use channels 1 and 11 at lower power settings. Install a 2.4 GHz access point using channel 6.',
+                        'Recommend installing an AP with 5 GHz radios.',
+                        'Install a wireless intrusion prevention system (WIPS). Classify the other businesses\' access points as interfering and implement deauthentication countermeasures.'
+                    ],
+                    correctAnswers: [
+                        'Recommend installing an AP with 5 GHz radios.'
+                    ],
+                    explanation: 'The best recommendation is to deploy hardware that operates at 5 GHz. The interference from the neighboring businesses\' 2.4 GHz networks will never be an issue with any 5 GHz coverage.'
+                },
+                {
+                    id: 7,
+                    type: 'single',
+                    question: 'The Duarte Corporation has hired you to make recommendations about a future wireless deployment that will require more than 300 access points to meet all coverage requirements. What is the most cost-efficient and practical recommendation in regard to providing electrical power to the access points?',
+                    options: [
+                        'Recommend that the customer replace older edge switches with new switches that have inline PoE.',
+                        'Recommend that the customer replace the core switch with a new core switch that has inline PoE.',
+                        'Recommend that the customer use single-port power injectors.',
+                        'Recommend that the customer hire an electrician to install new electrical outlets.'
+                    ],
+                    correctAnswers: [
+                        'Recommend that the customer replace older edge switches with new switches that have inline PoE.'
+                    ],
+                    explanation: 'The cheapest and most efficient solution would be to replace the older edge switches with newer switches that have inline power that can provide PoE to the access points.'
+                },
+                {
+                    id: 8,
+                    type: 'single',
+                    question: 'During the interview process, which topics will be discussed so that the WLAN will integrate properly into the existing wired architecture?',
+                    options: [
+                        'PoE',
+                        'Segmentation',
+                        'User management',
+                        'AP management',
+                        'All of the above'
+                    ],
+                    correctAnswers: [
+                        'All of the above'
+                    ],
+                    explanation: 'Multiple questions are related to infrastructure integration. How will the access points be powered? How will the WLAN and/or users be segmented? How will the APs be managed? Considerations such as RBAC, bandwidth throttling, and load balancing should also be discussed.'
+                },
+                {
+                    id: 9,
+                    type: 'multiple',
+                    question: 'The Mitchell County Regional Hospital has hired you for a wireless site survey. Prior to conducting the site survey, you should consult with employees from which departments? (Choose all that apply.)',
+                    options: [
+                        'Network management',
+                        'Biomedical department',
+                        'Hospital security',
+                        'Custodial department',
+                        'Marketing department'
+                    ],
+                    correctAnswers: [
+                        'Network management',
+                        'Biomedical department',
+                        'Hospital security'
+                    ],
+                    explanation: 'You should consult with network management during the process to ensure proper integration. You should consult with the biomedical department about possible RF interference issues. You should contact hospital security in order to obtain proper security passes and, possibly, an escort.'
+                },
+                {
+                    id: 10,
+                    type: 'multiple',
+                    question: 'What additional documentation is usually provided along with the final site survey deliverable? (Choose all that apply.)',
+                    options: [
+                        'Bill of materials',
+                        'Implementation diagrams',
+                        'Power consumption charts',
+                        'Project schedule and costs',
+                        'Access point user manuals'
+                    ],
+                    correctAnswers: [
+                        'Bill of materials',
+                        'Implementation diagrams',
+                        'Project schedule and costs'
+                    ],
+                    explanation: 'A final design diagram will be presented to the customer. Along with the implementation diagrams will be a detailed bill of materials (BOM) itemizing every hardware and software component. A detailed deployment schedule should be drafted that outlines timelines, equipment costs, and labor costs.'
+                },
+                {
+                    id: 11,
+                    type: 'single',
+                    question: 'Which type of coverage analysis requires a radio card to be associated to an access point?',
+                    options: [
+                        'Associated',
+                        'Passive',
+                        'Predictive',
+                        'Assisted',
+                        'Active'
+                    ],
+                    correctAnswers: [
+                        'Active'
+                    ],
+                    explanation: 'During an active manual survey, the radio card is associated to the access point and has upper layer connectivity, allowing for low-level frame transmissions while RF measurements are also taken.'
+                },
+                {
+                    id: 12,
+                    type: 'multiple',
+                    question: 'Which of the following tools can be used in an indoor site survey? (Choose all that apply.)',
+                    options: [
+                        'Measuring wheel',
+                        'GPS',
+                        'Ladder',
+                        'Battery pack',
+                        'Microwave oven'
+                    ],
+                    correctAnswers: [
+                        'Measuring wheel',
+                        'Ladder',
+                        'Battery pack'
+                    ],
+                    explanation: 'A measuring wheel measures distance. A ladder might be needed for mounting. Battery packs power the AP. GPS is for outdoors. Microwave ovens are interference.'
+                },
+                {
+                    id: 13,
+                    type: 'multiple',
+                    question: 'Name potential sources of interference in the 5 GHz U-NII bands. (Choose all that apply.)',
+                    options: [
+                        'Microwave ovens',
+                        'Cordless phones',
+                        'FM radios',
+                        'Radar'
+                    ],
+                    correctAnswers: [
+                        'Cordless phones',
+                        'Radar'
+                    ],
+                    explanation: 'Cordless phones that operate in the 5 GHz U-NII bands may cause interference. Radar is also a potential source of interference at 5 GHz.'
+                },
+                {
+                    id: 14,
+                    type: 'multiple',
+                    question: 'Which of these measurements are taken during a passive manual site survey? (Choose all that apply.)',
+                    options: [
+                        'SNR',
+                        'dBi',
+                        'dBm signal strength',
+                        'dBd'
+                    ],
+                    correctAnswers: [
+                        'SNR',
+                        'dBm signal strength'
+                    ],
+                    explanation: 'During a passive manual survey, the radio card is collecting RF measurements, including received signal strength (dBm) and noise level (dBm), which allows for SNR calculation.'
+                },
+                {
+                    id: 15,
+                    type: 'multiple',
+                    question: 'Name potential sources of interference that might be found during a 2.4 GHz site survey. (Choose all that apply.)',
+                    options: [
+                        'Toaster ovens',
+                        'Plasma cutters',
+                        'Bluetooth headsets',
+                        '2.4 GHz video cameras'
+                    ],
+                    correctAnswers: [
+                        'Plasma cutters',
+                        'Bluetooth headsets',
+                        '2.4 GHz video cameras'
+                    ],
+                    explanation: 'Bluetooth radios, plasma cutters, and 2.4 GHz video cameras are all potential interfering devices in the 2.4 GHz ISM band.'
+                },
+                {
+                    id: 16,
+                    type: 'multiple',
+                    question: 'Which access point settings should be recorded during an AP-on-a-stick site survey? (Choose all that apply.)',
+                    options: [
+                        'Power settings',
+                        'Encryption settings',
+                        'Authentication settings',
+                        'Channel settings',
+                        'IP addresses'
+                    ],
+                    correctAnswers: [
+                        'Power settings',
+                        'Channel settings'
+                    ],
+                    explanation: 'Wherever an access point is placed during a site survey, the power and channel settings should be noted.'
+                },
+                {
+                    id: 17,
+                    type: 'single',
+                    question: 'Which type of site survey uses modeling algorithms and attenuation values to create visual models of RF coverage?',
+                    options: [
+                        'Associated',
+                        'Passive',
+                        'Predictive',
+                        'Assisted',
+                        'Active'
+                    ],
+                    correctAnswers: [
+                        'Predictive'
+                    ],
+                    explanation: 'Predictive coverage analysis is accomplished using software that creates visual models of RF coverage and capacity, bypassing the need for actually capturing RF measurements.'
+                },
+                {
+                    id: 18,
+                    type: 'single',
+                    question: 'The ACME Corporation has hired you to design a wireless network that will have data clients, VoWiFi phones that do not support 802.11r, and access for guest users. The company wants the strongest security solution possible for the data clients and phones. Which design best fits the customer\'s requirements?',
+                    options: [
+                        'Create one wireless VLAN. Segment the data clients, VoWiFi phones, and guest users from the wired network. Use 802.1X/EAP authentication and CCMP/AES encryption for a wireless security solution.',
+                        'Create three separate VLANs. Segment the data clients, VoWiFi phones, and guest users into three distinct VLANs. Use 802.1X/EAP authentication and TKIP encryption for security in the data VLAN. Use WPA2-Personal in the voice VLAN. The guest VLAN will have no security, other than possibly a captive portal.',
+                        'Create three separate VLANs. Segment the data clients, VoWiFi phones, and guest users into three distinct VLANs. Use 802.1X/EAP authentication with CCMP/AES encryption for security in the data VLAN. Use WPA2-Personal in the voice VLAN. The guest VLAN traffic will require a captive web portal and a guest firewall policy for security.',
+                        'Create two separate VLANs. The data and voice clients will share one VLAN, and the guest users will reside in another. Use 802.1X/EAP authentication and CCMP/AES encryption for security in the data/voice VLAN. The guest VLAN will have no security, other than possibly a captive portal.'
+                    ],
+                    correctAnswers: [
+                        'Create three separate VLANs. Segment the data clients, VoWiFi phones, and guest users into three distinct VLANs. Use 802.1X/EAP authentication with CCMP/AES encryption for security in the data VLAN. Use WPA2-Personal in the voice VLAN. The guest VLAN traffic will require a captive web portal and a guest firewall policy for security.'
+                    ],
+                    explanation: 'Segmenting three types of users into separate VLANs with separate security solutions is the best recommendation. The data users using 802.1X/EAP and CCMP/AES will have the strongest solution available.'
+                },
+                {
+                    id: 19,
+                    type: 'single',
+                    question: 'Which type of WLAN site survey is the most important survey that should always be performed regardless of the vertical deployment?',
+                    options: [
+                        'AP-on-a-stick survey',
+                        'Hybrid survey',
+                        'Predictive model survey',
+                        'Validation survey'
+                    ],
+                    correctAnswers: [
+                        'Validation survey'
+                    ],
+                    explanation: 'Coverage verification, capacity performance, and roaming testing are key components of a proper validation survey.'
+                },
+                {
+                    id: 20,
+                    type: 'multiple',
+                    question: 'Name the necessary calculations for an outdoor bridging survey under 5 miles. (Choose all that apply.)',
+                    options: [
+                        'Link budget',
+                        'Free space path loss',
+                        'Fresnel zone',
+                        'Fade margin adjustment',
+                        'Height of the antenna beamwidth'
+                    ],
+                    correctAnswers: [
+                        'Link budget',
+                        'Free space path loss',
+                        'Fresnel zone',
+                        'Fade margin adjustment'
+                    ],
+                    explanation: 'Calculations for a link budget, FSPL, Fresnel zone clearance, and fade margin are all necessary for any bridge link.'
+                }
+            ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 10;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
