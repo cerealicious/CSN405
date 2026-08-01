@@ -84,182 +84,199 @@
         const quizData = [
             {
                 id: 1,
-                type: 'single',
-                question: 'The Wi-Fi HaLow certification from the Wi-Fi Alliance will likely be used for sensor networks and Internet of Things (IoT) devices and is based on which IEEE amendment?',
-                options: ['802.11aq', '802.11ak', '802.11ae', '802.11ai', '802.11ah'],
-                correctAnswers: ['802.11ah'],
-                explanation: '802.11ah defines the use of Wi-Fi in frequencies below 1 GHz and is the basis for the Wi-Fi HaLow certification. The lower frequencies will provide longer distances, which will prove useful for sensors, IoT devices, and machine-to-machine (M2M) communications.'
+                type: 'multiple',
+                question: 'What are some results of multipath interference? (Choose all that apply.)',
+                options: ['Scattering delay', 'Upfade', 'Excessive retransmissions', 'Absorption'],
+                correctAnswers: ['Upfade', 'Excessive retransmissions'],
+                explanation: 'Multipath may result in attenuation, amplification, signal loss, or data corruption. If two signals arrive together in phase, the result is an increase in signal strength called upfade. The delay spread may also be too significant and cause data bits to be corrupted, resulting in excessive layer 2 retransmissions.'
             },
             {
                 id: 2,
                 type: 'single',
-                question: 'Which amendment defines performance enhancements using the much higher unlicensed frequency band of 60 GHz, and a transmission method known as directional multi-gigabit (DMG)?',
-                options: ['802.11ac', '802.11ad', '802.11ay', '802.11q', '802.11z'],
-                correctAnswers: ['802.11ad'],
-                explanation: '802.11ad supports data rates of up to 7 Gbps. The downside is that 60 GHz will have significantly less effective range than a 5 GHz signal and be limited to line-of-sight communications, as the high-frequency signal will have difficulty penetrating walls. The 802.11ay draft amendment is expected to improve 802.11ad, providing faster speeds and longer range.'
+                question: 'What term best defines the linear distance traveled in one positive-to-negative-to-positive oscillation of an electromagnetic signal?',
+                options: ['Crest', 'Frequency', 'Trough', 'Wavelength'],
+                correctAnswers: ['Wavelength'],
+                explanation: 'The wavelength is the linear distance between the repeating crests (peaks) or repeating troughs (valleys) of a single cycle of a wave pattern.'
             },
             {
                 id: 3,
                 type: 'multiple',
-                question: 'Which types of devices were defined in the original 802.11 standard? (Choose all that apply.)',
-                options: ['OFDM', 'DSSS', 'HR-DSSS', 'IR', 'FHSS', 'ERP'],
-                correctAnswers: ['DSSS', 'IR', 'FHSS'],
-                explanation: 'The original 802.11 standard defined three Physical layer specifications. An 802.11 legacy network could use frequency-hopping spread-spectrum (FHSS), direct-sequence spread-spectrum (DSSS), or IR (infrared) technology. 802.11b defined the use of High-Rate DSSS (HR-DSSS); 802.11a defined the use of orthogonal frequency-division multiplexing (OFDM); 802.11g defined Extended Rate Physical (ERP); 802.11n defined High Throughput (HT); 802.11ac defined Very High Throughput (VHT); and 802.11ax defines High Efficiency (HE).'
+                question: 'Which of the following statements are true about amplification? (Choose all that apply.)',
+                options: [
+                    'Antennas are active gain amplifiers that focus the energy of a signal.',
+                    'Transceivers are active gain amplifiers where the signal is sourced.',
+                    'Antennas are passive gain amplifiers that focus the energy of a signal.',
+                    'RF amplifiers passively increase signal strength by focusing the AC current of the signal.'
+                ],
+                correctAnswers: [
+                    'Transceivers are active gain amplifiers where the signal is sourced.',
+                    'Antennas are passive gain amplifiers that focus the energy of a signal.'
+                ],
+                explanation: 'RF amplifiers introduce active gain with the help of an outside power source. Passive gain is typically created by antennas that focus the energy of a signal without the use of an outside power source.'
             },
             {
                 id: 4,
                 type: 'single',
-                question: 'Which 802.11 amendment defines wireless mesh networking mechanisms?',
-                options: ['802.11n', '802.11u', '802.11s', '802.11v', '802.11k'],
-                correctAnswers: ['802.11s'],
-                explanation: 'The 802.11 Task Group s (TGs) has set forth the pursuit of standardizing mesh networking using the IEEE 802.11 MAC/PHY layers. The 802.11s amendment defines the use of mesh points (MPs), which are 802.11 QoS stations that support mesh services. An MP is capable of using a mandatory mesh routing protocol called Hybrid Wireless Mesh Protocol (HWMP) that uses a default path selection metric. Vendors may also use proprietary mesh routing protocols and metrics.'
+                question: 'A standard measurement of frequency is called what?',
+                options: ['Hertz', 'Milliwatt', 'Nanosecond', 'Decibel', 'K-factor'],
+                correctAnswers: ['Hertz'],
+                explanation: 'The standard measurement of the number of times a signal cycles per second is hertz (Hz). One Hz is equal to one cycle in 1 second.'
             },
             {
                 id: 5,
-                type: 'multiple',
-                question: 'A robust security network (RSN) requires the use of which security mechanisms? (Choose all that apply.)',
-                options: ['802.11x', 'WEP', 'IPsec', 'CCMP/AES', 'CKIP', '802.1X'],
-                correctAnswers: ['CCMP/AES', '802.1X'],
-                explanation: 'The required encryption method defined by an RSN wireless network (802.11i) is Counter Mode with Cipher Block Chaining Message Authentication Code Protocol (CCMP), which uses the Advanced Encryption Standard (AES) algorithm. The 802.11i amendment also requires the use of an 802.1X/EAP authentication solution or the use of preshared keys.'
+                type: 'single',
+                question: 'When an RF signal bends around an object, this propagation behavior is known as what?',
+                options: ['Stratification', 'Refraction', 'Scattering', 'Diffraction', 'Attenuation'],
+                correctAnswers: ['Diffraction'],
+                explanation: 'Often confused with refraction, diffraction is the bending of the wave front around an obstacle. Diffraction is caused by some sort of partial blockage of the RF signal, such as a small hill or a building that sits between a transmitting radio and a receiver.'
             },
             {
                 id: 6,
                 type: 'single',
-                question: 'An 802.11ac radio can transmit on what frequency and uses which spread-spectrum technology?',
-                options: ['5 MHz, OFDM', '2.4 GHz, HR-DSSS', '2.4 GHz, ERP-OFDM', '5 GHz, VHT', '5 GHz, DSSS'],
-                correctAnswers: ['5 GHz, VHT'],
-                explanation: '802.11ac radio cards operate in the 5 GHz frequency bands using very high throughput (VHT).'
+                question: 'When multiple RF signals arrive at a receiver at the same time and are generated from the same transmitter, which of the following can be the result of the combined phase of the signals?',
+                options: [
+                    '140 degrees out of phase, amplification',
+                    '140 degrees out of phase, cancellation',
+                    '0 degrees out of phase, amplification',
+                    '180 degrees out of phase, attenuation',
+                    '180 degrees out of phase, amplification',
+                    '180 degrees out of phase, cancellation'
+                ],
+                correctAnswers: ['0 degrees out of phase, amplification'],
+                explanation: 'If multiple copies of an RF signal from a transmitter arrive at a receiver at the same time, there will be no phase separation. Signals that have 0 (zero) degree phase separation actually combine their amplitude, which results in a received signal of much greater signal strength, potentially as much as twice the amplitude.'
             },
             {
                 id: 7,
-                type: 'single',
-                question: 'What are the required data rates of an OFDM station?',
-                options: ['3, 6, and 12 Mbps', '6, 9, 12, 18, 24, 36, 48, and 54 Mbps', '6, 12, 24, and 54 Mbps', '6, 12, and 24 Mbps', '1, 2, 5.5, and 11 Mbps'],
-                correctAnswers: ['6, 12, and 24 Mbps'],
-                explanation: 'The IEEE 802.11-2020 standard requires data rates of 6, 12, and 24 Mbps for both orthogonal frequency-division multiplexing (OFDM) 802.11a radios and Extended Rate Physical OFDM (ERP-OFDM) 802.11g radios. Data rates of 6, 9, 12, 18, 24, 36, 48, and 54 Mbps are typically supported. 54 Mbps is the maximum defined rate for these two 802.11 technologies (802.11a and 802.11g).'
+                type: 'multiple',
+                question: 'Which of the following statements are true? (Choose all that apply.)',
+                options: [
+                    'When upfade occurs, the final received signal will be stronger than the original transmitted signal.',
+                    'When downfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When upfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When downfade occurs, the final received signal will be stronger than the original transmitted signal.'
+                ],
+                correctAnswers: [
+                    'When downfade occurs, the final received signal will never be stronger than the original transmitted signal.',
+                    'When upfade occurs, the final received signal will never be stronger than the original transmitted signal.'
+                ],
+                explanation: 'When the multiple RF signals arrive at the receiver at the same time and are in phase or partially out of phase with the primary wave, the result is an increase in signal strength (amplitude). However, the final received signal, whether affected by upfade or downfade, will never be stronger than the original transmitted signal because of free space path loss.'
             },
             {
                 id: 8,
                 type: 'single',
-                question: 'When implementing an 802.1X/EAP RSN network with a VoWiFi solution, what is needed to avoid latency issues during roaming?',
-                options: ['Inter-Access Point Protocol', 'Fast BSS transition', 'Distributed Coordination Function', 'Roaming Coordination Function', 'Lightweight APs'],
-                correctAnswers: ['Fast BSS transition'],
-                explanation: 'Fast basic service set transition (FT), also known as fast-secure roaming, defines fast handoffs when roaming occurs between cells in a WLAN using the strong security defined in a robust security network (RSN). Applications such as VoIP that necessitate timely delivery of packets require the roaming handoff to occur in 150 ms or less.'
+                question: 'What is the frequency of an RF signal that cycles 2.4 million times per second?',
+                options: ['2.4 hertz', '2.4 MHz', '2.4 GHz', '2.4 kilohertz', '2.4 KHz'],
+                correctAnswers: ['2.4 MHz'],
+                explanation: '802.11 wireless LANs operate in the 60 GHz, 6 GHz, 5 GHz, and 2.4 GHz frequency range. However, 2.4 GHz is equal to 2.4 billion cycles per second. The frequency of 2.4 million cycles per second is 2.4 MHz. Trick question!'
             },
             {
                 id: 9,
-                type: 'multiple',
-                question: 'Which technologies debuted in the 802.11ac-2013 amendment? (Choose all that apply.)',
-                options: ['MIMO', 'MU-MIMO', '256-QAM', '40 MHz channels', '80 MHz channels'],
-                correctAnswers: ['MU-MIMO', '256-QAM', '80 MHz channels'],
-                explanation: 'The 802.11ac amendment debuted and defined the use of 256-QAM modulation, eight spatial streams, multi-user MIMO (MU-MIMO), 80 MHz channels, and 160 MHz channels. 802.11 MIMO technology and 40 MHz channels debuted with the ratification of the 802.11n amendment.'
+                type: 'single',
+                question: 'What is the best example of a time-domain tool that could be used by an RF engineer?',
+                options: ['Oscilloscope', 'Spectroscope', 'Spectrum analyzer', 'Refractivity gastroscope'],
+                correctAnswers: ['Oscilloscope'],
+                explanation: 'An oscilloscope is a time-domain tool that can be used to measure how a signal’s amplitude changes over time. A frequency-domain tool called a spectrum analyzer is a more commonplace tool most often used during site surveys.'
             },
             {
                 id: 10,
-                type: 'single',
-                question: 'The TV white space (TVWS) frequencies operate between 54 MHz and 790 MHz, use a new PHY known as TVHT, and are defined by which 802.11 amendment?',
-                options: ['802.11af', '802.11y', '802.11a', '802.11aa', '802.11ad'],
-                correctAnswers: ['802.11af'],
-                explanation: 'The 802.11af amendment allows the use of wireless in the TV white space (TVWS) frequencies between 54 MHz and 790 MHz. The Physical layer is based on the OFDM technology used in 802.11ac, using smaller channel widths than 802.11ac along with a maximum of four spatial streams. This new PHY is known as television very high throughput (TVHT) and is designed to support the narrow TV channels that are made available by TVWS.'
+                type: 'multiple',
+                question: 'What are some objects or materials that are common causes of reflection? (Choose all that apply.)',
+                options: ['Metal', 'Trees', 'Asphalt road', 'Lake', 'Carpeted floors'],
+                correctAnswers: ['Metal', 'Asphalt road', 'Lake'],
+                explanation: 'This is a tough question to answer because many of the same mediums can cause several different propagation behaviors. Metal will always bring about reflection. Water is a major source of absorption; however, large bodies of water can also cause reflection. Flat surfaces such as asphalt roads, ceilings, and walls will also result in reflection behavior.'
             },
             {
                 id: 11,
                 type: 'multiple',
-                question: 'Which two technologies are used to prevent 802.11 radios from interfering with radar and satellite transmissions at 5 GHz?',
-                options: [
-                    'Dynamic frequency selection', 
-                    'Enhanced Distributed Channel Access', 
-                    'Direct-sequence spread-spectrum', 
-                    'Temporal Key Integrity Protocol', 
-                    'Transmit power control'
-                ],
-                correctAnswers: ['Dynamic frequency selection', 'Transmit power control'],
-                explanation: 'The 802.11-2020 standard defines mechanisms for dynamic frequency selection (DFS) and transmit power control (TPC) that may be used to satisfy regulatory requirements for operation in the 5 GHz band. DFS and TPC technology were originally defined in the 802.11h amendment, which is now part of the 802.11-2020 standard.'
+                question: 'Which of these propagation behaviors can result in multipath? (Choose all that apply.)',
+                options: ['Refraction', 'Diffraction', 'Amplification', 'Scattering', 'Attenuation', 'Reflection'],
+                correctAnswers: ['Refraction', 'Diffraction', 'Scattering', 'Reflection'],
+                explanation: 'Multipath is a propagation phenomenon that results in two or more paths of a signal arriving at a receiving antenna at the same time or within nanoseconds of each other. Because of the natural broadening of the waves, the propagation behaviors of reflection, scattering, diffraction, and refraction can all result in multiple paths of the same signal. The propagation behavior of reflection is usually considered to be the main cause of high-multipath environments.'
             },
             {
                 id: 12,
-                type: 'multiple',
-                question: 'Which 802.11 amendments provide for throughput of 1 Gbps or higher? (Choose all that apply.)',
-                options: ['802.11aa', '802.11ab', '802.11ac', '802.11ad', '802.11ae', '802.11af'],
-                correctAnswers: ['802.11ac', '802.11ad'],
-                explanation: 'The 802.11ac and 802.11ad amendments are often referred to as the "gigabit Wi-Fi" amendments because they define data rates of greater than 1 Gbps. The 802.11ac and 802.11ad very high throughput (VHT) task groups define transmission rates of up to 7 Gbps in an 802.11 environment.'
+                type: 'single',
+                question: 'Which behavior can be described as an RF signal encountering a chain link fence, causing the signal to bounce into multiple directions?',
+                options: ['Diffraction', 'Scattering', 'Reflection', 'Refraction', 'Multiplexing'],
+                correctAnswers: ['Scattering'],
+                explanation: 'Scattering, or scatter, is defined as an RF signal reflecting in multiple directions when encountering an uneven surface.'
             },
             {
                 id: 13,
                 type: 'multiple',
-                question: 'As defined by the 802.11-2020 standard, which equipment is compatible? (Choose all that apply.)',
-                options: ['ERP and HR-DSSS', 'HR-DSSS and FHSS', 'VHT and OFDM', '802.11h and 802.11a', 'HR-DSSS and DSSS'],
-                correctAnswers: ['ERP and HR-DSSS', 'VHT and OFDM', '802.11h and 802.11a', 'HR-DSSS and DSSS'],
-                explanation: 'ERP (802.11g) requires the use of Extended Rate Physical OFDM (ERP-OFDM) and Extended Rate Physical DSSS (ERP-DSSS/CCK) in the 2.4 GHz industrial, scientific, and medical (ISM) band and is backward compatible with 802.11b High-Rate DSSS (HR-DSSS) and direct-sequence spread-spectrum (DSSS) equipment. 802.11b uses HR-DSSS in the 2.4 GHz ISM band and is backward compatible with only legacy DSSS equipment and not legacy frequency-hopping spread-spectrum (FHSS) equipment. 802.11ac uses very high throughput (VHT) and is backward compatible with 802.11a orthogonal frequency-division multiplexing (OFDM). The 802.11h amendment defines the use of transmit power control (TPC) and dynamic frequency selection (DFS) in the 5 GHz Unlicensed National Information Infrastructure (U-NII) bands and is an enhancement of the 802.11a amendment. OFDM technology is used with all 802.11a- and 802.11h-compliant radios.'
+                question: 'Which 802.11 radio technologies are most impacted by the destructive effects of multipath? (Choose all that apply.)',
+                options: ['802.11a', '802.11b', '802.11g', '802.11n', '802.11ac', '802.11ax'],
+                correctAnswers: ['802.11a', '802.11b', '802.11g'],
+                explanation: 'High-multipath environments can have a destructive impact on legacy 802.11a/b/g radio transmissions. Multipath has a constructive effect with 802.11n/ac/ax transmissions that utilize MIMO antenna diversity and maximum ratio combining (MRC) signal processing techniques.'
             },
             {
                 id: 14,
-                type: 'single',
-                question: 'What is the maximum data rate defined by the 802.11ac amendment?',
-                options: ['54 Mbps', '1300 Mbps', '3466.7 Mbps', '6933.3 Mbps', '60 Gbps'],
-                correctAnswers: ['6933.3 Mbps'],
-                explanation: 'The 802.11ac amendment defines a maximum rate of 6933.3 Mbps. However, 802.11ac chipsets have gone through multiple generations with different capabilities. The maximum data rate for most first-generation 802.11ac devices is 1300 Mbps, and the maximum data rate for most second-generation 802.11ac devices is 3466.7 Mbps. Remember that data rates do not equate to actual throughput.'
+                type: 'multiple',
+                question: 'Which of the following can cause refraction of an RF signal traveling through it? (Choose all that apply.)',
+                options: ['Shift in air temperature', 'Change in air pressure', 'Humidity', 'Lightning', 'Wind', 'Smog'],
+                correctAnswers: ['Shift in air temperature', 'Change in air pressure', 'Humidity', 'Smog'],
+                explanation: 'Air stratification is a leading cause of refraction of an RF signal. Changes in air temperature, changes in air pressure, and water vapor are all causes of refraction. Smog can cause a density change in the air pressure as well as increased moisture.'
             },
             {
                 id: 15,
                 type: 'multiple',
-                question: 'What are the security options available as defined in the original IEEE Std 802.11-1999 (R2003)? (Choose all that apply.)',
-                options: ['CCMP/AES', 'Open System authentication', 'Preshared keys', 'Shared Key authentication', 'WEP', 'TKIP'],
-                correctAnswers: ['Open System authentication', 'Shared Key authentication', 'WEP'],
-                explanation: 'The original 802.11 standard defined the use of Wired Equivalent Privacy (WEP) for encryption. The original 802.11 standard also defined two methods of authentication: Open System authentication and Shared Key authentication. TKIP was introduced in 2002 to address security flaws discovered in WEP. In 2012 both WEP and TKIP were deprecated from the 802.11 standard.'
+                question: 'Which of the following statements about free space path loss are true? (Choose all that apply.)',
+                options: [
+                    'RF signals will attenuate as they travel, despite the lack of attenuation caused by obstructions.',
+                    'Path loss occurs at a constant linear rate.',
+                    'Attenuation is only caused by obstructions.',
+                    'Path loss occurs at a logarithmic rate.'
+                ],
+                correctAnswers: [
+                    'RF signals will attenuate as they travel, despite the lack of attenuation caused by obstructions.',
+                    'Path loss occurs at a logarithmic rate.'
+                ],
+                explanation: 'Because of the natural broadening of the wave front, electromagnetic signals lose amplitude as they travel away from the transmitter. The rate of free space path loss is logarithmic and not linear. Attenuation of RF signals as they pass through different mediums does occur but is not a function of FSPL.'
             },
             {
                 id: 16,
                 type: 'single',
-                question: 'The 802.11u-2011 amendment is also known as what?',
-                options: [
-                    'WIEN (Wireless Interworking with External Networks)', 
-                    'WLAN (wireless local area networking)', 
-                    'WPP (Wireless Performance Prediction)', 
-                    'WAVE (Wireless Access in Vehicular Environments)', 
-                    'WAP (Wireless Access Protocol)'
-                ],
-                correctAnswers: ['WIEN (Wireless Interworking with External Networks)'],
-                explanation: 'The 802.11u draft amendment defines integration of IEEE 802.11 access networks with external networks in a generic and standardized manner. 802.11u is often referred to as Wireless Interworking with External Networks (WIEN).'
+                question: 'What term is used to describe the time differential between a primary signal and a reflected signal arriving at a receiver?',
+                options: ['Path delay', 'Spread spectrum', 'Multipath', 'Delay spread'],
+                correctAnswers: ['Delay spread'],
+                explanation: 'The time difference due to a reflected signal taking a longer path is known as the delay spread. The delay spread can cause intersymbol interference, which results in data corruption and layer 2 retransmissions.'
             },
             {
                 id: 17,
-                type: 'multiple',
-                question: 'The 802.11-2020 standard defines which two technologies for quality of service (QoS) in a WLAN?',
-                options: [
-                    'EDCA', 
-                    'PCF', 
-                    'Hybrid Coordination Function Controlled Channel Access', 
-                    'VOIP', 
-                    'Distributed Coordination Function', 
-                    'VoWiFi'
-                ],
-                correctAnswers: ['EDCA', 'Hybrid Coordination Function Controlled Channel Access'],
-                explanation: 'The 802.11e amendment (now part of the 802.11-2020 standard) defined two enhanced medium access methods to support quality of service (QoS) requirements. Enhanced Distributed Channel Access (EDCA) is an extension to Distributed Coordination Function (DCF). Hybrid Coordination Function Controlled Channel Access (HCCA) is an extension to PCF. In the real world, only EDCA is implemented.'
+                type: 'single',
+                question: 'What is an example of a frequency-domain tool that could be used by an RF engineer?',
+                options: ['Oscilloscope', 'Spectroscope', 'Spectrum analyzer', 'Refractivity gastroscope'],
+                correctAnswers: ['Spectrum analyzer'],
+                explanation: 'A spectrum analyzer is a frequency-domain tool that can be used to measure amplitude in a finite frequency spectrum. An oscilloscope is a time-domain tool.'
             },
             {
                 id: 18,
                 type: 'multiple',
-                question: 'The 802.11h amendment (now part of the 802.11-2020 standard) introduced which two major changes for 5 GHz radios?',
-                options: ['TPC', 'IAPP', 'DFS', 'DMG', 'FHSS'],
-                correctAnswers: ['TPC', 'DFS'],
-                explanation: 'The 802.11h amendment introduced two major enhancements: transmit power control (TPC) and dynamic frequency selection (DFS) for radar avoidance and detection. All aspects of the 802.11h ratified amendment can now be found in the 802.11-2020 standard.'
+                question: 'Using knowledge of RF characteristics and behaviors, which two options should a WLAN engineer be most concerned about when doing an indoor site survey? (Choose the best two answers.)',
+                options: ['Concrete walls', 'Indoor temperature', 'Wood-lath plaster walls', 'Drywall'],
+                correctAnswers: ['Concrete walls', 'Wood-lath plaster walls'],
+                explanation: 'Concrete walls are very dense and will significantly attenuate a 2.4 GHz and 5 GHz signal. Older structures that are constructed with wood-lath plaster walls often have wire mesh in the walls, which was used to help hold the plaster to the walls. Wire mesh is notorious for disrupting and preventing RF signals from passing through walls. Wire mesh is also used on stucco exteriors. Drywall will attenuate a signal but not to the extent of water, cinder blocks, or other dense mediums. Air temperature has no significance during an indoor site survey.'
             },
             {
                 id: 19,
                 type: 'single',
-                question: 'The 802.11n amendment defined which PHY?',
-                options: ['HR-DSSS', 'FHSS', 'OFDM', 'PBCC', 'HT', 'VHT'],
-                correctAnswers: ['HT'],
-                explanation: 'The 802.11n high throughput (HT) amendment defined MAC and PHY enhancements, whereas radios can transmit at data rates up to 600 Mbps.'
+                question: 'Which three properties are interrelated?',
+                options: [
+                    'Frequency, wavelength, and the speed of light',
+                    'Frequency, amplitude, and the speed of light',
+                    'Frequency, phase, and amplitude',
+                    'Amplitude, phase, and the speed of sound'
+                ],
+                correctAnswers: ['Frequency, wavelength, and the speed of light'],
+                explanation: 'There is an inverse relationship between frequency and wavelength. A simplified explanation is that the higher the frequency of an RF signal, the shorter the wavelength will be of that signal. The longer the wavelength of an RF signal, the lower the frequency of that signal. Both formulas include the speed of light as a value.'
             },
             {
                 id: 20,
-                type: 'multiple',
-                question: 'Which layers of the OSI model are referenced in the 802.11 standard? (Choose all that apply.)',
-                options: ['Application', 'Data-Link', 'Presentation', 'Physical', 'Transport', 'Network'],
-                correctAnswers: ['Data-Link', 'Physical'],
-                explanation: 'The IEEE specifically defines 802.11 technologies at the Physical layer and the MAC sublayer of the Data-Link layer. By design, anything that occurs at the upper layers of the OSI model is insignificant to 802.11 communications.'
+                type: 'single',
+                question: 'Which RF behavior best describes a signal striking a medium and bending in a different direction?',
+                options: ['Refraction', 'Scattering', 'Diffusion', 'Diffraction', 'Microwave reflection'],
+                correctAnswers: ['Refraction'],
+                explanation: 'Refraction is the bending of an RF signal when it encounters a medium.'
             }
         ];
 
