@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSN450: CWNA Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-300 min-h-screen antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Nav -->
+    <nav class="border-b border-slate-800/80 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="font-extrabold text-white text-lg tracking-tight flex items-center gap-2">
+                <i class="fa-solid fa-wifi text-red-500"></i> CSN450
+            </span>
+            <div class="flex items-center gap-3 text-sm font-medium">
+                <span class="text-slate-400 hidden sm:inline-block">Made by cerealicious</span>
+                <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-white transition-colors bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm flex items-center justify-center">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-6 h-6 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center flex flex-col items-center">
+        <div class="mb-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            CSN450 Prep Mode
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
+            CWNA <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">Study Hub</span>
+        </h1>
+        <p class="text-slate-400 text-lg leading-relaxed mb-8 max-w-2xl">
+            This dashboard provides chapter-by-chapter practice questions adapted from the official <strong class="text-slate-200">CWNA-108 6th Edition Study Guide</strong> (by David D. Coleman & David A. Westcott) to help you confidently prepare for your quizzes and tests.
+        </p>
+        
+        <div class="inline-flex items-center gap-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 max-w-2xl text-left md:text-center mb-4">
+            <i class="fa-solid fa-lightbulb text-indigo-400 text-xl hidden md:block"></i>
+            <p class="text-indigo-200 text-sm font-medium leading-relaxed">
+                <strong class="text-indigo-300">Study Note:</strong> This project is intended strictly as a personal educational aid only. It is not officially affiliated with the CWNP organization.
+            </p>
+        </div>
+        <div class="inline-flex items-center gap-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 max-w-2xl text-left md:text-center">
+            <i class="fa-solid fa-book text-red-500 text-xl hidden md:block"></i>
+            <p class="text-indigo-200 text-sm font-extrabold">
+                <a href="https://drive.google.com/drive/folders/1Fur8XFfR-DvwReBJgz71qHzXxFUOPvqr?usp=sharing" class="text-red-400 underline hover:text-red-300 transition-colors" target="_blank" rel="noopener noreferrer">
+                    The Chapter-by-Chapter Book is available for download here.
+                </a>
+             </p>
+        </div>
+    </header>
+
+    <!-- Modules/Syllabus List -->
+    <main class="max-w-7xl mx-auto px-6 pb-16">
+        <div class="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
+            <h2 class="text-xl font-bold text-white">Course Chapters</h2>
+            <span id="module-count" class="text-sm font-medium text-slate-500">20 Modules</span>
+        </div>
+
+        <!-- Grid Card Container -->
+        <div id="chapter-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic cards injected via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-3xl mx-auto mt-16 mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+           © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 font-medium transition-colors">cerealicious</a> | CSN450 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const listContainer = document.getElementById('chapter-list');
+        
+        // Chapters data array with external link property for Chapter 14 and 17
+        const chaptersData = [
+            { id: 1, title: 'Chapter 1', subtitle: 'Overview of Wireless Standards', desc: 'Quiz 1 Topic: Covers basic networking layers and regulatory domains.', active: true, hidden: false },
+            { id: 2, title: 'Chapter 2', subtitle: 'IEEE 802.11 Standard & Amendments', desc: 'Quiz 4 Topic: Focuses on 802.11ax, 802.11ac, and legacy PHYs.', active: true, hidden: false },
+            { id: 3, title: 'Chapter 3', subtitle: 'Radio Frequency Fundamentals', desc: 'Quiz 1 Topic: Wave propagation, multipath, and RF math.', active: true, hidden: false },
+            { id: 4, title: 'Chapter 4', subtitle: 'RF Components & Measurements', desc: 'Quiz 2 Topic: Rules of 10s and 3s, antennas, and EIRP math.', active: true, hidden: false },
+            { id: 5, title: 'Chapter 5', subtitle: 'RF Signal and Antenna Concepts', desc: 'Quiz 3 Topic: Azimuth/Elevation charts and Fresnel zones.', active: true, hidden: false },
+            { id: 6, title: 'Chapter 6', subtitle: 'Wireless Networks and Spread Spectrum', desc: 'Quiz 6 Topic: DSSS, OFDM, and channel spacing.', active: true, hidden: false },
+            { id: 7, title: 'Chapter 7', subtitle: 'Wireless LAN Topologies', desc: 'Quiz 5 Topic: Wireless networking topologies, 802.11 stations, sets and Configuration Modes.', active: true, hidden: false },
+            { id: 8, title: 'Chapter 8', subtitle: '802.11 Medium Access', desc: 'Quiz 6 Topic: CSMA/CA and DCF, HCF, WMM, Airtime Fairness.', active: true, hidden: false },
+            { id: 9, title: 'Chapter 9', subtitle: '802.11 MAC', desc: 'Quiz 7 Topic: Frame headers and MAC architecture.', active: true, hidden: false },
+            { id: 10, title: 'Chapter 10', subtitle: 'MIMO Technology', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 11, title: 'Chapter 11', subtitle: 'WLAN Architecture', desc: 'Quiz 8 Topic: WLAN client devices, Management, Control and Data Plane.', active: true, hidden: false },
+            { id: 12, title: 'Chapter 12', subtitle: 'Power over Ethernet (PoE)', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 13, title: 'Chapter 13', subtitle: '802.11 Security Basics', desc: 'Add notes here...', active: false, hidden: true },
+            { 
+              id: 14, 
+              title: 'Chapter 14', 
+              subtitle: 'Site Survey and Validation', 
+              desc: 'Credits goes to Modrić/abassam and ak_احمد_خان  /M.Ahmed Khan for the chapter Quiz. <br>Select <strong>Chapter 16</strong> to do the Practice Test', 
+              active: true, 
+              hidden: false,
+              link: 'https://claude.ai/public/artifacts/635f34c9-a86e-497c-a8b8-4436e201a47a'
+            },
+            { id: 15, title: 'Chapter 15', subtitle: 'BYOD and Guest Access', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 16, title: 'Chapter 16', subtitle: 'WLAN Deployment & Site Surveying', desc: 'Add notes here...', active: false, hidden: true },
+            { 
+              id: 17, 
+              title: 'Chapter 17', 
+              subtitle: '802.11 Network Security Architecture', 
+              desc: 'Credits goes to Modrić/abassam and ak_احمد_خان  /M.Ahmed Khan for the chapter Quiz. <br>Select <strong>Chapter 17</strong> to do the Practice Test.', 
+              active: true, 
+              hidden: false,
+              link: 'https://claude.ai/public/artifacts/635f34c9-a86e-497c-a8b8-4436e201a47a'
+            },
+            { id: 18, title: 'Chapter 18', subtitle: 'WLAN Design', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 19, title: 'Chapter 19', subtitle: 'WLAN Management', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 20, title: 'Chapter 20', subtitle: 'High Density WLANs', desc: 'Add notes here...', active: false, hidden: true },
+            { id: 'Finals', title: 'Finals Practice Test', subtitle: 'Finals Practice Test', desc: 'Practice Test using the 60-item questions that were presented in the class.', active: true, hidden: false }
+        ];
+
+        let rowsHtml = '';
+        let visibleCount = 0;
+
+        chaptersData.forEach((chap) => {
+            if (chap.hidden) return;
+            visibleCount++;
+
+            // Use external link if defined, otherwise build standard local GitHub page URL
+            const isExternal = Boolean(chap.link);
+            const targetUrl = isExternal ? chap.link : `https://cerealicious.github.io/CSN405/Chapter${chap.id}.html`;
+            const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+            const description = chap.desc || "Click edit to add your custom chapter notes.";
+
+            if (chap.active) {
+                rowsHtml += `
+                    <div class="group relative bg-slate-800/80 backdrop-blur-sm border-t-4 border-t-red-500 border-x border-b border-slate-700/50 rounded-b-2xl rounded-t-sm p-6 flex flex-col h-full hover:bg-slate-800 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-red-400">${chap.title}</span>
+                            ${isExternal 
+                                ? '<span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md flex items-center gap-1"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> External</span>' 
+                                : '<i class="fa-solid fa-unlock-keyhole text-red-400/50 text-sm"></i>'}
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors line-clamp-2">${chap.subtitle}</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">${description}</p>
+                        
+                        <a href="${targetUrl}" ${targetAttr} class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 text-white font-semibold rounded-lg border border-slate-700 hover:bg-red-600 hover:border-red-500 transition-colors shadow-sm">
+                            ${isExternal ? 'Start External Quiz' : 'Start Practice'} <i class="fa-solid ${isExternal ? 'fa-arrow-up-right-from-square' : 'fa-arrow-right'} text-sm"></i>
+                        </a>
+                    </div>
+                `;
+            } else {
+                rowsHtml += `
+                    <div class="relative bg-slate-900/40 border-t-4 border-t-slate-700 border-x border-b border-slate-800/50 rounded-b-2xl rounded-t-sm p-6 flex flex-col h-full opacity-60">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">${chap.title}</span>
+                            <i class="fa-solid fa-lock text-slate-600 text-sm"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-400 mb-3 line-clamp-2">${chap.subtitle}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">${description}</p>
+                        
+                        <span class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900/50 text-slate-500 font-semibold rounded-lg border border-slate-800 cursor-not-allowed">
+                            Locked
+                        </span>
+                    </div>
+                `;
+            }
+        });
+        
+        listContainer.innerHTML = rowsHtml;
+        
+        const countElement = document.getElementById('module-count');
+        if(countElement) {
+            countElement.textContent = `${visibleCount} Modules`;
+        }
+    </script>
+</body>
+</html>

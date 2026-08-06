@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Practice Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Fallback and custom dark theme rules to ensure design is never plain */
+        :root {
+            --bg-main: #0b1120;
+            --bg-card: #0f172a;
+            --bg-nav: #020617;
+            --border-color: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-red: #dc2626;
+            --accent-emerald: #10b981;
+        }
+
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        /* Input styling */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626;
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+
+        .exam-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #1e293b;
+            background-color: rgba(15, 23, 42, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-label:hover {
+            background-color: rgba(30, 41, 59, 0.6);
+            border-color: #334155;
+        }
+
+        .text-answer-input {
+            width: 100%;
+            max-width: 400px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            padding: 0.625rem 0.875rem;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .text-answer-input:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+        }
+
+        .custom-select {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .custom-select:focus {
+            border-color: #dc2626;
+        }
+
+        .btn-check {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #475569;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-check:hover {
+            background-color: #334155;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            background-color: rgba(30, 41, 59, 0.5);
+            border-left: 4px solid #dc2626;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> Return to Dashboard
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA Practice Test</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 6</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-8 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120]/95 backdrop-blur-md z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-6 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CNWA Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'text',
+                question: '802.11i introduced ____________ for data privacy, replacing WEP.',
+                acceptedAnswers: ['CCMP/AES', 'CCMP', 'AES', 'AES-CCMP', 'CCMP-AES'],
+                explanation: 'Accepted Answers: CCMP/AES, CCMP, AES, AES-CCMP, CCMP-AES<br>The IEEE 802.11i security amendment defined a Robust Security Network (RSN), which replaced legacy WEP with Counter Mode with Cipher Block Chaining Message Authentication Code Protocol (CCMP), utilizing the Advanced Encryption Standard (AES) algorithm. (Chapter 17, Page 737)'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'Which mechanism is used to acknowledge multiple data frames efficiently by aggregating acknowledgments?',
+                options: ['PS-Poll', 'CTS-to-self', 'RTS/CTS', 'Block ACK (802.11e)'],
+                correctAnswers: ['Block ACK (802.11e)'],
+                explanation: 'The 802.11e amendment introduced the Block Acknowledgment (Block ACK) mechanism. It improves channel efficiency by aggregating several acknowledgments into a single acknowledgment frame instead of acknowledging each unicast frame independently. (Chapter 9, Page 335)'
+            },
+            {
+                id: 3,
+                type: 'text',
+                question: 'The mathematical relationship of dBi and dBd is defined as dBi = dBd + ____.',
+                acceptedAnswers: ['2.14', '2.15', '+2.14', '+ 2.14'],
+                explanation: 'Answers: 2.14, 2.15, +2.14, + 2.14<br>An isotropic radiator is a theoretical point source with 0 dBi gain. A dipole antenna has a gain of 2.14 dBi (which equals 0 dBd). Therefore, converting from dBd to dBi requires adding 2.14 dB. (Chapter 3 / RF Math Fundamentals)'
+            },
+            {
+                id: 4,
+                type: 'single',
+                question: 'Which combination of 10s and 3s represents a loss of 5 dB?',
+                options: ['+10 +10 -3 -3 -3 -3', '+10 +10 -3 -3 -3 -3 -3', '-10 -10 +3 +3 +3 +3 +3', '-3 -3 -3 -3 +10'],
+                correctAnswers: ['-10 -10 +3 +3 +3 +3 +3'],
+                explanation: '-10 - 10 + 3 + 3 + 3 + 3 + 3 = -5 dB (representing a loss of 5 dB). (Chapter 3)'
+            },
+            {
+                id: 5,
+                type: 'single',
+                question: 'Which 802.11 amendment introduced OFDMA and improved efficiency for dense deployments?',
+                options: ['802.11ac', '802.11ax (Wi-Fi 6)', '802.11n', '802.11ad'],
+                correctAnswers: ['802.11ax (Wi-Fi 6)'],
+                explanation: 'IEEE 802.11ax (High Efficiency / Wi-Fi 6) introduced Orthogonal Frequency Division Multiple Access (OFDMA) to subdivide channels into smaller subcarriers (Resource Units) for multi-user efficiency in dense environments. (Chapter 19 / 802.11ax High Efficiency)'
+            },
+            {
+                id: 6,
+                type: 'text',
+                question: 'Antenna __________ describes the orientation of the electric field and should match between Tx and Rx.',
+                acceptedAnswers: ['Polarization', 'polarization'],
+                explanation: 'Antenna <strong>POLARIZATION</strong> refers to the orientation of the E-plane (electric field) of the electromagnetic wave. To avoid signal loss due to polarization mismatch, transmitting and receiving antennas must be aligned in the same polarization plane. (Chapter 4 / Antennas and RF Components)'
+            },
+            {
+                id: 7,
+                type: 'single',
+                question: 'In a predictive (virtual) site survey, what is primarily used to simulate wireless coverage before deployment?',
+                options: ['Spectrum Analysis', 'Actual AP measurements', 'Floor plans and modeling software', 'Physical site walk-throughs'],
+                correctAnswers: ['Floor plans and modeling software'],
+                explanation: 'Predictive site surveys use CAD/graphic floor plans, assigned material attenuation values, and mathematical modeling software to forecast AP placement and RF propagation prior to hardware installation. (Chapter 14, Page 598)'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'If an RF Transmitter emits a signal at 100mW and is connected to 100 feet of cable producing a 6 dB loss, what will be roughly the resultant IR strength?',
+                options: ['50mW', '25mW', '100mW', '200mW'],
+                correctAnswers: ['25mW'],
+                explanation: '100mW = 20 dBm. Subtract 6 dB cable loss: 20 dBm - 6 dB = 14 dBm. Converting 14 dBm back to mW: 20 dBm / 2 (-3dB) = 10 dBm (50mW) / 2 (-3dB) = 25mW. (Chapter 3)'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'What critical function does the management plane provide in a WLAN?',
+                options: ['Dynamic routing adjustments', 'Data packet forwarding', 'User authentication services', 'Network monitoring and configuration management'],
+                correctAnswers: ['Network monitoring and configuration management'],
+                explanation: 'The management plane is defined by administrative network management, administration, configuration (SSID, security, channels), and monitoring. (Chapter 11, Page 421–422)'
+            },
+            {
+                id: 10,
+                type: 'single',
+                question: 'Which statement correctly defines the Basic Service Set (BSS) in 802.11 networks?',
+                options: [
+                    'A BSS is a group of stations that share the same BSSID, which is the MAC address of the access point, enabling communication within the basic service area.',
+                    'A BSS is a peer-to-peer group of stations with no APs involved.',
+                    'A BSS is a collection of multiple APs sharing a common SSID but different MACs.',
+                    'A BSS is a wireless network where the DS is always disabled.'
+                ],
+                correctAnswers: ['A BSS is a group of stations that share the same BSSID, which is the MAC address of the access point, enabling communication within the basic service area.'],
+                explanation: 'The basic service set (BSS) consists of one AP radio with one or more associated client stations sharing a unique layer 2 BSSID (the MAC address of the AP radio). (Chapter 7, Page 256–258)'
+            },
+            {
+                id: 11,
+                type: 'single',
+                question: 'Which survey type is particularly useful for planning large-scale projects without a site visit?',
+                options: ['Predictive Survey', 'Active Survey', 'Hybrid Survey', 'Passive Survey'],
+                correctAnswers: ['Predictive Survey'],
+                explanation: 'Predictive surveys allow virtual RF modeling using CAD or floor plans without requiring an immediate physical site visit. (Chapter 14, Page 597-598)'
+            },
+            {
+                id: 12,
+                type: 'single',
+                question: 'What unit of measurement is frequency most commonly expressed in?',
+                options: ['Decibels (dBi)', 'Hertz (Hz)', 'Volts (V)', 'Amperes (A)'],
+                correctAnswers: ['Hertz (Hz)'],
+                explanation: 'The basic service set (BSS) consists of one AP radio with one or more associated client stations sharing a unique layer 2 BSSID (the MAC address of the AP radio). (Chapter 7, Page 256–258)'
+            },
+            {
+                id: 13,
+                type: 'single',
+                question: 'Which RF metric is most critical when designing for voice-grade WLANs according to the provided material?',
+                options: ['Signal strength of -65 dBm or higher', 'Signal strength of -85 dBm', 'Low SNR', '1000 Hz bandwidth'],
+                correctAnswers: ['Signal strength of -65 dBm or higher'],
+                explanation: 'While data networks typically require a minimum received signal of −70 dBm, designing for Voice over Wi-Fi (VoWiFi) requires a stronger signal threshold of −65 dBm or higher to guarantee low latency and minimal packet loss. (Chapter 14, Page 590)'
+            },
+            {
+                id: 14,
+                type: 'matching',
+                question: 'Match the following RF terms with their correct descriptions:',
+                pairs: [
+                    { item: 'EIRP', correct: 'Effective Isotropic Radiated Power' },
+                    { item: 'SNR', correct: 'Signal-to-Noise Ratio' },
+                    { item: 'FSPL', correct: 'Free Space Path Loss' },
+                    { item: 'RSSI', correct: 'Receive Signal Strength Indicator' }
+                ],
+                optionsPool: [
+                    'Effective Isotropic Radiated Power',
+                    'Signal-to-Noise Ratio',
+                    'Free Space Path Loss',
+                    'Receive Signal Strength Indicator'
+                ],
+                explanation: 'EIRP: Effective Isotropic Radiated Power<br>SNR: Signal-to-Noise Ratio<br>FSPL: Free Space Path Loss<br>RSSI: Receive Signal Strength Indicator. (Chapters 2, 3, & 8)'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'In wireless networks, which frame exchange optimizes efficiency by reserving the medium before a data transmission occurs?',
+                options: ['Data frame fragmentation sequence', 'Request to Send/Clear to Send (RTS/CTS) handshake', 'Association request and response', 'Beacon frame', 'Authentication frame'],
+                correctAnswers: ['Request to Send/Clear to Send (RTS/CTS) handshake'],
+                explanation: 'The Request-to-Send/Clear-to-Send (RTS/CTS) mechanism performs NAV distribution across all listening stations, reserving the medium for the duration of the upcoming data frame and ACK exchange. (Chapter 9, Page 336–337)'
+            },
+            {
+                id: 16,
+                type: 'single',
+                question: 'WEP is still permitted under RSN in modern WLAN security.',
+                options: ['True', 'False'],
+                correctAnswers: ['False'],
+                explanation: 'False. A Robust Security Network (RSN) explicitly forbids the use of legacy, insecure WEP algorithms. An RSN requires CCMP/AES (or optionally TKIP) with dynamic 802.1X/EAP or PSK/SAE key management. (Chapter 17, Page 737–738)'
+            },
+            {
+                id: 17,
+                type: 'text',
+                question: '17.  A point-to-point wireless network link operates at a carrier frequency of 2.4GHz. The system has the following link budget parameters:<br> • Transmitter Output Power = <strong>150 mW</strong><br> • Loss due to transmitter cables and connectors: <strong>2.5 dB</strong><br> • Transmitting antenna gain: <strong>26 dBi</strong><br> • Free Space Path Loss (FSPL): <strong>110 dB</strong><br> • Receiving Antenna Gain: <strong>26 dBi</strong><br> • Loss due to receiver cables and connectors: <strong>2.5 dB</strong><br> • Radio Receiver Sensitivity: <strong>-85 dBm </strong>.<br><br>Task:<br>1. Convert the transmitter power from mW to dBm.<br> 2. Calculate the received power (Pr) in dBm using the standard link budget equation:<br> • <strong>PR = PT-Ltx+Gtx-Lpath+Grx-Lrx</strong><br> 3. Using the received power and the receiver sensitivity, determine the Fade Margin (dB).<br> • <strong>Fade Margin = PR-Receiver Sensitivity</strong><br> Enter your final answer as a number only',
+                acceptedAnswers: ['20', '44', '20 dB', '44 dB'],
+                explanation: 'Accepted answers: 20, 44, 20 dB, 44 dB<br>Pr = 22 - 2.5 + 26 - 110 + 26 - 2.5 = -41 dBm. Fade Margin = -41 - (-85) = 44 dB (or 20 dB depending on exact rounding of 150mW). (Chapter 3)'
+            },
+            {
+                id: 18,
+                type: 'multiple',
+                question: 'Which of the following are valid calculations when using the rules of 10s and 3s? (Choose Two)',
+                options: [
+                    'For every 10 dB of loss (absolute), divide the relative power (mW) by a factor of 3.',
+                    'For every 3 dB of gain (relative), double the absolute power (mW).',
+                    'For every 10 dB of loss (relative), divide the absolute power (mW) by a factor of 2.',
+                    'For every 10 dB of loss (relative), halve the absolute power (mW).',
+                    'For every 10 dB of loss (relative), divide the absolute power (mW) by a factor of 10.',
+                    'For every 10 mW of loss (relative), multiply the absolute power (dB) by a factor of 10.'
+                ],
+                correctAnswers: [
+                    'For every 3 dB of gain (relative), double the absolute power (mW).',
+                    'For every 10 dB of loss (relative), divide the absolute power (mW) by a factor of 10.'
+                ],
+                explanation: '+3 dB doubles the absolute power (mW) and<br>-10 dB divides the absolute power (mW) by 10. (Chapter 3)'
+            },
+            {
+                id: 19,
+                type: 'single',
+                question: 'What distinguishes a basic service set (BSS) from an extended service set (ESS) in 802.11 topology?',
+                options: [
+                    'BSS and ESS are functionally identical with no differences.',
+                    'An ESS has single AP where BSS has multiple APs.',
+                    'An ESS uses only Ethernet Backhaul while BSS uses Wi-Fi backhaul.',
+                    'An ESS supports multiple BSSes connected by a distribution system (DS).',
+                    'A BSS cannot support power-saving modes.'
+                ],
+                correctAnswers: ['An ESS supports multiple BSSes connected by a distribution system (DS).'],
+                explanation: 'An Extended Service Set (ESS) connects two or more BSSes via a Distribution System Medium (DSM) under a common SSID. (Chapter 7, Page 261)'
+            },
+            {
+                id: 20,
+                type: 'single',
+                question: 'What is the primary purpose of a PBSS control point (PCP) in a 60 GHz 802.11ad PBSS?',
+                options: ['Provide long-range backhaul', 'Offers QoS enhancements', 'Coordinate synchronized medium contention among DMG clients.', 'Bridge to the DS.'],
+                correctAnswers: ['Coordinate synchronized medium contention among DMG clients.'],
+                explanation: 'In a Personal Basic Service Set (PBSS) operating at 60 GHz, one directional multi-gigabit (DMG) client assumes the role of PBSS Control Point (PCP) to transmit Beacon/Announce frames for synchronized channel access. (Chapter 7, Page 264)'
+            },
+            {
+                id: 21,
+                type: 'single',
+                question: 'In RF signal propagation, what does the term "Scattering" describe?',
+                options: [
+                    'The reflection of signals off smooth surfaces',
+                    'The absorption of the signal by materials.',
+                    'Multiple reflections of a signal due to uneven surfaces.',
+                    'The bending of a signal around obstacles'
+                ],
+                correctAnswers: ['Multiple reflections of a signal due to uneven surfaces.'],
+                explanation: 'Scattering occurs when an RF wave strikes an uneven surface, rough object, or tiny particles (like foliage or wire mesh), causing the signal to reflect into multiple smaller, unpredictable directions. (Chapter 3 / RF Propagation Behaviors)'
+            },
+            {
+                id: 22,
+                type: 'text',
+                question: 'The original IEEE 802.11 standard operated in the _________ ISM band frequency band and used spread-spectrum techniques such as FHSS and DSSS?',
+                correctAnswers: ['2.4 GHz', '2.4GHz'],
+                explanation: 'Accepted answer: 2.4<br>The legacy IEEE 802.11-1997 prime standard operated in the 2.4 GHz ISM band at 1 Mbps and 2 Mbps using Frequency-Hopping Spread Spectrum (FHSS) and Direct Sequence Spread Spectrum (DSSS). (Chapter 2 / PHY Standards)'
+            },
+            {
+                id: 23,
+                type: 'text',
+                question: 'A wireless transmitter is producing 75mW of power. The total loss of the cables and connectors is 3.5 dB, and the transmitting antenna gain is 27 dBi.<br>What is the EIRP value in dBm?',
+                acceptedAnswers: ['42.25', '42.25 dBm', '42.25dBm', '42.3'],
+                explanation: 'Accepted answers: 42.25, 42.25 dBm, 42.25dBm, 42.3<br>75mW = 18.75 dBm.<br>EIRP = 18.75 - 3.5 + 27 = 42.25 dBm. (Chapter 3)'
+            },
+            {
+                id: 24,
+                type: 'single',
+                question: 'When a station sends an RTS, the Duration/ID field notifies the other stations that they must set their NAV timers to which value?',
+                options: [
+                    'The time necessary to transmit the CTS, Data, and ACK frames',
+                    'The time necessary to transmit the Data and ACK frames',
+                    'The time necessary to transmit the CTS frame',
+                    '213 microseconds'
+                ],
+                correctAnswers: ['The time necessary to transmit the CTS, Data, and ACK frames'],
+                explanation: 'The duration value of an RTS frame covers the time required to complete the remaining frame exchange sequence: "CTS + Data + ACK + 3 SIFS intervals". (Chapter 9, Page 336–337)'
+            },
+            {
+                id: 25,
+                type: 'single',
+                question: 'What does the MAC address BSSID represent in an 802.11 frame?',
+                options: [
+                    'The destination IP address of the upper-layer packet',
+                    'The MAC address of the AP radio that forms the BSS',
+                    'The software vendor\'s hardware ID',
+                    'The client stations\' MAC Address'
+                ],
+                correctAnswers: ['The MAC address of the AP radio that forms the BSS'],
+                explanation: 'The Basic Service Set Identifier (BSSID) is the 48-bit layer 2 MAC address of the access point radio interface providing the BSS. (Chapter 7, Page 258)'
+            },
+            {
+                id: 26,
+                type: 'text',
+                question: 'DFS and _________ are requirements in certain UNII bands to manage interference.',
+                acceptedAnswers: ['TPC', 'tpc', 'Transmit Power Control'],
+                explanation: 'Accepted answers: TPC, tpc, Transmit Power Control<br>Dynamic Frequency Selection (DFS) and Transmit Power Control (TPC) are mandated by regulatory agencies in 5 GHz U-NII bands to prevent Wi-Fi from interfering with radar systems. (Chapter 7, Page 251 & Chapter 14, Page 589)'
+            },
+            {
+                id: 27,
+                type: 'single',
+                question: 'Which band did 802.11a utilize for its operations?',
+                options: ['6 GHz band', '5 GHz UNII bands', '900 MHz ISM Band', '2.4 GHz ISM band'],
+                correctAnswers: ['5 GHz UNII bands'],
+                explanation: 'IEEE 802.11a specified Orthogonal Frequency Division Multiplexing (OFDM) operating exclusively in the 5 GHz U-NII bands, offering data rates up to 54 Mbps. (Chapter 2 / PHY Standards)'
+            },
+            {
+                id: 28,
+                type: 'single',
+                question: 'Which type of frame is used to acknowledge the successful reception of a unicast data frame in 802.11?',
+                options: ['CTS Frame', 'RTS Frame', 'ACK (Acknowledgement) Frame', 'Beacon Frame', 'Null Data Frame'],
+                correctAnswers: ['ACK (Acknowledgement) Frame'],
+                explanation: 'In 802.11 CSMA/CA, every unicast frame received with a passing CRC must be acknowledged by the receiver sending an ACK control frame. (Chapter 8, Page 277 & Chapter 9, Page 333–334)'
+            },
+            {
+                id: 29,
+                type: 'single',
+                question: 'A WLAN transmitter that emits a 400 mW signal is connected to a cable with 9 dB of loss and an antenna with 19 dBi of gain. What is the EIRP?',
+                options: ['3,500 mW', '2 W', '4 W', '3,000 mW'],
+                correctAnswers: ['4 W'],
+                explanation: '400 mW = 26 dBm.<br>EIRP = 26 - 9 + 19 = 36 dBm = 4 Watts (4 W). (Chapter 3)'
+            },
+            {
+                id: 30,
+                type: 'multiple',
+                question: 'What two technologies are used to prevent 802.11 radios from interfering with radar and satellite transmissions at 5GHz?',
+                options: [
+                    'Transmit Power Control',
+                    'Dynamic Frequency Selection',
+                    'Enhanced Distributed Channel Access',
+                    'Direct Sequence Spread Spectrum'
+                ],
+                correctAnswers: ['Transmit Power Control', 'Dynamic Frequency Selection'],
+                explanation: 'Dynamic Frequency Selection (DFS) detects radar signals and switches channels, while Transmit Power Control (TPC) manages power output to prevent interference with radar/satellite operations. (Chapter 7, Page 251 & Chapter 14, Page 589)'
+            },
+            {
+                id: 31,
+                type: 'single',
+                question: 'What is the recommended minimum SNR for data WLANs to avoid excessive retransmissions?',
+                options: ['30 dB', '5 dB', '10 dB', '20 dB'],
+                correctAnswers: ['20 dB'],
+                explanation: 'A minimum SNR of 20 dB is recommended for data WLANs to prevent excessive layer 2 retransmissions, whereas voice networks require at least 25 dB. (Chapter 15, Page 640)'
+            },
+            {
+                id: 32,
+                type: 'multiple',
+                question: 'When is an 802.11ac AP transmitting on 5 GHz required by the IEEE 802.11-2020 standard to respond to probe request frames from nearby client stations? (Choose all that apply)',
+                options: [
+                    'When the probe request is encrypted.',
+                    'When the probe request client is also an 802.11ac radio',
+                    'When the probe request frames contain the correct SSID value',
+                    'When the probe request contain a null SSID value',
+                    'When the probe request has the Power Management bit set to 1.'
+                ],
+                correctAnswers: [
+                    'When the probe request frames contain the correct SSID value',
+                    'When the probe request contain a null SSID value'
+                ],
+                explanation: 'APs respond to directed probe requests containing their matching SSID as well as broadcast (null) probe requests searching for any available SSID. (Chapter 9, Page 322-323)'
+            },
+            {
+                id: 33,
+                type: 'single',
+                question: 'Which device typically uses Power over Ethernet (PoE) to receive both data and power in 802.11 deployment?',
+                options: ['PBSS Control Point', 'Access Point (AP)', 'Client Station', 'Mesh Portal'],
+                correctAnswers: ['Access Point (AP)'],
+                explanation: 'Access Points (APs) are connected to switched Ethernet networks, allowing Power over Ethernet (PoE) to deliver both network data and DC power over a single cable. (Chapter 7, Page 253 & Chapter 12)'
+            },
+            {
+                id: 34,
+                type: 'single',
+                question: 'Which security model is mandatory for 6 GHz WPA3 deployment?',
+                options: [
+                    'WPA3 with MFP and SAE/GCMP on 6 GHz',
+                    'WPA2 with TKIP on 6 GHz',
+                    'Open SSID with no authentication',
+                    'WPA3-Personal without SAE on 6 GHz'
+                ],
+                correctAnswers: ['WPA3 with MFP and SAE/GCMP on 6 GHz'],
+                explanation: 'The 6 GHz spectrum strictly mandates WPA3 security. Legacy WPA2, WEP, and TKIP are barred, Management Frame Protection (MFP) is required, and SAE/OWE is used. (Chapter 17, Page 762–763)'
+            },
+            {
+                id: 35,
+                type: 'single',
+                question: 'What is the fundamental characteristic of the Distributed Coordination Function (DCF) in 802.11?',
+                options: [
+                    'It relies on CSMA/CA for automatic contention-based medium sharing',
+                    'It provides centralized polling for all clients',
+                    'It operates only at Layer 3',
+                    'It guarantees zero collisions'
+                ],
+                correctAnswers: ['It relies on CSMA/CA for automatic contention-based medium sharing'],
+                explanation: 'DCF is the primary MAC access method in 802.11 that enables automatic medium sharing on a half-duplex RF medium using CSMA/CA. (Chapter 8, Page 278)'
+            },
+            {
+                id: 36,
+                type: 'matching',
+                question: 'Match the encryption method to the WPA version that utilizes it:',
+                pairs: [
+                    { item: 'AES-CCMP', correct: 'WPA2' },
+                    { item: 'AES-GCMP', correct: 'WPA3' },
+                ],
+                optionsPool: ['WPA2', 'WPA3', 'WEP'],
+                explanation: 'WPA2 mandated AES-CCMP. WPA3 introduced support for Suite-B 192-bit mode using AES-GCMP-256. (Chapter 17, Page 756–760)'
+            },
+            {
+                id: 37,
+                type: 'single',
+                question: 'What is the function of the Direction fields To DS and From DS in an 802.11 frame header?',
+                options: [
+                    'They indicate the encryption type used for the frame.',
+                    'They determine whether the frame is a management or data frame.',
+                    'They indicate whether the frame is moving toward or away from the Distribution System (DS), affecting how many MAC addresses are used.',
+                    'They specify the primary channel width (20/40/80 MHz)'
+                ],
+                correctAnswers: ['They indicate whether the frame is moving toward or away from the Distribution System (DS), affecting how many MAC addresses are used.'],
+                explanation: 'The 1-bit To DS and From DS fields define the directional flow of data relative to the distribution system and determine the role of the 4 MAC address fields (RA, TA, DA, SA). (Chapter 9, Page 308–309)'
+            },
+            {
+                id: 38,
+                type: 'text',
+                question: 'A wireless transmitter is producing 35 mW of power. The total cable loss is 3 dB, and the transmitting antenna gain is 20 dB.<br>Determine the EIRP value in dBm.',
+                acceptedAnswers: ['32.44', '32.44 dBm', '32.44dBm', '32.4'],
+                explanation: 'Accepted answers: 32.44, 32.44 dBm, 32.44dBm, 32.4<br>35 mW = 15.44 dBm.<br>EIRP = 15.44 - 3 + 20 = 32.44 dBm. (Chapter 3)'
+            },
+            {
+                id: 39,
+                type: 'single',
+                question: 'Which two mechanisms are used by CSMA/CA to avoid collisions in 802.11 networks?',
+                options: [
+                    'Frequency hopping and time synchronization',
+                    'Power saving polling and beacon scheduling',
+                    'Physical carrier sensing and virtual carrier sensing (NAV)',
+                    'Binary exponential backoff only'
+                ],
+                correctAnswers: ['Physical carrier sensing and virtual carrier sensing (NAV)'],
+                explanation: 'CSMA/CA uses physical carrier sensing (Clear Channel Assessment - CCA) and virtual carrier sensing (Network Allocation Vector - NAV timer) to evaluate medium availability. (Chapter 8, Page 278–282)'
+            },
+            {
+                id: 40,
+                type: 'single',
+                question: 'An omnidirectional antenna radiates uniformly in all directions in 3D Space.',
+                options: ['True', 'False'],
+                correctAnswers: ['True'],
+                explanation: 'True. An omnidirectional antenna radiates power uniformly in all directions within a specific plane, but an ideal omnidirectional antenna (often called an isotropic radiator) radiates equally in all directions in 3D space.'
+            },
+            {
+                id: 41,
+                type: 'single',
+                question: 'Which statement best describes VoWiFi in WLANs?',
+                options: [
+                    'VoWiFi uses Bluetooth for signaling',
+                    'VoWiFi requires no QoS since traffic is low priority',
+                    'VoIP over Wi-Fi with QoS support using SIP signaling',
+                    'Wi-Fi only for data without voice consideration'
+                ],
+                correctAnswers: ['VoIP over Wi-Fi with QoS support using SIP signaling'],
+                explanation: 'Voice over Wi-Fi (VoWiFi) delivers real-time voice packets over 802.11 using WMM/EDCA Quality of Service (QoS) and standard call signaling protocols such as Session Initiation Protocol (SIP). (Chapter 11, Page 443–444)'
+            },
+            {
+                id: 42,
+                type: 'single',
+                question: 'During a site survey of a point-to-point bridge link, the engineer determines that the ambient noise floor is extremely high due to nearby machinery. What is a suggested best practice?',
+                options: [
+                    'Increase the WLAN bridge access points\' transmission amplitude 5-10 dB.',
+                    'Mount the WLAN bridge access points higher.',
+                    'Double the distance of the WLAN bridge AP signal with 6 dBi of antenna gain.',
+                    'Plan for received amplitude with a 5-10 dB fade margin.'
+                ],
+                correctAnswers: ['Plan for received amplitude with a 5-10 dB fade margin.'],
+                explanation: 'Adding a fade margin (typically 10 to 20 dB) ensures that environmental fluctuations or high ambient noise floors do not cause the received signal to drop below sensitivity thresholds. (Chapter 14 / Link Budget Design)'
+            },
+            {
+                id: 43,
+                type: 'single',
+                question: 'The amount of signal a wireless station must receive in order to distinguish between data and noise:',
+                options: ['Transmitter', 'Receive Sensitivity', 'Receiver', 'Isotropic Radiation'],
+                correctAnswers: ['Receive Sensitivity'],
+                explanation: 'Receive sensitivity is the minimum power level at which a radio receiver can successfully detect, decode, and extract data from an incoming RF signal. (Chapter 2 / Radio Receiver Sensitivity)'
+            },
+            {
+                id: 44,
+                type: 'single',
+                question: 'The following is true about Wi-Fi:',
+                options: [
+                    'It is defined by the IEEE standard 803.2 and it uses the protocol CSMA/CA',
+                    'It is defined by the IEEE standard 802.11 and it uses the protocol CSMA/CD',
+                    'It is defined by the IEEE standard 802.3 and it uses the protocol CSMA/CA',
+                    'It is defined by the IEEE standard 802.11 and it uses the protocol CSMA/CA'
+                ],
+                correctAnswers: ['It is defined by the IEEE standard 802.11 and it uses the protocol CSMA/CA'],
+                explanation: 'Wi-Fi is governed by the IEEE 802.11 standard and uses Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA) at the MAC layer. (Chapter 8, Page 276)'
+            },
+            {
+                id: 45,
+                type: 'text',
+                question: 'VSWR measures the amount of impedance ________ in an RF system.',
+                acceptedAnswers: ['mismatch', 'mismatches'],
+                explanation: 'Answer: mismatch<br>Voltage Standing Wave Ratio (VSWR) measures the ratio of reflected energy caused by an impedance mismatch between transmission lines, connectors, and antennas. (Chapter 3 / RF Components)'
+            },
+            {
+                id: 46,
+                type: 'text',
+                question: '46.  A point-to-point wireless network link operates at a carrier frequency of 2.4GHz. The system has the following link budget parameters:<br> • Transmitter Output Power = <strong>100 mW</strong><br> • Loss due to transmitter cables and connectors: <strong>3.5 dB </strong><br> •Transmitting antenna gain: <strong>25 dBi</strong><br> • Free Space Path Loss (FSPL): <strong>128 dB</strong><br> • Receiving Antenna Gain: <strong>25 dBi</strong><br> • Loss due to receiver cables and connectors: <strong>3.5 dB</strong><br> • Radio Receiver Sensitivity: <strong>-83 dBm</strong><br><br>Task:<br> 1. Convert the transmitter power from mW to dBm<br> 2. Calculate the received power (Pr) in dBm using the standard link budget equation:<br> <strong>• PR = PT - Ltx  + Gtx - Lpath + Grx - Lrx</strong><br> 3. Using the received power and the receiver sensitivity, determine the Fade Margin (dB).<br> <strong>• Fade Margin = PR-Receiver Sensitivity</strong><br> Enter your final answer',
+                acceptedAnswers: ['18', '18 dB', '18dB'],
+                explanation: 'Pr = 20 - 3.5 + 25 - 128 + 25 - 3.5 = -65 dBm. Fade Margin = -65 - (-83) = 18 dB. (Chapter 3)'
+            },
+            {
+                id: 47,
+                type: 'single',
+                question: '802.11 technology is typically deployed at which fundamental layer of network architecture?',
+                options: ['Access', 'Network', 'Distribution', 'Core'],
+                correctAnswers: ['Access'],
+                explanation: 'Wireless local area networks provide end-user devices with portal connectivity at the Access Layer of the hierarchical network design model. (Chapter 11, Page 425)'
+            },
+            {
+                id: 48,
+                type: 'single',
+                question: 'Which specifications are true about IEEE 802.11n Wi-Fi mode?',
+                options: [
+                    '2.4/5 GHz operation bands, supports up to 600 Mbps data rates, uses HT-OFDM spread spectrum technology, uses SISO radios, and is backward compatible with the a, b, and g Wi-Fi amendments.',
+                    '2.4/5 GHz operation bands, supports up to 600 Mbps data rates, uses HT-OFDM spread spectrum technology, uses MIMO radios, and is backward compatible with the a, b, and g Wi-Fi amendments.',
+                    '2.4 GHz operation band, supports 1 and 2 Mbps data rates, uses OFDM spread spectrum technology, uses SISO radios, and is not backward compatible with the previous Wi-Fi amendments.',
+                    '5 GHz operation band, supports up to 6.93 Gbps data rates, uses VHT-OFDM spread spectrum technology, uses MIMO radios, and is backward compatible with all previous Wi-Fi amendments.',
+                    '2.4/5 GHz operation bands, supports up to 600 Mbps data rates, uses ERP-OFDM spread spectrum technology, uses MIMO radios, and is backward compatible with the b and g Wi-Fi amendments'
+                ],
+                correctAnswers: ['2.4/5 GHz operation bands, supports up to 600 Mbps data rates, uses HT-OFDM spread spectrum technology, uses MIMO radios, and is backward compatible with the a, b, and g Wi-Fi amendments.'],
+                explanation: 'IEEE 802.11n operates in both 2.4 GHz and 5 GHz, utilizes High Throughput (HT) OFDM, introduced MIMO technology, achieves data rates up to 600 Mbps, and is backward compatible with 802.11a/b/g. (Chapter 2 & 10 / High Throughput)'
+            },
+            {
+                id: 49,
+                type: 'matching',
+                question: 'Match the terms associated with power measurements with their formulas or definitions:',
+                pairs: [
+                    { item: 'dBm conversion formula', correct: '10 log (Power in mW)' },
+                    { item: 'Power in mW', correct: '10^(dBm/10)' },
+                    { item: 'Rule of 3s', correct: 'For every 3 dB gain, double the power' },
+                    { item: 'Rule of 10s', correct: 'For every 10 dB gain, times power by 10.' }
+                ],
+                optionsPool: [
+                    '10 log (Power in mW)',
+                    '10^(dBm/10)',
+                    'For every 3 dB gain, double the power',
+                    'For every 10 dB gain, times power by 10.'
+                ],
+                explanation: 'dBm formula: 10 log(mW)<br>Power in mW: 10^(dBm/10)<br>Rule of 3s: +3dB doubles power<br>Rule of 10s: +10dB multiplies power by 10. (Chapter 3)'
+            },
+            {
+                id: 50,
+                type: 'multiple',
+                question: 'Which layers of the OSI model are referenced in the 802.11 standard? (Choose all that apply)',
+                options: ['Physical', 'Presentation', 'Application', 'Transport', 'Data Link'],
+                correctAnswers: ['Physical', 'Data Link'],
+                explanation: 'IEEE 802.11 explicitly defines physical layer (PHY) and data-link layer (MAC sublayer) operations. (Chapter 9, Page 300–302)'
+            },
+            {
+                id: 51,
+                type: 'single',
+                question: 'Which 802.11 amendment introduced Orthogonal Frequency Division Multiplexing (OFDM) to support higher data rates in the 5 GHz band?',
+                options: ['802.11b', '802.11n', '802.11g', '802.11a'],
+                correctAnswers: ['802.11a'],
+                explanation: 'IEEE 802.11a introduced OFDM modulation in the 5 GHz U-NII bands to deliver data rates up to 54 Mbps. (Chapter 2 / PHY Standards)'
+            },
+            {
+                id: 52,
+                type: 'matching',
+                question: 'Pair the following security and network concepts with their WLAN relevance:',
+                pairs: [
+                    { item: 'WPA2/WPA3', correct: 'Encryption and authentication for client traffic' },
+                    { item: '802.1X/EAP', correct: 'RADIUS-based authentication for devices joining the network' },
+                    { item: 'WMM', correct: 'QoS mechanism to prioritize voice/video traffic' },
+                    { item: 'SSO (Single Sign On)', correct: 'Not typically a core WLAN security control; more common in enterprise IT auth contexts.' }
+                ],
+                optionsPool: [
+                    'Encryption and authentication for client traffic',
+                    'RADIUS-based authentication for devices joining the network',
+                    'QoS mechanism to prioritize voice/video traffic',
+                    'Not typically a core WLAN security control; more common in enterprise IT auth contexts.'
+                ],
+                explanation: 'WPA2/WPA3 encrypts client traffic<br>802.1X/EAP performs RADIUS authentication<br> WMM provides QoS<br>SSO handles higher-level enterprise login. (Chapters 8 & 17)'
+            },
+            {
+                id: 53,
+                type: 'single',
+                question: 'What is the term for a single AP radio\'s MAC address that serves as the BSSID for a BSS?',
+                options: ['ESSID', 'SSID String', 'MAC Address of the AP radio (BSSID)', 'MAC Address of the WS point'],
+                correctAnswers: ['MAC Address of the AP radio (BSSID)'],
+                explanation: 'The BSSID is the layer 2 hardware MAC address of an AP radio interface serving the basic service set. (Chapter 7, Page 258)'
+            },
+            {
+                id: 54,
+                type: 'single',
+                question: 'In 802.11 frames, which condition uses four addresses in the header (RA, TA, DA, SA)?',
+                options: [
+                    'A standard beacon frame',
+                    'A simple data frame with a single BSS',
+                    'Frame flow that traverses a Wireless Distribution System (WDS) or AP-to-AP bridging',
+                    'Management frames during association'
+                ],
+                correctAnswers: ['Frame flow that traverses a Wireless Distribution System (WDS) or AP-to-AP bridging'],
+                explanation: 'Four MAC address fields are used only when data frames traverse a Wireless Distribution System (WDS) or mesh/bridge backhaul link where To DS=1 and From DS=1. (Chapter 9, Page 312)'
+            },
+            {
+                id: 55,
+                type: 'single',
+                question: 'A wireless bridge is configured to transmit at 100 mW. The antenna cable and the connectors produces a 3 dB loss and are connected to a 16 dBi antenna.<br>What is the EIRP?',
+                options: ['8W', '2,000W', '36 dBm', '30 dBm', '20mW'],
+                correctAnswers: ['2,000W'],
+                explanation: '100 mW = 20 dBm<br>20 dBm - 3 dB (loss) = 17 dBm<br>EIRP = 17 dBm + 16 dBi = 33 dBm<br>33 dBm is equivalent to 2000 mW'
+            },
+            {
+                id: 56,
+                type: 'matching',
+                question: 'Match the WLAN security concept to its brief description:',
+                pairs: [
+                    { item: 'RSN requirement ensuring per-session keys', correct: 'Dynamic Key management (4-way Handshake)' },
+                    { item: 'Authentication mechanism (802.1X/EAP, PSK, or SAE)', correct: 'Strong Authentication (802.11X/EAP, PSK, or SAE)' },
+                    { item: 'Encryption protocol used in WPA2', correct: 'CCM (AES-CCMP)' },
+                    { item: 'Replaces PSK in WPA3-Personal', correct: 'SAE' }
+                ],
+                optionsPool: [
+                    'Dynamic Key management (4-way Handshake)',
+                    'Strong Authentication (802.11X/EAP, PSK, or SAE)',
+                    'CCM (AES-CCMP)',
+                    'SAE'
+                ],
+                explanation: 'Per-session keys use the 4-Way Handshake<br>Strong authentication options include 802.1X/PSK/SAE<br>WPA2 uses AES-CCMP<br>SAE replaces PSK in WPA3. (Chapter 17)'
+            },
+            {
+                id: 57,
+                type: 'single',
+                question: 'Which WLAN architecture places data forwarding primarily at the edge with centralized control assistance?',
+                options: ['Autonomous', 'Distributed', 'Centralized', 'Hybrid'],
+                correctAnswers: ['Distributed'],
+                explanation: 'In a Distributed or Hybrid WLAN architecture, user data forwarding occurs locally at the edge (AP), while control and management functions are coordinated via central controllers or cloud management. (Chapter 11, Page 432–436)'
+            },
+            {
+                id: 58,
+                type: 'single',
+                question: 'ACK and CTS frames follow which interframe space?',
+                options: ['PIFS', 'DIFS', 'AIFS', 'SIFS', 'EIFS'],
+                correctAnswers: ['SIFS'],
+                explanation: 'ACK, CTS, and Block ACK control frames follow a Short Interframe Space (SIFS), which is the shortest interframe space and gives these control responses the highest priority on the medium. (Chapter 8, Page 285)'
+            },
+            {
+                id: 59,
+                type: 'matching',
+                question: 'Match the PHY amendments with their key feature:',
+                pairs: [
+                    { item: '802.11a', correct: 'OFDM in the 5 GHz band' },
+                    { item: '802.11b', correct: 'HR-DSSS in the 2.4 GHz band' },
+                    { item: '802.11n', correct: 'MIMO and HT (up to 600Mbps)' },
+                    { item: '802.11ac', correct: 'VHT Wider channels up to 160Mhz' }
+                ],
+                optionsPool: [
+                    'OFDM in the 5 GHz band',
+                    'HR-DSSS in the 2.4 GHz band',
+                    'MIMO and HT (up to 600Mbps)',
+                    'VHT Wider channels up to 160Mhz'
+                ],
+                explanation: '802.11a: 5GHz OFDM<br>802.11b: 2.4GHz HR-DSSS<br>802.11n: MIMO/HT up to 600Mbps<br> 802.11ac: VHT up to 160MHz channels. (Chapter 2)'
+            },
+            {
+                id: 60,
+                type: 'text',
+                question: 'SAE replaces traditional PSK in WPA3 Personal because it provides resistance to _________.',
+                acceptedAnswers: ['Dictionary Attacks', 'dictionary attacks', 'dictionary attack'],
+                explanation: 'Answer: dictionary attack<br>Simultaneous Authentication of Equals (SAE) uses a Dragonfly handshake that prevents offline dictionary attacks and password-guessing attempts. (Chapter 17, Page 743–744)'
+            }
+        ];
+
+        let currentPage = 0;
+        const questionsPerPage = 10;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                pageDiv.className = p === 0 ? 'space-y-8' : 'space-y-8 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-card';
+                    
+                    let optionsHtml = '';
+
+                    if (q.type === 'text') {
+                        // Render fill-in-the-blank text input
+                        optionsHtml = `
+                            <div class="flex flex-col gap-3 w-full max-w-md my-2">
+                                <input type="text" id="input-${q.id}" class="text-answer-input" placeholder="Type your answer here..." autocomplete="off">
+                                <button id="btn-${q.id}" class="btn-check self-start mt-1">
+                                    <i class="fa-solid fa-check-circle mr-1.5"></i> Check Answer
+                                </button>
+                            </div>
+                        `;
+                    } else if (q.type === 'matching') {
+                        // Render matching UI with dropdowns
+                        let pairsHtml = '';
+                        const shuffledPool = shuffleArray([...q.optionsPool]);
+
+                        q.pairs.forEach((pair, pairIdx) => {
+                            let selectOptions = `<option value="">-- Select Matching Option --</option>`;
+                            shuffledPool.forEach(optVal => {
+                                selectOptions += `<option value="${optVal.replace(/"/g, '&quot;')}">${optVal}</option>`;
+                            });
+
+                            pairsHtml += `
+                                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-slate-900/60 rounded-md border border-slate-800">
+                                    <span class="font-medium text-slate-200 text-sm">${pair.item}</span>
+                                    <select id="select-${q.id}-${pairIdx}" class="custom-select w-full sm:w-auto min-w-[260px]">
+                                        ${selectOptions}
+                                    </select>
+                                </div>
+                            `;
+                        });
+
+                        optionsHtml = `
+                            <div class="flex flex-col gap-2.5 w-full">${pairsHtml}</div>
+                            <div class="mt-4">
+                                <button id="btn-${q.id}" class="btn-check">
+                                    <i class="fa-solid fa-tasks mr-1.5"></i> Check Selection
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        // Render single or multiple choice
+                        const shuffledOptions = shuffleArray([...q.options]);
+                        shuffledOptions.forEach(opt => {
+                            const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                            const inputName = `question-${q.id}`;
+                            const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                            
+                            optionsHtml += `
+                                <label id="label-${inputId}" class="option-label">
+                                    <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}">
+                                    <span class="text-slate-300 leading-relaxed text-sm sm:text-base">${opt}</span>
+                                </label>
+                            `;
+                        });
+
+                        if (q.type === 'multiple') {
+                            optionsHtml += `
+                                <div class="mt-3">
+                                    <button id="btn-${q.id}" class="btn-check">
+                                        <i class="fa-solid fa-list-check mr-1.5"></i> Check Selection
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    const badgeText = q.type === 'single' ? 'Select One' : q.type === 'matching' ? 'Matching Type' : q.type === 'text' ? 'Fill in the Blank' : 'Select All That Apply';
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3.5 items-start">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-200 font-bold text-sm border border-slate-700 shadow-sm mt-0.5">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="w-full">
+                                <span class="inline-block px-2.5 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800/80 rounded uppercase border border-slate-700/60">
+                                    ${badgeText}
+                                </span>
+                                <h3 class="text-base sm:text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-0 sm:pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        <div id="explanation-${q.id}" class="hidden explanation-box ml-0 sm:ml-11">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-info text-red-500"></i> Explanation
+                            </h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    // Event Listeners
+                    if (q.type === 'single') {
+                        const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else if (q.type === 'multiple') {
+                        const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    } else if (q.type === 'matching') {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, null, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    } else if (q.type === 'text') {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        const textInput = qWrapper.querySelector(`#input-${q.id}`);
+                        
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, textInput, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                        textInput.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter') {
+                                evaluateAnswer(q, textInput, qWrapper);
+                                btn.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            prevBtn.disabled = currentPage === 0;
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right ml-1"></i>`;
+                nextBtn.className = "flex items-center gap-2 px-8 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-emerald-900/20";
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right ml-1"></i>`;
+                nextBtn.className = "flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20";
+            }
+        }
+
+        function evaluateAnswer(questionData, inputsOrInput, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            if (questionData.type === 'text') {
+                const inputElem = inputsOrInput;
+                const userVal = inputElem.value.trim().toLowerCase();
+                inputElem.disabled = true;
+
+                const isCorrect = questionData.acceptedAnswers.some(ans => {
+                    const cleanAns = ans.toString().trim().toLowerCase();
+                    return userVal === cleanAns || userVal.replace(/\s+/g, '') === cleanAns.replace(/\s+/g, '');
+                });
+
+                if (isCorrect) {
+                    inputElem.classList.remove('border-slate-700');
+                    inputElem.classList.add('bg-emerald-950/40', 'border-emerald-500', 'text-emerald-300');
+                } else {
+                    inputElem.classList.remove('border-slate-700');
+                    inputElem.classList.add('bg-rose-950/40', 'border-rose-500', 'text-rose-300');
+                }
+            } else if (questionData.type === 'matching') {
+                questionData.pairs.forEach((pair, pairIdx) => {
+                    const selectElem = wrapperElement.querySelector(`#select-${questionData.id}-${pairIdx}`);
+                    const selectedValue = selectElem.value;
+                    selectElem.disabled = true;
+
+                    if (selectedValue === pair.correct) {
+                        selectElem.classList.add('bg-emerald-950/40', 'border-emerald-500', 'text-emerald-300');
+                    } else {
+                        selectElem.classList.add('bg-rose-950/40', 'border-rose-500', 'text-rose-300');
+                    }
+                });
+            } else {
+                const inputs = inputsOrInput;
+                inputs.forEach(input => {
+                    const label = wrapperElement.querySelector(`#label-${input.id}`);
+                    const isSelected = input.checked;
+                    const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                    input.disabled = true;
+                    label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                    input.classList.remove('cursor-pointer');
+
+                    if (isSelected && isCorrectAnswer) {
+                        label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                    } else if (isSelected && !isCorrectAnswer) {
+                        label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                    } else if (!isSelected && isCorrectAnswer) {
+                        label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                    } else {
+                        label.classList.add('opacity-50');
+                    }
+                });
+            }
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-8px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 250, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

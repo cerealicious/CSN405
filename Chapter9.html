@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWNA Chapter 9 Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Exam-style accent colors */
+        input[type="radio"], input[type="checkbox"] { 
+            accent-color: #dc2626; /* Tailwind Red-600 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 min-h-screen flex flex-col antialiased selection:bg-red-500/30 selection:text-white">
+
+    <!-- Top Navigation Bar (Exam Engine Style) -->
+    <nav class="bg-[#020617] border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2 bg-slate-800/50 hover:bg-slate-700/50 px-3 py-1.5 rounded-md border border-slate-700">
+                    <i class="fa-solid fa-chevron-left"></i> Return to Dashboard
+                </a>
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <h1 class="text-lg font-semibold text-white tracking-wide hidden sm:block">CWNA-108: Chapter 9</h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-0.5">Progress</span>
+                    <span id="progress-indicator" class="text-sm font-medium text-white">Page 1 of 4</span>
+                </div>
+                <a href="https://github.com/cerealicious/" target="_blank" class="text-slate-300 hover:text-white transition-all duration-200 bg-slate-800 hover:bg-slate-700 p-1 rounded-full border border-slate-700/50 hover:border-slate-500 shadow-sm hover:shadow-md flex items-center justify-center hover:-translate-y-0.5">
+                    <img src="https://avatars.githubusercontent.com/u/5056960?v=4" alt="cerealicious profile" class="w-8 h-8 rounded-full">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Exam Container -->
+    <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full flex flex-col">
+        
+        <!-- Questions rendered here inside page groups -->
+        <div id="quiz-container" class="flex-grow"></div>
+
+        <!-- Bottom Pagination Controls -->
+        <div class="mt-12 flex justify-between items-center border-t border-slate-800 pt-6 pb-4 sticky bottom-0 bg-[#0b1120] z-40">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-md transition-colors border border-slate-700 shadow-sm disabled:opacity-0 disabled:pointer-events-none">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <button id="next-btn" class="flex items-center gap-2 px-8 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-md transition-colors shadow-lg shadow-red-900/20">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto mt-auto mb-8 pt-8 border-t border-slate-800/80 text-sm text-slate-400 w-full px-6">
+        <div class="flex flex-wrap items-center justify-center md:justify-center gap-1.5 text-center">
+            <span>Find this useful? Buy me a</span>
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md border border-amber-500/20 font-medium transition-colors hover:bg-amber-500/20 cursor-pointer">
+                <i class="fa-solid fa-mug-hot"></i> coffee
+            </span>
+            <span>, a</span>
+            <span class="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-md border border-yellow-500/20 font-medium transition-colors hover:bg-yellow-500/20 cursor-pointer">
+                <i class="fa-solid fa-stroopwafel"></i> waffle
+            </span>
+            <span>or an</span>
+            <span class="inline-flex items-center gap-1 bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-md border border-orange-500/20 font-medium transition-colors hover:bg-orange-500/20 cursor-pointer">
+                <i class="fa-solid fa-cheese"></i> Ultimate Grilled Cheese
+            </span>
+        </div>
+        <div class="text-center mt-8 text-sm text-slate-500">
+          © <a href="https://github.com/cerealicious/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">cerealicious</a> | CSN405 Practice Test | Made for Educational Purposes
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                type: 'single',
+                question: 'Which of the following 802.11 frames carry an MSDU payload that may eventually be transferred by the integration service into an 802.3 Ethernet frame?',
+                options: ['802.11 management frames', '802.11 control frames', '802.11 data frames', '802.11 action frames', '802.11 association frames'],
+                correctAnswers: ['802.11 data frames'],
+                explanation: 'Only 802.11 data frames can carry an upper-layer payload (MSDU) within the body of the frame. The MSDU can be as large as 2,304 bytes and should usually be encrypted. 802.11 control frames do not have a body. 802.11 management frames have a body; however, the payload of the frame is strictly layer 2 information. An action frame is a subtype of an 802.11 control frame. Association request and response frames are subtypes of 802.11 management frames.'
+            },
+            {
+                id: 2,
+                type: 'single',
+                question: 'Which of the following contains only LLC data and the IP packet and does not include any layer 2 802.11 data?',
+                options: ['MPDU', 'PPDU', 'PSDU', 'MSDU', 'MMPDU'],
+                correctAnswers: ['MSDU'],
+                explanation: 'An IP packet consists of layer 3-7 information. The MAC service data unit (MSDU) contains data from the LLC sublayer and/or any number of layers above the Data-Link layer. The MSDU is the payload found inside the body of 802.11 data frames.'
+            },
+            {
+                id: 3,
+                type: 'single',
+                question: 'Based on the 802.11 frame capture shown here, which type of networking communication is occurring?<br><br><img src="9.3.png" alt="802.11 MAC Header Capture" class="my-4 max-w-full h-auto rounded border border-slate-700 shadow-sm mx-auto block">',
+                options: ['AP to client station', 'Client station to server', 'Client station to AP', 'Server to client station', 'AP to AP'],
+                correctAnswers: ['AP to AP'],
+                explanation: 'This screen capture of an 802.11 header displays four MAC addresses. Although 802.11 frames have four address fields in the MAC header, 802.11 frames typically use only three of the MAC address fields. An 802.11 frame sent within a wireless distribution system (WDS) requires all four MAC addresses. Although the standard does not specifically define procedures for using this format, WLAN vendors often implement WDS solutions. One example of a WDS is a point-to-point WLAN bridge link. Another example of a WDS is mesh backhaul communications between a mesh portal AP and a mesh point AP.'
+            },
+            {
+                id: 4,
+                type: 'multiple',
+                question: 'The presence of what type of transmissions can trigger the protection mechanism within an ERP basic service set? (Choose all that apply.)',
+                options: ['Association of an HR-DSSS client', 'Association of an ERP-OFDM client', 'HR-DSSS beacon frame', 'ERP beacon frame with the NonERP_Present bit set to 1', 'Association of an FHSS client'],
+                correctAnswers: ['Association of an HR-DSSS client', 'HR-DSSS beacon frame', 'ERP beacon frame with the NonERP_Present bit set to 1'],
+                explanation: 'An ERP AP signals for the use of the protection mechanism in the ERP information element in the beacon frame. If a non-ERP STA associates to an ERP AP, the ERP AP will enable the NonERP_Present bit in its own beacons, enabling protection mechanisms in its BSS. In other words, an HR-DSSS (802.11b) client association will trigger protection. If an ERP AP hears a beacon with only an 802.11b or 802.11 supported rate set from another AP or an IBSS STA, it will enable the NonERP_Present bit in its own beacons, enabling protection mechanisms in its BSS.'
+            },
+            {
+                id: 5,
+                type: 'multiple',
+                question: 'Which of the following information is included in a probe response frame? (Choose all that apply.)',
+                options: ['Channel information', 'Supported data rates', 'Basic data rates', 'SSID', 'Traffic indication map'],
+                correctAnswers: ['Channel information', 'Supported data rates', 'Basic data rates', 'SSID'],
+                explanation: 'A probe response frame contains the same information as a beacon frame, with the exception of the traffic indication map.'
+            },
+            {
+                id: 6,
+                type: 'multiple',
+                question: 'Which of the following statements are true about beacon management frames? (Choose all that apply.)',
+                options: ['Beacons can be disabled to hide the network from intruders.', 'Time-stamp information is used by the clients to synchronize their clocks.', 'In a BSS, clients share the responsibility of transmitting the beacons.', 'Beacons can contain vendor-proprietary information.'],
+                correctAnswers: ['Time-stamp information is used by the clients to synchronize their clocks.', 'Beacons can contain vendor-proprietary information.'],
+                explanation: 'Beacons cannot be disabled. Clients use the time-stamp information from the beacons to synchronize with the other stations on the wireless network. Only APs send beacons in a BSS; client stations send beacons in an IBSS. Beacons can contain proprietary information.'
+            },
+            {
+                id: 7,
+                type: 'multiple',
+                question: 'Which of the following statements regarding the four MAC address fields in the 802.11 MAC header are accurate? (Choose all that apply.)',
+                options: ['Address 2 is always the transmitter address (TA).', 'Address 3 is always the transmitter address (TA).', 'Address 1 is always the basic service set identifier (BSSID).', 'Address 1 is always the receiver address (RA).', 'Address 3 is always the basic service set identifier (BSSID).', 'Address 2 is always the receiver address (RA).'],
+                correctAnswers: ['Address 2 is always the transmitter address (TA).', 'Address 1 is always the receiver address (RA).'],
+                explanation: 'Depending on how the To DS and From DS fields are used, the definition of the four MAC fields will change. One constant, however, is that the Address 1 field will always be the receiver address (RA) but may have a second definition as well. The Address 2 field will always be the transmitter address (TA) but also may have a second definition. Address 3 is normally used for additional MAC address information. Address 4 is used only in the case of a WDS.'
+            },
+            {
+                id: 8,
+                type: 'single',
+                question: 'When a station sends an RTS, the Duration/ID field notifies the other stations that they must set their NAV timers to which of the following values?',
+                options: ['213 microseconds', 'The time necessary to transmit the Data and ACK frames', 'The time necessary to transmit the CTS frame', 'The time necessary to transmit the CTS, Data, and ACK frames'],
+                correctAnswers: ['The time necessary to transmit the CTS, Data, and ACK frames'],
+                explanation: 'When the RTS frame is sent, the value of the Duration/ID field is equal to the time necessary for the CTS, Data, and ACK frames to be transmitted, plus three SIFS intervals.'
+            },
+            {
+                id: 9,
+                type: 'single',
+                question: 'How does a client station indicate that it is using power-save mode?',
+                options: ['It transmits a frame to the AP with the Sleep field set to 1.', 'It transmits a frame to the AP with the Power Management field set to 1.', 'Using DTIM, the AP determines when the client station uses power-save mode.', 'It does not need to, because power-save mode is the default.'],
+                correctAnswers: ['It transmits a frame to the AP with the Power Management field set to 1.'],
+                explanation: 'When the client station transmits a frame with the Power Management field set to 1, it is enabling power-save mode. The DTIM does not enable power-save mode; it only notifies clients to stay awake in preparation for a multicast or a broadcast.'
+            },
+            {
+                id: 10,
+                type: 'multiple',
+                question: 'What would cause an 802.11 station to retransmit a unicast frame? (Choose all that apply.)',
+                options: ['The transmitted unicast frame was corrupted.', 'The ACK frame from the receiver was corrupted.', 'The receiver\'s buffer was full.', 'The transmitting station\'s buffer was full.'],
+                correctAnswers: ['The transmitted unicast frame was corrupted.', 'The ACK frame from the receiver was corrupted.'],
+                explanation: 'The receiving station may have received the data, but the returning ACK frame may have become corrupted and the original unicast frame will have to be retransmitted. If the unicast frame becomes corrupted for any reason, the receiving station will not send an ACK.'
+            },
+            {
+                id: 11,
+                type: 'single',
+                question: 'If a station is in power-save mode, how does it know that the AP has buffered unicast frames waiting for it?',
+                options: ['By examining the PS-Poll frame', 'By examining the TIM field', 'When it receives an ATIM', 'When the Power Management bit is set to 1', 'By examining the DTIM interval'],
+                correctAnswers: ['By examining the TIM field'],
+                explanation: 'The PS-Poll frame is used by the station to request cached data. The ATIM is used to notify stations in an IBSS of cached data. The Power Management bit is used by the station to notify the AP that the station is going into power-save mode. The DTIM is used to indicate to client stations how often to wake up to receive buffered broadcast and multicast frames. The traffic indication map (TIM) is a field in the beacon frame used by the AP to indicate that there are buffered unicast frames for clients in power-save mode.'
+            },
+            {
+                id: 12,
+                type: 'multiple',
+                question: 'When is an 802.11ac AP transmitting on 5 GHz required by the IEEE 802.11-2020 standard to respond to probe request frames from nearby client stations? (Choose all that apply.)',
+                options: ['When the probe request frames contain a null SSID value', 'When the probe request client is also an 802.11ac radio', 'When the probe request is encrypted', 'When the probe request has the Power Management bit set to 1', 'When the probe request frames contain the correct SSID value'],
+                correctAnswers: ['When the probe request frames contain a null SSID value', 'When the probe request frames contain the correct SSID value'],
+                explanation: 'All 802.11 AP radios will send a probe response to directed probe request frames that contain the correct SSID value. The AP must also respond to null probe request frames that contain a blank SSID value. Some vendors offer the capability to respond to null probe requests with a null probe response. An 802.11ac AP radio will respond to 802.11ac client stations as well as 802.11a/n clients stations transmitting probe requests on 5 GHz. Like all management frames, probe requests are not encrypted. The Power Management bit is used by the client to indicate the client\'s power state.'
+            },
+            {
+                id: 13,
+                type: 'multiple',
+                question: 'Which of the following statements about scanning are true? (Choose all that apply.)',
+                options: ['There are two types of scanning: passive and active.', 'Stations must transmit beacons in order to learn about local APs.', 'The 802.11 standard allows APs to ignore probe requests for security reasons.', 'It is common for stations to continue to send probe requests after being associated to an AP.'],
+                correctAnswers: ['There are two types of scanning: passive and active.', 'It is common for stations to continue to send probe requests after being associated to an AP.'],
+                explanation: 'There are two types of scanning: passive, which occurs when a station listens to the beacons to discover an AP, and active, which occurs when a station sends probe requests looking for APs. Stations send probe requests only if they are performing an active scan. After a station is associated, it is common for the station to continue to learn about nearby APs. All client stations maintain a "known AP" list, which is constantly updated by active scanning.'
+            },
+            {
+                id: 14,
+                type: 'multiple',
+                question: 'Given that an 802.11 MAC header can have as many as four MAC addresses, which types of addresses are not found in an 802.3 MAC header? (Choose all that apply.)',
+                options: ['SA', 'BSSID', 'DA', 'RA', 'TA'],
+                correctAnswers: ['BSSID', 'RA', 'TA'],
+                explanation: 'Although there are similarities, the addressing used by 802.11 MAC frames is much more complex than Ethernet frames. 802.3 frames have only a source address (SA) and destination address (DA) in the layer 2 header. The four MAC addresses used by an 802.11 frame can be used as five different types of addresses: receiver address (RA), transmitter address (TA), basic service set identifier (BSSID), destination address (DA), and source address (SA).'
+            },
+            {
+                id: 15,
+                type: 'single',
+                question: 'When a client station is first powered on, what is the order of frames generated by the client station and AP?',
+                options: ['Probe request/response, association request/response, authentication request/response', 'Probe request/response, authentication request/response, association request/response', 'Association request/response, authentication request/response, probe request/response', 'Authentication request/response, association request/response, probe request/response'],
+                correctAnswers: ['Probe request/response, authentication request/response, association request/response'],
+                explanation: 'When the client first attempts to connect to an AP, it will first send a probe request and listen for a probe response. After it receives a probe response, it will attempt to authenticate to the AP and then associate to the network.'
+            },
+            {
+                id: 16,
+                type: 'single',
+                question: 'WLAN users have recently complained about gaps in audio and problems with the push-to-talk capabilities with the ACME Company\'s VoWiFi phones. What could be the cause of this problem?',
+                options: ['A misconfigured TIM setting', 'A misconfigured DTIM setting', 'A misconfigured ATIM setting', 'A misconfigured BTIM setting'],
+                correctAnswers: ['A misconfigured DTIM setting'],
+                explanation: 'The delivery traffic indication map (DTIM) is used to ensure that all stations using power management are awake when multicast or broadcast traffic is sent. The DTIM interval is important for any application that uses multicasting. For example, many VoWiFi vendors support push-to-talk capabilities that send VoIP traffic to a multicast address. A misconfigured DTIM interval would cause performance issues during a push-to-talk multicast.'
+            },
+            {
+                id: 17,
+                type: 'multiple',
+                question: 'The WLAN help desk gets a call that suddenly all the legacy 802.11b wireless barcode scanners cannot connect to any of the 802.11n APs. However, all the 802.11g/n clients can still connect. What are the possible causes of this problem? (Choose all that apply.)',
+                options: ['The WLAN administrator disabled the 1, 2, 5.5, and 11 Mbps data rates.', 'The WLAN administrator disabled the 6 and 9 Mbps data rates.', 'The WLAN administrator enabled the 6 and 9 Mbps data rates as basic rates.', 'The WLAN administrator configured all the APs on channel 6.'],
+                correctAnswers: ['The WLAN administrator disabled the 1, 2, 5.5, and 11 Mbps data rates.', 'The WLAN administrator enabled the 6 and 9 Mbps data rates as basic rates.'],
+                explanation: 'An 802.11n/g AP is backward compatible with 802.11b and supports the HR-DSSS data rates of 1, 2, 5.5, and 11 Mbps, as well as the ERP-OFDM data rates of 6, 9, 12, 18, 24, 36, 48, and 54 Mbps. If a WLAN administrator disabled the 1, 2, 5.5, and 11 Mbps data rates, backward compatibility will effectively be disabled and the 802.11b clients will not be able to connect. The 802.11-2020 standard defines the use of basic rates, which are required rates. If a client station does not support any of the basic rates used by an AP, the client station will be denied association to the BSS. If a WLAN administrator configured the ERP-OFDM data rates of 6 and 9 Mbps as basic rates, the 802.11b (HR-DSSS) clients would be denied association because they do not support those rates.'
+            },
+            {
+                id: 18,
+                type: 'multiple',
+                question: 'Which of these 802.11 data frames carry an MSDU payload? (Choose all that apply.)',
+                options: ['Non-QoS data frame', 'QoS data frame', 'Null frame', 'QoS null frame'],
+                correctAnswers: ['Non-QoS data frame', 'QoS data frame'],
+                explanation: 'Some 802.11 data frames do not actually carry any data. The Null and QoS Null frames are both non-data-carrying frames. 802.11 data frames have a header and a trailer but do not have a frame body that transports an MSDU payload. These frames are sometimes referred to as null function frames because the payload is null, yet the frames still serve a purpose.'
+            },
+            {
+                id: 19,
+                type: 'multiple',
+                question: 'What are some examples of how an 802.11 action frame can be used? (Choose all that apply.)',
+                options: ['An action frame can function as a probe request.', 'An action frame can function as a neighbor report request.', 'An action frame can function as a probe response.', 'An action frame can function as a channel switch announcement.', 'An action frame can function as a beacon.'],
+                correctAnswers: ['An action frame can function as a neighbor report request.', 'An action frame can function as a channel switch announcement.'],
+                explanation: 'An action frame is a type of management frame used to trigger specific actions in a BSS. Action frames can be sent by access points or by client stations. An action frame provides information and direction regarding what to do. An action frame is sometimes referred to as a "management frame that can do anything." A complete list of all the current action frames can be found in section 9.6 of the 802.11-2020 standard. One example of how action frames are used is as a channel switch announcement (CSA) from an AP transmitting on a dynamic frequency selection (DFS) channel. Another example of an action frame is neighbor report requests and responses that 802.11k compliant radios can use. Neighbor report information is used by client stations to gain information from the associated AP about potential roaming neighbors.'
+            },
+            {
+                id: 20,
+                type: 'multiple',
+                question: 'What can you conclude about this frame based on the frame capture graphic shown? (Choose all that apply.)<br><br><img src="9.20.png" alt="802.11 Frame Capture" class="my-4 max-w-full h-auto rounded border border-slate-700 shadow-sm mx-auto block">',
+                options: ['This is a unicast frame.', 'This is a multicast frame.', 'This is a broadcast frame.', 'This a transmission between a mesh point AP and a mesh portal AP.', 'This frame is encrypted.', 'The frame check sequence (FCS) of the previous attempt of the same frame failed at the receiving station.'],
+                correctAnswers: ['This is a unicast frame.', 'The frame check sequence (FCS) of the previous attempt of the same frame failed at the receiving station.'],
+                explanation: 'The Retry field indicates a value of 1, meaning this is a retransmission. Every time an 802.11 radio transmits a unicast frame, if the frame is received properly and the cyclic redundancy check (CRC) of the FCS passes, the 802.11 radio that received the frame will reply with an acknowledgment (ACK) frame. If the ACK is received, the original station knows that the frame transfer was successful. All unicast 802.11 frames must be acknowledged. Broadcast and multicast frames do not require an acknowledgment. If any portion of a unicast frame is corrupted, the CRC will fail, and the receiving 802.11 radio will not send an ACK frame to the transmitting 802.11 radio. If an ACK frame is not received by the original transmitting radio, the unicast frame is not acknowledged and will have to be retransmitted.'
+            }
+        ];
+
+        // Pagination State
+        let currentPage = 0;
+        const questionsPerPage = 10;
+        let totalPages = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+
+            shuffledQuestions = shuffleArray([...quizData]);
+            totalPages = Math.ceil(shuffledQuestions.length / questionsPerPage);
+
+            // Generate pages
+            for (let p = 0; p < totalPages; p++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.id = `page-${p}`;
+                // Hide all pages except the first one
+                pageDiv.className = p === 0 ? 'space-y-12' : 'space-y-12 hidden';
+                
+                const startIdx = p * questionsPerPage;
+                const endIdx = Math.min(startIdx + questionsPerPage, shuffledQuestions.length);
+                const pageQuestions = shuffledQuestions.slice(startIdx, endIdx);
+
+                pageQuestions.forEach((q, idx) => {
+                    const globalQuestionNumber = startIdx + idx + 1;
+                    const shuffledOptions = shuffleArray([...q.options]);
+                    
+                    const qWrapper = document.createElement('div');
+                    qWrapper.className = 'exam-question pb-8 border-b border-slate-800/80 last:border-0';
+                    
+                    let optionsHtml = '';
+                    shuffledOptions.forEach(opt => {
+                        const inputType = q.type === 'single' ? 'radio' : 'checkbox';
+                        const inputName = `question-${q.id}`;
+                        const inputId = `opt-${q.id}-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        optionsHtml += `
+                            <label id="label-${inputId}" class="flex items-start gap-4 p-4 rounded-md border border-transparent cursor-pointer hover:bg-slate-800/50 transition-colors w-full">
+                                <input type="${inputType}" name="${inputName}" value="${opt.replace(/"/g, '&quot;')}" id="${inputId}" class="mt-0.5 cursor-pointer">
+                                <span class="text-slate-300 leading-relaxed">${opt}</span>
+                            </label>
+                        `;
+                    });
+
+                    qWrapper.innerHTML = `
+                        <div class="mb-5 flex gap-3">
+                            <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-semibold text-sm border border-slate-700">
+                                ${globalQuestionNumber}
+                            </span>
+                            <div class="pt-1">
+                                <span class="inline-block px-2 py-0.5 mb-3 text-[10px] font-bold tracking-wider text-slate-400 bg-slate-800 rounded uppercase border border-slate-700/50">
+                                    ${q.type === 'single' ? 'Select One' : 'Select All That Apply'}
+                                </span>
+                                <h3 class="text-lg font-medium text-white leading-snug">${q.question}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 pl-11" id="options-container-${q.id}">
+                            ${optionsHtml}
+                        </div>
+                        ${q.type === 'multiple' ? `
+                            <div class="mt-4 pl-11">
+                                <button id="btn-${q.id}" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded border border-slate-600 transition-colors">
+                                    Check Selection
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div id="explanation-${q.id}" class="hidden mt-6 ml-11 p-4 rounded-r-md bg-slate-800/50 border-l-4 border-red-600">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Explanation</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${q.explanation}</p>
+                        </div>
+                    `;
+                    
+                    pageDiv.appendChild(qWrapper);
+
+                    const inputs = qWrapper.querySelectorAll(`input[name="question-${q.id}"]`);
+                    
+                    if (q.type === 'single') {
+                        inputs.forEach(input => {
+                            input.addEventListener('change', () => evaluateAnswer(q, inputs, qWrapper));
+                        });
+                    } else {
+                        const btn = qWrapper.querySelector(`#btn-${q.id}`);
+                        btn.addEventListener('click', () => {
+                            evaluateAnswer(q, inputs, qWrapper);
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+
+                container.appendChild(pageDiv);
+            }
+
+            setupPaginationControls();
+        }
+
+        function setupPaginationControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            updatePaginationUI();
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage--;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    document.getElementById(`page-${currentPage}`).classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Restart state
+                    window.location.reload();
+                }
+            });
+        }
+
+        function updatePaginationUI() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('progress-indicator');
+
+            indicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+
+            if (currentPage === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            if (currentPage === totalPages - 1) {
+                nextBtn.innerHTML = `Restart Quiz <i class="fa-solid fa-rotate-right"></i>`;
+                nextBtn.classList.replace('bg-red-600', 'bg-emerald-600');
+                nextBtn.classList.replace('hover:bg-red-500', 'hover:bg-emerald-500');
+                nextBtn.classList.replace('shadow-red-900/20', 'shadow-emerald-900/20');
+            } else {
+                nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+                nextBtn.classList.replace('hover:bg-emerald-500', 'hover:bg-red-500');
+                nextBtn.classList.replace('shadow-emerald-900/20', 'shadow-red-900/20');
+            }
+        }
+
+        function evaluateAnswer(questionData, inputs, wrapperElement) {
+            const explanationBox = wrapperElement.querySelector(`#explanation-${questionData.id}`);
+            
+            inputs.forEach(input => {
+                const label = wrapperElement.querySelector(`#label-${input.id}`);
+                const isSelected = input.checked;
+                const isCorrectAnswer = questionData.correctAnswers.includes(input.value);
+
+                input.disabled = true;
+                label.classList.remove('hover:bg-slate-800/50', 'cursor-pointer');
+                input.classList.remove('cursor-pointer');
+
+                if (isSelected && isCorrectAnswer) {
+                    label.classList.add('bg-emerald-900/20', 'border-emerald-500/50');
+                } else if (isSelected && !isCorrectAnswer) {
+                    label.classList.add('bg-rose-900/20', 'border-rose-500/50');
+                } else if (!isSelected && isCorrectAnswer) {
+                    label.classList.add('border-dashed', 'border-emerald-500/50');
+                } else {
+                    label.classList.add('opacity-50');
+                }
+            });
+
+            explanationBox.classList.remove('hidden');
+            explanationBox.animate([
+                { opacity: 0, transform: 'translateY(-10px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 300, easing: 'ease-out' });
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
